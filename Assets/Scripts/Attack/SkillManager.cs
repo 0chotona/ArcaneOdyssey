@@ -1,173 +1,226 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-
-public class Skill
+public class CStat
 {
-    public int _level { get; set; }
-
     //데미지 / 공격횟수 / 공격범위 / 쿨타임 / 유지시간
-    public string _name { get; set; }
-    public int _damage { get; set; }
+
+    public float _damage { get; set; }
     public int _attCount { get; set; }
     public float _attRange { get; set; }
     public float _coolTime { get; set; }
     public float _durTime { get; set; }
     public float _shotSpeed { get; set; }
 
-    public PASSIVE_TYPE _synergyType { get; set; }
-    /*
-    public Skill(string name)
-    {
-        _name = name;
-    }
-    */
-    public Skill(string name, int level, int damage, int attCount, float attRange, float coolTime, float durTime, float shotSpeed)
-    {
-        _name = name;
-        _level = level;
-        _damage = damage;
-        _attCount = attCount;
-        _attRange = attRange;
-        _coolTime = coolTime;
-        _durTime = durTime;
-        _shotSpeed = shotSpeed;
-    }
-    /*
-    public void UpdateDamage(int damage) { _damage = damage; }
-    public void UpdateAttCount(int attCount) { _attCount = attCount; }
-    public void UpdateAttRange(float attRange) { _attRange = attRange; }
-    public void UpdateCoolTime(float cumTime) { _coolTime = cumTime; }
-    public void UpdateDurTime(float durTime) { _durTime = durTime; }
-    public void UpdateShotSpeed(float shotSpeed) { _shotSpeed = shotSpeed; }
-    */
-    public void UpdateStat(int level, int damage, int attCount, float attRange, float coolTime, float durTime, float shotSpeed)
-    {
-        _level = level;
-        _damage = damage;
-        _attCount = attCount;
-        _attRange = attRange;
-        _coolTime = coolTime;
-        _durTime = durTime;
-        _shotSpeed = shotSpeed;
-    }
+    
+}
+public class CSkill
+{
+    public int _id { get; set; }
 
-    public void SetPassiveSynergy(PASSIVE_TYPE type)
+    public string _skillText { get; set; }
+    public eSKILL _skillName { get; set; }
+    public string _iconName { get; set; }
+    public int _level { get; set; }
+    public CStat _stat { get; set; }
+
+    public Dictionary<int, CStat> _skillMap = new Dictionary<int, CStat>();
+    
+    public ePASSIVE_TYPE _synergyType { get; set; }
+    public string _char_Pref_Name { get; set; }
+
+    public void UpgradeLevel()
     {
-        _synergyType = type;
+        _level++;
+        _stat = _skillMap[_level];
     }
+    
 
 }
 
 public class SkillManager : MonoBehaviour
 {
-    //List<Skill> _skills;
-    Dictionary<string, Skill> _skills;
+    static SkillManager _instance;
+
+    public static SkillManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+                _instance = FindObjectOfType<SkillManager>();
+            return _instance;
+        }
+
+    }
+    Dictionary<eSKILL, CSkill> _possedSkills = new Dictionary<eSKILL, CSkill>();
     List<string> _skillNames = new List<string>();
 
     int _attIncrease;
     int _rangeIncrease;
     int _coolTimeDecrease;
 
-    List<Skill> _skillList = new List<Skill>();
-    [SerializeField] List<AttackController> _attackControllers;
+    Dictionary<eSKILL, CSkill> _skillDic = new Dictionary<eSKILL, CSkill>();
+    [Header("스킬 오브젝트"),SerializeField] List<Attack> _attacks;
+    [SerializeField] PassiveManager _passiveManager;
+    [Header("플레이어 트랜스폼"), SerializeField] Transform _playerTrs;
+    public Transform _PlayerTrs => _playerTrs;
+    SkillData _skillData;
 
-    private void Awake()
-    {
-        _skillList.Add(new Skill("기본 베기",1, 5, 1, 0.8f, 2f, 0, 0));
-        _skillList.Add(new Skill("회전구",0, 4, 2, 0.7f, 5f, 1f, 1f));
-        _skillList.Add(new Skill("회전 베기", 0, 5, 1, 1f, 9f, 1f, 0f));
-        _skillList.Add(new Skill("화살 공격", 0, 4, 1, 0.7f, 6f, 1.5f, 0.7f));
-        _skillList.Add(new Skill("부메랑", 0, 5, 1, 0.8f, 5, 0, 0));
-        _skillList.Add(new Skill("운석 충돌", 0, 9, 1, 0.8f, 7, 0, 0));
-
-        _skillList[0].SetPassiveSynergy(PASSIVE_TYPE.MoveSpeed_Up);
-        _skillList[1].SetPassiveSynergy(PASSIVE_TYPE.Def_Up);
-        _skillList[2].SetPassiveSynergy(PASSIVE_TYPE.Range_Up);
-        _skillList[3].SetPassiveSynergy(PASSIVE_TYPE.Exp_Up);
-        _skillList[4].SetPassiveSynergy(PASSIVE_TYPE.CoolTime_Down);
-        _skillList[5].SetPassiveSynergy(PASSIVE_TYPE.Attack_Up);
-
-
-        for (int i = 0; i < _skillList.Count; i++)
-            _skillNames.Add(_skillList[i]._name);
-        UIManager.Instance.SetGiftNames(_skillNames);
-        _skills = new Dictionary<string, Skill>();
-        SetSkillAwake();
-
-        _attIncrease = 0;
-        _rangeIncrease = 0;
-        _coolTimeDecrease = 0;
-    }
+    CChar _selectedChar = new CChar();
+    CSkill _selectedSkill = new CSkill();
+    
     private void Start()
     {
-        for (int i = 0; i < _attackControllers.Count; i++)
-            _attackControllers[i].SetSkill(_skillList[i]);
+        SetAttackStat();
     }
-    void SetSkillAwake()
+    private void Update()
     {
-        /*
-         *  _damage = 4;
-                _durTime = 1.5f;
-                _attRange = 0.7f;
-                _coolTime = 6f;
-                _shotSpeed = 0.7f;
-                _attCount = 1;
-        */
-        for (int i = 0; i < _skillList.Count; i++)
-            _skills.Add(_skillList[i]._name, _skillList[i]);
-    }
-    public void UpdateStat(string name, int level, int damage, int attCount, float attRange, float coolTime, float durTime, float shotSpeed)
-    {
-        _skills[name].UpdateStat(level, damage, attCount, attRange, coolTime, durTime, shotSpeed);
-    }
-    public void UpgradeLevel(string name)
-    { 
-        _skills[name]._level++; 
-        foreach(var skill in _attackControllers)
+        if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if(skill._name == name)
-                skill.UpdateStat(_skills[name]);
+            UpgradeLevel(_skillDic.ElementAt(0).Value._skillName);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            UpgradeLevel(_skillDic.ElementAt(1).Value._skillName);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            UpgradeLevel(_skillDic.ElementAt(2).Value._skillName);
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            UpgradeLevel(_skillDic.ElementAt(3).Value._skillName);
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+            UpgradeLevel(_skillDic.ElementAt(4).Value._skillName);
+
+    }
+    public void SetSkillAwake(SkillData skillData, CChar selectedChar)
+    {
+        _skillData = skillData;
+
+        SetCharSkill(selectedChar);
+        _skillDic.Add(_selectedSkill._skillName, _selectedSkill); //_skillDatas에 캐릭 스킬 추가
+
+        
+        foreach (CSkill skill in _skillData._SkillDatas)
+        {
+            _skillDic.Add(skill._skillName, skill);
+            _skillDic[skill._skillName]._stat = new CStat();
+        }
+
+        
+
+
+
+        foreach (CSkill skill in _skillDic.Values)
+            _skillNames.Add(skill._skillText); //UI 아이템 선택창에 쓰일 이름 리스트
+
+        UIManager.Instance.SetGiftNames(new List<CSkill>(_skillDic.Values)); //UI 아이템 선택창 이름 리스트 세팅
+
+        
+    }
+    public void AddSkill(eSKILL name)
+    {
+        _possedSkills.Add(name, FindSkillByName(name));
+        StartAttack(name);
+    }
+    public void UpgradeLevel(eSKILL name)
+    {
+        
+        if(!IsMaxLevel(name))
+        {
+            _skillDic[name].UpgradeLevel();
+            if (!_possedSkills.ContainsKey(name))
+                AddSkill(name);
+        }
+        else
+        {
+            if (_passiveManager._Passives[FindSkillByName(name)._synergyType]._level > 0)
+                _skillDic[name].UpgradeLevel();
+        }
+        SetAttackStat();
+        UIManager.Instance.RemoveGiftName(FindSkillByName(name)._skillText);
+
+    }
+    void StartAttack(eSKILL name)
+    {
+        foreach (Attack att in _attacks)
+        {
+            if (att._name == name)
+                att.StartAttack();
         }
     }
-    public List<string> GetNames() { return _skillNames; }
-    public int GetLevel(string name) { return _skills[name]._level; }
-    public int GetDamage(string name) { return _skills[name]._damage + (int)(_skills[name]._damage * 0.01f * _attIncrease); }
-    public int GetAttCount(string name) { return _skills[name]._attCount; }
-    public float GetAttRange(string name) { return _skills[name]._attRange + (int)(_skills[name]._attRange * 0.01f * _rangeIncrease); }
-    public float GetCoolTime(string name) { return _skills[name]._coolTime + (_skills[name]._coolTime * 0.01f * _coolTimeDecrease); }
-    public float GetDurTime(string name) { return _skills[name]._durTime; }
-    public float GetShotSpeed(string name) { return _skills[name]._shotSpeed; }
-
-    public bool IsMaxLevel(string name)
+    public int GetLevel(string name)
     {
-        if (_skills[name]._level >= 5)
+        int level = 0;
+        foreach(CSkill skill in _skillDic.Values)
+        {
+            if(skill._skillText == name)
+                level = skill._level;
+        }
+        return level;
+    }
+    CSkill FindSkillByName(eSKILL name)
+    {
+        CSkill skill = null;
+        foreach (CSkill sk in _skillDic.Values)
+        {
+            if (sk._skillName == name)
+                skill = sk;
+        }
+        return skill;
+    }
+
+    public eSKILL GetSkillByName(string name)
+    {
+        eSKILL eSkill = 0;
+        foreach (CSkill skill in _skillDic.Values)
+        {
+            if (skill._skillText == name)
+                eSkill = skill._skillName;
+        }
+        return eSkill;
+    }
+    public bool IsMaxLevel(eSKILL name)
+    {
+        if (FindSkillByName(name)._level >= 5)
             return true;
         else
             return false;
     }
-    Skill FindSkillByName(string name)
-    {
-        foreach(var skill in _skillList)
-        {
-            if (skill._name == name)
-                return skill;
-        }
-        return null;
-    }
-    public void UpdatePassiveStat(PASSIVE_TYPE type)
+    public void UpdatePassiveStat(ePASSIVE_TYPE type)
     {
         switch(type)
         {
-            case PASSIVE_TYPE.Attack_Up:
+            case ePASSIVE_TYPE.Attack_Up:
                 _attIncrease += 5;
                 break;
-            case PASSIVE_TYPE.Range_Up:
+            case ePASSIVE_TYPE.Range_Up:
                 _rangeIncrease += 5;
                 break;
-            case PASSIVE_TYPE.CoolTime_Down:
+            case ePASSIVE_TYPE.CoolTime_Down:
                 _coolTimeDecrease -= 5;
                 break;
         }
+    }
+    void SetAttackStat()
+    {
+        List<CSkill> skills = new List<CSkill>(_skillDic.Values);
+        for (int i = 0; i < _skillDic.Count; i++)
+        {
+            _attacks[i].SetSkill(skills[i]);
+            _attacks[i].UpdateStat(skills[i]._stat);
+        }
+    }
+    void SetCharSkill(CChar selectedChar)
+    {
+        _selectedChar = selectedChar;
+        CSkill charSkill = null;
+        foreach(CSkill skill in _skillData._CharSkillDatas)
+        {
+            if(skill._char_Pref_Name == _selectedChar._prefName)
+            {
+                charSkill = skill;
+                break;
+            }
+        }
+        _selectedSkill = charSkill;
     }
 }

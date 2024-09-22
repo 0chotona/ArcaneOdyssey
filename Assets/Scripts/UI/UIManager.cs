@@ -20,12 +20,12 @@ public class UIManager : MonoBehaviour
 
     }
 
-    [SerializeField] SkillManager _skillManager;
     [SerializeField] PassiveManager _passiveManager;
 
     [SerializeField] GameObject _upgradePanel;
-    [SerializeField] TextMeshProUGUI[] _giftTexts;
-    [SerializeField] TextMeshProUGUI[] _levelTexts;
+    [Header("물품"), SerializeField]
+    GiftInfo[] _giftInfos;
+
     [SerializeField] Button[] _skillButtons;
 
     [SerializeField] TextMeshProUGUI _timerText;
@@ -34,10 +34,13 @@ public class UIManager : MonoBehaviour
 
     public bool _isPause = false;
 
-    List<string> _skillNames = new List<string>();
-    List<string> _passiveNames = new List<string>();
+    List<CSkill> _skills = new List<CSkill>();
+    List<CPassive> _passives = new List<CPassive>();
 
     List<string> _giftNames = new List<string>();
+
+    List<string> _skillNames = new List<string>();
+    List<string> _passiveNames = new List<string>();
     private void Start()
     {
         
@@ -54,12 +57,21 @@ public class UIManager : MonoBehaviour
 
         _timerText.text = ((int)_curTime).ToString();
     }
-    public void SetGiftNames(List<string> skillNames)
+    public void SetGiftNames(List<CSkill> skills)
     {
-        _skillNames = skillNames;
-        _passiveNames = _passiveManager._PassiveNames;
-        _giftNames.AddRange(_skillNames);
-        _giftNames.AddRange(_passiveNames);
+        _skills = skills;
+        _passives = _passiveManager._PassiveNames;
+        foreach (CSkill skill in _skills)
+        {
+            _giftNames.Add(skill._skillText);
+            _skillNames.Add(skill._skillText);
+        }
+
+        foreach (CPassive passive in _passives)
+        {
+            _giftNames.Add(passive._name);
+            _passiveNames.Add(passive._name);
+        }
     }
     public void ShowUpgradePanel()
     {
@@ -78,7 +90,7 @@ public class UIManager : MonoBehaviour
         List<int> rndList = new List<int>();
         int rnd = Random.Range(0, _giftNames.Count);
 
-        for (int i = 0; i < _giftTexts.Length;) //3
+        for (int i = 0; i < _giftInfos.Length;) //3
         {
 
             if (rndList.Contains(rnd))
@@ -96,12 +108,11 @@ public class UIManager : MonoBehaviour
                 break;
             }
         }
-        for(int i = 0; i < _giftTexts.Length; i++)
+        for(int i = 0; i < _giftInfos.Length; i++)
         {
             string giftName = _giftNames[rndList[i]];
-            _giftTexts[i].text = giftName;
-            _levelTexts[i].text = IsSkill(giftName) ? "LV. " + (_skillManager.GetLevel(giftName) + 1) : 
-                                                                    "LV. " + (_passiveManager.GetLevel(giftName) + 1);
+            int giftLevel = IsSkill(giftName) ? SkillManager.Instance.GetLevel(giftName) + 1 : _passiveManager.GetLevel(giftName) + 1;
+            _giftInfos[i].SetText(giftName, giftLevel);
         }
         Time.timeScale = 0;
 
@@ -110,15 +121,21 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 1;
 
-        string upgradeGiftName = _giftTexts[index].text;
+        string upgradeGiftName = _giftInfos[index]._Name;
         if (IsSkill(upgradeGiftName))
-            _skillManager.UpgradeLevel(upgradeGiftName);
+            SkillManager.Instance.UpgradeLevel(SkillManager.Instance.GetSkillByName(upgradeGiftName));
         else
             _passiveManager.UpgradeLevel(upgradeGiftName);
 
-        if(IsSkill(upgradeGiftName))
+        RemoveGiftName(upgradeGiftName);
+            
+        _upgradePanel.SetActive(false);
+    }
+    public void RemoveGiftName(string upgradeGiftName)
+    {
+        if (IsSkill(upgradeGiftName))
         {
-            if (_skillManager.IsMaxLevel(upgradeGiftName))
+            if (SkillManager.Instance.IsMaxLevel(SkillManager.Instance.GetSkillByName(upgradeGiftName)))
                 _giftNames.Remove(upgradeGiftName);
         }
         else
@@ -126,8 +143,6 @@ public class UIManager : MonoBehaviour
             if (_passiveManager.IsMaxLevel(upgradeGiftName))
                 _giftNames.Remove(upgradeGiftName);
         }
-            
-        _upgradePanel.SetActive(false);
     }
     public void SetTimerString(int timer)
     {
@@ -143,7 +158,7 @@ public class UIManager : MonoBehaviour
     }
     bool IsSkill(string name)
     {
-        if (_skillNames.Contains(name))
+        if (_skillNames.Contains(name)) //_skills에 포함됐는지
             return true;
         else if (_passiveNames.Contains(name))
             return false;

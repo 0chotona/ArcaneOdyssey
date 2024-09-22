@@ -1,0 +1,13 @@
+ID,Skill_Name,Enum_Name,Icon_Name,Level,Damage,AttCount,AttRange,CoolTime,DurTime,ShotSpeed,SynergyType,Char_Pref_Name
+100,마감 사수,Gun,skill_000,1,5,1,0.8,2,,,CoolTime_Down,Char_100
+100,마감 사수,Gun,skill_000,2,7,2,0.8,2,,,CoolTime_Down,Char_100
+100,마감 사수,Gun,skill_000,3,7,3,0.8,2,,,CoolTime_Down,Char_100
+100,마감 사수,Gun,skill_000,4,9,4,1,1.5,,,CoolTime_Down,Char_100
+100,마감 사수,Gun,skill_000,5,9,5,1,1.5,,,CoolTime_Down,Char_100
+100,마감 사수,Gun,skill_000,6,11,6,1.2,1.5,,,CoolTime_Down,Char_100
+101,기본 베기,Slash,skill_001,1,5,1,0.8,2,,,MaxHP_Up,Char_101
+101,기본 베기,Slash,skill_001,2,7,1,0.8,2,,,MaxHP_Up,Char_101
+101,기본 베기,Slash,skill_001,3,7,2,0.8,2,,,MaxHP_Up,Char_101
+101,기본 베기,Slash,skill_001,4,9,2,1,1.5,,,MaxHP_Up,Char_101
+101,기본 베기,Slash,skill_001,5,9,2,1,1.5,,,MaxHP_Up,Char_101
+101,기본 베기,Slash,skill_001,6,11,3,1.2,1.5,,,MaxHP_Up,Char_101

@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [Header("최대 체력"), SerializeField] int _maxHp = 10;
-    public int _curHp;
+    public float _curHp;
 
     [Header("방어력"),SerializeField] int _def;
 
@@ -25,7 +25,7 @@ public class EnemyHealth : MonoBehaviour
 
         _tmpObj = gameObject;
     }
-    public void LoseDamage(int damage)
+    public void LoseDamage(float damage)
     {
         _curHp -= damage;
         if (_curHp <= 0)

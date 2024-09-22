@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class DamageBox_Spin : MonoBehaviour
 {
-    int _damage;
-    Vector3 _boxScale = new Vector3(3, 1, 3);
+    float _damage;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
@@ -14,6 +13,5 @@ public class DamageBox_Spin : MonoBehaviour
             enemyHealth.LoseDamage(_damage);
         }
     }
-    public void UpdateDamage(int damage) { _damage = damage; }
-    public void UpdateScale(float boxSize) { transform.localScale = _boxScale * boxSize; }
+    public void UpdateDamage(float damage) { _damage = damage; }
 }

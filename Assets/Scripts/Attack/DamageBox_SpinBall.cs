@@ -8,7 +8,7 @@ public class DamageBox_SpinBall : MonoBehaviour
     float _startAngle = 0;
     float _radius = 4;
 
-    int _damage;
+    float _damage;
     Vector3 _boxScale = new Vector3(1, 1, 1);
 
     float _speed = 400;
@@ -52,7 +52,7 @@ public class DamageBox_SpinBall : MonoBehaviour
             enemyHealth.LoseDamage(_damage);
         }
     }
-    public void UpdateDamage(int damage) { _damage = damage; }
+    public void UpdateDamage(float damage) { _damage = damage; }
     public void UpdateSpeed(float speed) { _speed *= speed; }
     public void UpdateScale(float boxSize) { transform.localScale = _boxScale * boxSize; }
     public void SetTarget(Transform target)

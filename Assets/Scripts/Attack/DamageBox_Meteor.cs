@@ -5,7 +5,7 @@ using UnityEngine;
 public class DamageBox_Meteor : MonoBehaviour
 {
 
-    int _damage;
+    float _damage;
     Vector3 _boxScale = new Vector3(1, 1, 1);
     GameObject _tmpObj;
 
@@ -19,7 +19,7 @@ public class DamageBox_Meteor : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(_isGrounded)
+        if (_isGrounded)
         {
             if (other.CompareTag("Enemy"))
             {
@@ -27,20 +27,20 @@ public class DamageBox_Meteor : MonoBehaviour
                 enemyHealth.LoseDamage(_damage);
             }
         }
-        
-        if(other.CompareTag("Ground"))
+
+        if (other.CompareTag("Ground"))
         {
             _isGrounded = true;
 
             GameObject explode = Instantiate(_explodeObj, transform.position, Quaternion.identity);
             Destroy(explode, 1f);
             Destroy(_tmpObj, 1.1f);
-            
-            
+
+
         }
     }
-    
-    public void UpdateDamage(int damage) { _damage = damage; }
+
+    public void UpdateDamage(float damage) { _damage = damage; }
     public void UpdateScale(float boxSize) { transform.localScale = _boxScale * boxSize; }
 
 }

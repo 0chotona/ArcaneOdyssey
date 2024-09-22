@@ -14537,7 +14537,7 @@ GameObject:
   - component: {fileID: 2677468302076642518}
   - component: {fileID: 2239817924336309893}
   - component: {fileID: 1939080760567094034}
-  - component: {fileID: 1357150911629857518}
+  - component: {fileID: 5342589689912787389}
   m_Layer: 0
   m_Name: MeteorAttack
   m_TagString: Untagged
@@ -14612,7 +14612,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1357150911629857518
+--- !u!114 &5342589689912787389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14621,7 +14621,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2905573729637018157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 230f411c5dfe17147bd3ee7d33d2e4d9, type: 3}
+  m_Script: {fileID: 11500000, guid: f71fe89b9e77b264ea56d7cc6ad5a0e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _explodeObj: {fileID: 4471638694170836954, guid: 1e62ac3cf7722484e8b1e1be0a1bc8e0, type: 3}

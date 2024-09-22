@@ -40,7 +40,7 @@ public class MapSensor : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
 
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("MapSensor"))
         {
             Vector3 quadToPlayer = _playerTrs.position - transform.position;
             Vector3 targetDir = Vector3.zero;

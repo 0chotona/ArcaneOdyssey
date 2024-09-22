@@ -1,33 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
-/*
- * 1. 공격횟수 (0. 한바퀴 1. 두바퀴 2. 세바퀴)
-2. 공격범위 (0. 1단 1. 2단 2. 3단 + 스턴)
-3. 쿨타임 (0. 5초 1. 4초 2. 3초)
-*/
-public class Attack_Boomerang : AttackController
+public class Attack_Boomerang : Attack
 {
     [SerializeField] GameObject _damageBoxObj;
     DamageBox_Boomerang _damageBox;
 
-    Skill _skill;
+    [SerializeField] SkillManager _skillManager;
 
-    private void Start()
+    private void OnEnable()
     {
-        StartCoroutine(CRT_Attack());
-
-        _name = "부메랑";
+        _name = eSKILL.SpinBall;
     }
-    
-    public override void Attack()
+
+    public override void UpdateStat(CStat stat)
     {
-        for(int i = 0; i < _attCount; i++)
+        _damage = stat._damage;
+        _attCount = stat._attCount;
+        _attRange = stat._attRange;
+        _coolTime = stat._coolTime;
+        
+    }
+
+    public override IEnumerator CRT_Attack()
+    {
+        while (true)
         {
-            GameObject damageBox = Instantiate(_damageBoxObj,transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(_coolTime);
+            if (_level > 0)
+                AttackInteract();
+        }
+    }
+
+    
+    public override void AttackInteract()
+    {
+        for (int i = 0; i < _attCount; i++)
+        {
+            GameObject damageBox = Instantiate(_damageBoxObj, transform.position, Quaternion.identity);
 
             _damageBox = damageBox.GetComponent<DamageBox_Boomerang>();
 
@@ -35,67 +46,16 @@ public class Attack_Boomerang : AttackController
             _damageBox.UpdateDamage(_damage);
             _damageBox.SetPlayerTrs(transform);
         }
-        
-        //UpdateStat();
-        
-        
     }
-    public override void UpdateStat(Skill skill)
-    {
-        _level = skill._level;
-        switch (_level) 
-        {
-            case 1:
-                _damage = 5;
-                _attCount = 1;
-                _attRange = 0.8f;
-                _coolTime = 5f;
-                break;
-            case 2:
-                _damage = 6;
-                _attCount = 1;
-                _attRange = 0.8f;
-                _coolTime = 5f;
-                break;
-            case 3:
-                _damage = 7;
-                _attCount = 2;
-                _attRange = 0.8f;
-                _coolTime = 5f;
-                break;
-            case 4:
-                _damage = 9;
-                _attCount = 2;
-                _attRange = 1f;
-                _coolTime = 4f;
-                break;
-            case 5:
-                _damage = 9;
-                _attCount = 3;
-                _attRange = 1f;
-                _coolTime = 4f;
-                break;
-            case 6:
-                _damage = 8;
-                _attCount = 5;
-                _attRange = 1.2f;
-                _coolTime = 3f;
-                break;
-        }
-        skill.UpdateStat(_level, _damage, _attCount, _attRange, _coolTime, _durTime, _shotSpeed);
-    }
-
-    public override IEnumerator CRT_Attack()
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(_coolTime);
-            Attack();
-        }
-    }
-
-    public override void SetSkill(Skill skill)
+    public override void SetSkill(CSkill skill)
     {
         _skill = skill;
+        _level = _skill._level;
+        UpdateStat(_skill._stat);
+    }
+
+    public override void StartAttack()
+    {
+        StartCoroutine(CRT_Attack());
     }
 }

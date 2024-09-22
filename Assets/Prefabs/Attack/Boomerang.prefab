@@ -29464,7 +29464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1639938580889567596}
   - component: {fileID: 7837606600872910995}
-  - component: {fileID: 1285716714925211965}
+  - component: {fileID: 456442547169787834}
   m_Layer: 0
   m_Name: Boomerang
   m_TagString: Untagged
@@ -29517,7 +29517,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.9
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1285716714925211965
+--- !u!114 &456442547169787834
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29526,7 +29526,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8239679655125981049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 728ff08d839fafb4083f7a16ba51afa5, type: 3}
+  m_Script: {fileID: 11500000, guid: 57cc9515f375ab94fab173f05acfdd5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8353166391289484584

@@ -10,22 +10,19 @@ public class PassiveController : MonoBehaviour
     [SerializeField] PlayerHealth _playerHealth;
     [SerializeField] PlayerMove _playerMove;
 
-    public void UpdateStat(PASSIVE_TYPE type)
+    public void UpdateStat(ePASSIVE_TYPE type)
     {
         switch(type)
         {
-            case PASSIVE_TYPE.Attack_Up:
-            case PASSIVE_TYPE.Range_Up:
-            case PASSIVE_TYPE.CoolTime_Down:
-                _skillManager.UpdatePassiveStat(type);
+            case ePASSIVE_TYPE.Attack_Up:
+            case ePASSIVE_TYPE.Range_Up:
+            case ePASSIVE_TYPE.CoolTime_Down:
+                SkillManager.Instance.UpdatePassiveStat(type);
                 break;
-            case PASSIVE_TYPE.Exp_Up:
-                _playerItem.UpdatePassiveStat();
-                break;
-            case PASSIVE_TYPE.Def_Up:
+            case ePASSIVE_TYPE.Def_Up:
                 _playerHealth.UpdatePassiveStat();
                 break;
-            case PASSIVE_TYPE.MoveSpeed_Up:
+            case ePASSIVE_TYPE.MoveSpeed_Up:
                 _playerMove.UpdatePassiveStat();
                 break;
         }

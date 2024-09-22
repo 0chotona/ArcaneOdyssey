@@ -6,7 +6,7 @@ public class DamageBox_Sword : MonoBehaviour
 {
     Collider _collider;
     List<EnemyHealth> _enemyHealths;
-    int _damage;
+    float _damage;
     float _range;
     int _count;
 
@@ -43,7 +43,7 @@ public class DamageBox_Sword : MonoBehaviour
         foreach (EnemyHealth enemyHealth in _enemyHealths)
             enemyHealth.LoseDamage(_damage);
     }
-    public void UpdateDamage(int damage)
+    public void UpdateDamage(float damage)
     {
         _damage = damage;
 

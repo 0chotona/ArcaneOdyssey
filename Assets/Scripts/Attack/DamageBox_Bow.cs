@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DamageBox_Bow : MonoBehaviour
 {
-    int _damage;
+    float _damage;
     float _speed = 1000;
     Rigidbody _rigid;
 
@@ -26,9 +26,7 @@ public class DamageBox_Bow : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(_dir); 
         _rigid.AddForce(_dir * _speed);
     }
-    public void UpdateDamage(int damage) { _damage = damage; }
-    public void UpdateSpeed(float speed) { _speed *= speed; }
-    public void UpdateScale(float boxSize) { transform.localScale = _boxScale * boxSize; }
+    public void UpdateDamage(float damage) { _damage = damage; }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))

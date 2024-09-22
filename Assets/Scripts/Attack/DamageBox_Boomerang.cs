@@ -7,7 +7,7 @@ public class DamageBox_Boomerang : MonoBehaviour
     float _angle = 0;
     float _radius = 4;
 
-    int _damage;
+    float _damage;
     Vector3 _boxScale = new Vector3(1, 1, 1);
 
     float _moveSpeed = 1;
@@ -30,9 +30,9 @@ public class DamageBox_Boomerang : MonoBehaviour
 
         //_startPos = _playerTrs.position;
         _angle = Random.Range(0, 360);
-        
 
-        
+
+
     }
     private void Start()
     {
@@ -43,7 +43,7 @@ public class DamageBox_Boomerang : MonoBehaviour
     private void Update()
     {
         MoveBoomerang();
-        
+
     }
     Vector3 GetRandomAngle(float angle)
     {
@@ -61,7 +61,7 @@ public class DamageBox_Boomerang : MonoBehaviour
     {
         _isForward = true;
         _targetPos = _finalPos;
-        
+
         yield return new WaitForSeconds(_stopSec);
         _targetPos = _playerTrs.position;
         _isForward = false;
@@ -80,7 +80,6 @@ public class DamageBox_Boomerang : MonoBehaviour
     {
         _playerTrs = playerTrs;
     }
-    public void UpdateDamage(int damage) { _damage = damage; }
+    public void UpdateDamage(float damage) { _damage = damage; }
     public void UpdateScale(float boxSize) { transform.localScale = _boxScale * boxSize; }
-    
 }

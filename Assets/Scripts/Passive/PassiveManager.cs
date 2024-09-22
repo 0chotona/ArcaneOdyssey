@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.SearchService;
 using UnityEngine;
 
-public class Passive
+public class CPassive
 {
     public string _name { get; set; }
 
@@ -12,7 +12,7 @@ public class Passive
     public float _rate { get; set; }
 
     public bool _isGot { get; set; }
-    public Passive(string name, int level, float rate, bool isGot)
+    public CPassive(string name, int level, float rate, bool isGot)
     {
         _name = name;
         _level = level;
@@ -20,38 +20,39 @@ public class Passive
         _isGot = isGot;
     }
 }
-public enum PASSIVE_TYPE
+public enum ePASSIVE_TYPE
 {
     Attack_Up,
     Range_Up,
     CoolTime_Down,
-    Exp_Up,
     Def_Up,
-    MoveSpeed_Up
+    MoveSpeed_Up,
+    MaxHP_Up
 }
 public class PassiveManager : MonoBehaviour
 {
-    Dictionary<PASSIVE_TYPE, Passive> _passives;
+    Dictionary<ePASSIVE_TYPE, CPassive> _passives;
+    public Dictionary<ePASSIVE_TYPE, CPassive> _Passives => _passives;
 
-    List<string> _passiveNames = new List<string>();
-    public List<string> _PassiveNames => _passiveNames;
+    List<CPassive> _passiveNames = new List<CPassive>();
+    public List<CPassive> _PassiveNames => _passiveNames;
 
     [SerializeField] PassiveController _passiveController;
 
     private void Awake()
     {
-        _passives = new Dictionary<PASSIVE_TYPE, Passive>();
+        _passives = new Dictionary<ePASSIVE_TYPE, CPassive>();
 
-        _passives.Add(PASSIVE_TYPE.Attack_Up, new Passive("공격력 증가", 0, 5f, false));
-        _passives.Add(PASSIVE_TYPE.Range_Up, new Passive("공격 범위 증가", 0, 5f, false));
-        _passives.Add(PASSIVE_TYPE.CoolTime_Down, new Passive("쿨타임 감소", 0, 5f, false));
-        _passives.Add(PASSIVE_TYPE.Exp_Up, new Passive("경험치 획득량 증가", 0, 5f, false));
-        _passives.Add(PASSIVE_TYPE.Def_Up, new Passive("방어력 증가", 0, 5f, false));
-        _passives.Add(PASSIVE_TYPE.MoveSpeed_Up, new Passive("이동속도 증가", 0, 5f, false));
+        _passives.Add(ePASSIVE_TYPE.Attack_Up, new CPassive("공격력 증가", 0, 5f, false));
+        _passives.Add(ePASSIVE_TYPE.Range_Up, new CPassive("공격 범위 증가", 0, 5f, false));
+        _passives.Add(ePASSIVE_TYPE.CoolTime_Down, new CPassive("쿨타임 감소", 0, 5f, false));
+        _passives.Add(ePASSIVE_TYPE.Def_Up, new CPassive("방어력 증가", 0, 5f, false));
+        _passives.Add(ePASSIVE_TYPE.MoveSpeed_Up, new CPassive("이동속도 증가", 0, 5f, false));
+        _passives.Add(ePASSIVE_TYPE.MaxHP_Up, new CPassive("최대체력 증가", 0, 5f, false));
 
         foreach (var passive in _passives.Values)
         {
-            _passiveNames.Add(passive._name);
+            _passiveNames.Add(passive);
         }
     }
     public int GetLevel(string name)
@@ -69,6 +70,7 @@ public class PassiveManager : MonoBehaviour
         _passives[GetTypeByName(name)]._level++;
         _passives[GetTypeByName(name)]._isGot = true;
         _passiveController.UpdateStat(GetTypeByName(name));
+        UIManager.Instance.RemoveGiftName(name);
     }
     public bool IsMaxLevel(string name)
     {
@@ -78,9 +80,9 @@ public class PassiveManager : MonoBehaviour
             return false;
     }
 
-    PASSIVE_TYPE GetTypeByName(string name)
+    ePASSIVE_TYPE GetTypeByName(string name)
     {
-        PASSIVE_TYPE type = 0;
+        ePASSIVE_TYPE type = 0;
         foreach(var obj in _passives)
         {
             if (obj.Value._name == name)

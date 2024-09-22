@@ -1,43 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
-/*
- * 1. 공격횟수 (0. 한바퀴 1. 두바퀴 2. 세바퀴)
-2. 공격범위 (0. 1단 1. 2단 2. 3단 + 스턴)
-3. 쿨타임 (0. 5초 1. 4초 2. 3초)
-*/
-public class Attack_Meteor : AttackController
+public class Attack_Meteor : Attack
 {
     [SerializeField] GameObject _damageBoxObj;
     DamageBox_Meteor _damageBox;
 
-    Skill _skill;
-    private void Start()
+
+    [SerializeField] SkillManager _skillManager;
+
+    private void OnEnable()
     {
-        
+
         StartCoroutine(CRT_Attack());
 
-        _name = "운석 충돌";
+        _name = eSKILL.Meteor;
     }
-    private void Update()
-    {
-        /*
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            _skillManager.UpgradeLevel("운석 충돌");
-            UpdateStat();
-        }
-        UpdateStat();
-        */
-    }
-    public override void Attack()
+    public override void AttackInteract()
     {
         for (int i = 0; i < _attCount; i++)
         {
-            
+
             GameObject damageBox = Instantiate(_damageBoxObj, transform.position + GetRandomPos(), Quaternion.identity);
 
             _damageBox = damageBox.GetComponent<DamageBox_Meteor>();
@@ -57,49 +41,24 @@ public class Attack_Meteor : AttackController
         Vector3 rndPos = new Vector3(Mathf.Cos(rndAngle * Mathf.Deg2Rad) * rndDist, 15, Mathf.Sin(rndAngle * Mathf.Deg2Rad) * rndDist);
         return rndPos;
     }
-    public override void UpdateStat(Skill skill)
+    public override void SetSkill(CSkill skill)
     {
-        _level = skill._level;
-        switch (_level)
-        {
-            case 1:
-                _damage = 9;
-                _attCount = 1;
-                _attRange = 0.8f;
-                _coolTime = 7f;
-                break;
-            case 2:
-                _damage = 10;
-                _attCount = 1;
-                _attRange = 0.8f;
-                _coolTime = 7f;
-                break;
-            case 3:
-                _damage = 11;
-                _attCount = 1;
-                _attRange = 1f;
-                _coolTime = 7f;
-                break;
-            case 4:
-                _damage = 11;
-                _attCount = 1;
-                _attRange = 1f;
-                _coolTime = 6f;
-                break;
-            case 5:
-                _damage = 13;
-                _attCount = 1;
-                _attRange = 1.2f;
-                _coolTime = 6f;
-                break;
-            case 6:
-                _damage = 15;
-                _attCount = 1;
-                _attRange = 1.2f;
-                _coolTime = 4f;
-                break;
-        }
-        skill.UpdateStat(_level, _damage, _attCount, _attRange, _coolTime, _durTime, _shotSpeed);
+        _skill = skill;
+        _level = _skill._level;
+        UpdateStat(_skill._stat);
+    }
+
+    public override void StartAttack()
+    {
+        StartCoroutine(CRT_Attack());
+    }
+    public override void UpdateStat(CStat stat)
+    {
+        _damage = stat._damage;
+        _attCount = stat._attCount;
+        _attRange = stat._attRange;
+        _coolTime = stat._coolTime;
+
     }
 
     public override IEnumerator CRT_Attack()
@@ -107,12 +66,8 @@ public class Attack_Meteor : AttackController
         while (true)
         {
             yield return new WaitForSeconds(_coolTime);
-            Attack();
+            if (_level > 0)
+                AttackInteract();
         }
-    }
-
-    public override void SetSkill(Skill skill)
-    {
-        _skill = skill;
     }
 }
