@@ -58,20 +58,22 @@ public class CharacterSelector : MonoBehaviour
     IEnumerator CRT_SetSkillAwake()
     {
         yield return new WaitForSeconds(0.5f);
-        SkillManager.Instance.SetSkillAwake(_data, _selectedChar);
+        SkillManager.Instance.SetData(_data);
         SetCharacter();
+        SkillManager.Instance.SetSkillAwake();
+        
     }
     void SetCharacter()
     {
         GameObject selectedCharacter = Instantiate(GetObjByName(_selectedChar._prefName), SkillManager.Instance._PlayerTrs);
-        /*
-         * 1. SkillManager에서 List<GameObject> _attackObjs 선언.
-         * 2. 캐릭터 프리펩 2개 만들기 (Attack을 상속받는 클래스를 컴포넌트에 지니고 있는 게임 오브젝트 A 보유)
-         * 3. A를 SkillManager의 _attacks에 넣기
-         * 4. _attackObjs의 컴포넌트 Attack의 eSKILL변수 _name과 _skillDic.ElementAt(i).Value._skillName를 비교해 순서대로 _attacks에 넣기
-         * 5. AddSkill(_selectedSkill._skillName)를 써서 _possedSkills에 _selectedSkill넣기
-         */
 
+        AnimController animController = SkillManager.Instance._PlayerTrs.GetComponent<AnimController>();
+        animController.SetAnimator();
+
+
+        CharPrefInfo charPrefInfo = selectedCharacter.GetComponent<CharPrefInfo>();
+        Attack charAttack = charPrefInfo.GetCharAttack();
+        SkillManager.Instance.SetCharSkillAwake(charAttack, _selectedChar);
     }
     GameObject GetObjByName(string name)
     {

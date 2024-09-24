@@ -11,7 +11,7 @@ public class Attack_Boomerang : Attack
 
     private void OnEnable()
     {
-        _name = eSKILL.SpinBall;
+        _name = eSKILL.Boomerang;
     }
 
     public override void UpdateStat(CStat stat)

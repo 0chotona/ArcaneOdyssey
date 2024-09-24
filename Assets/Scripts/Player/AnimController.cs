@@ -6,13 +6,14 @@ public class AnimController : MonoBehaviour
 {
     public float _moveSpeed = 0;
     Animator _anim;
-    private void Awake()
-    {
-        _anim = GetComponentInChildren<Animator>();
-    }
     private void Update()
     {
-        _anim.SetFloat("moveSpeed", _moveSpeed);
+        if(_anim != null)
+            _anim.SetFloat("moveSpeed", _moveSpeed);
+    }
+    public void SetAnimator()
+    {
+        _anim = GetComponentInChildren<Animator>();
     }
     public void SetAttackAnimation(int level)
     {

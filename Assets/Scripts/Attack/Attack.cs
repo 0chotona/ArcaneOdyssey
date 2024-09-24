@@ -12,6 +12,7 @@ public abstract class Attack : MonoBehaviour
     public CSkill _skill;
 
     public eSKILL _name;
+    public bool _isMaxLevel = false;
 
     //데미지 / 공격횟수 / 공격범위 / 쿨타임 / 유지시간
     public float _damage;

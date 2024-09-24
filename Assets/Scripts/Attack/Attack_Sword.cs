@@ -27,7 +27,7 @@ public class Attack_Sword : Attack
 
     eSTATE _eState;
 
-    [SerializeField] AnimController _anim;
+    //[SerializeField] AnimController _anim;
     private void OnEnable()
     {
         _name = eSKILL.Slash;
@@ -79,7 +79,7 @@ public class Attack_Sword : Attack
                 _damageBox.UpdateDamage(_damage);
                 AttackInteract();
 
-                _anim.SetAttackAnimation(_level);
+                //_anim.SetAttackAnimation(_level);
 
                 yield return new WaitForSeconds(0.05f);
 
