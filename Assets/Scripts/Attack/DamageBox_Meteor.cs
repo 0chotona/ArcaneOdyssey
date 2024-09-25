@@ -9,7 +9,6 @@ public class DamageBox_Meteor : MonoBehaviour
     Vector3 _boxScale = new Vector3(1, 1, 1);
     GameObject _tmpObj;
 
-    bool _isGrounded = false;
 
     [SerializeField] GameObject _explodeObj;
     private void Awake()
@@ -19,24 +18,15 @@ public class DamageBox_Meteor : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (_isGrounded)
-        {
-            if (other.CompareTag("Enemy"))
-            {
-                EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
-                enemyHealth.LoseDamage(_damage);
-            }
-        }
 
         if (other.CompareTag("Ground"))
         {
-            _isGrounded = true;
 
-            GameObject explode = Instantiate(_explodeObj, transform.position, Quaternion.identity);
-            Destroy(explode, 1f);
-            Destroy(_tmpObj, 1.1f);
-
-
+            GameObject explodeObj = Instantiate(_explodeObj, transform.position, Quaternion.identity);
+            Explosion explosion = explodeObj.GetComponent<Explosion>();
+            explosion.UpdateDamage(_damage);
+            explosion.DestroyObj(1f);
+            Destroy(_tmpObj);
         }
     }
 

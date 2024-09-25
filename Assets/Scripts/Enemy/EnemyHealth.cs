@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class EnemyHealth : MonoBehaviour
 
     [Header("방어력"),SerializeField] int _def;
 
+    [Header("Hp 바"), SerializeField] Slider _hpSlider;
     bool _isDead;
     public bool _IsDead => _isDead;
 
@@ -24,10 +26,22 @@ public class EnemyHealth : MonoBehaviour
         
 
         _tmpObj = gameObject;
+        
+    }
+    private void Start()
+    {
+        if(_hpSlider != null)
+        {
+            _hpSlider.maxValue = _maxHp;
+            _hpSlider.value = _curHp;
+        }
+        
     }
     public void LoseDamage(float damage)
     {
         _curHp -= damage;
+        if (_hpSlider != null)
+            _hpSlider.value = _curHp;
         if (_curHp <= 0)
             Dead();
     }

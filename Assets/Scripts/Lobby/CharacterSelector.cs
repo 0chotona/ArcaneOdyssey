@@ -74,6 +74,7 @@ public class CharacterSelector : MonoBehaviour
         CharPrefInfo charPrefInfo = selectedCharacter.GetComponent<CharPrefInfo>();
         Attack charAttack = charPrefInfo.GetCharAttack();
         SkillManager.Instance.SetCharSkillAwake(charAttack, _selectedChar);
+        SkillManager.Instance.SetSkillMethod(charPrefInfo._Skill1, charPrefInfo._Skill2);
     }
     GameObject GetObjByName(string name)
     {

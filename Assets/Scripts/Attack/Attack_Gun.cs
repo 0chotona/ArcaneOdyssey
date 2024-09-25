@@ -9,8 +9,8 @@ public class Attack_Gun : Attack
 
     LineRenderer _lineRenderer;
     [Header("총알 발사 위치"), SerializeField] Transform _shootTrs;
-    [Header("발사 간격"), SerializeField] float _shootGap = 0.03f;
-    [Header("유지 시간"), SerializeField] float _shootDur = 0.15f;
+    [Header("발사 간격"), SerializeField] float _shootGap = 0.15f;
+    [Header("유지 시간"), SerializeField] float _shootDur = 0.05f;
     Vector3 _dir;
     float _distance = 15f;
 
@@ -80,9 +80,9 @@ public class Attack_Gun : Attack
             {
                 
                 AttackInteract();
-                yield return new WaitForSeconds(_shootGap);
-                _lineRenderer.enabled = false;
                 yield return new WaitForSeconds(_shootDur);
+                _lineRenderer.enabled = false;
+                yield return new WaitForSeconds(_shootGap);
             }
                 
 

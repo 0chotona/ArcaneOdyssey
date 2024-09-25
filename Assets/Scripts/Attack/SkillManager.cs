@@ -71,6 +71,7 @@ public class SkillManager : MonoBehaviour
     SkillData _skillData;
 
 
+    [Header("액티브 어택"), SerializeField] ActiveAttack _activeAttack;
 
     CChar _selectedChar = new CChar();
     Attack _selectedCharAttack = null;
@@ -254,5 +255,9 @@ public class SkillManager : MonoBehaviour
             }
         }
         _selectedSkill = charSkill;
+    }
+    public void SetSkillMethod(IActiveAttackable method1, IActiveAttackable method2)
+    {
+        _activeAttack.SetSkillMethod(method1, method2);
     }
 }
