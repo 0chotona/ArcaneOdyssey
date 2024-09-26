@@ -16,10 +16,17 @@ public class Active_Spin : MonoBehaviour, IActiveAttackable
 
     bool _canAttack = false;
     [Header("쿨타임"), SerializeField] float _coolTime = 10f;
+    [Header("데미지"), SerializeField] float _damage = 10f;
+    [Header("이펙트"), SerializeField] ParticleSystem _effectParticle;
+    ParticleSystem[] _effectParticles;
     private void Awake()
     {
         _damageBox = _damageBoxTrs.GetComponent<DamageBox_Spin>();
         _damageBoxTrs.gameObject.SetActive(false);
+        _effectParticles = _effectParticle.GetComponentsInChildren<ParticleSystem>();
+        foreach (ParticleSystem particle in _effectParticles)
+            particle.Stop();
+        StartCoroutine(CRT_SetCoolTime());
 
     }
     IEnumerator CRT_Attack() 
@@ -31,29 +38,20 @@ public class Active_Spin : MonoBehaviour, IActiveAttackable
     IEnumerator CRT_SetCoolTime()
     {
         _canAttack = false;
-        float curTime = 0f;
-        while(curTime < _coolTime)
-        {
-            curTime += Time.deltaTime;
-            yield return null;
-        }
+        yield return new WaitForSeconds(_coolTime);
         
         _canAttack = true;
     }//일시정지시 쿨타임 정지 https://www.inflearn.com/questions/1005470/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EC%BF%A8%ED%83%80%EC%9E%84-%EC%BD%94%EB%A3%A8%ED%8B%B4%ED%99%9C%EC%9A%A9-%EC%A7%88%EB%AC%B8
 
-    void SpawnEffect()
-    {
-        GameObject effect = Instantiate(_effect, transform.position, transform.rotation);
-        
-        Destroy(effect, 1);
-    }
 
 
     public void ActiveInteract()
     {
         if(_canAttack)
         {
-            SpawnEffect();
+            _damageBox.UpdateDamage(_damage);
+            foreach (ParticleSystem particle in _effectParticles)
+                particle.Play();
             StartCoroutine(CRT_Attack());
             StartCoroutine(CRT_SetCoolTime());
 

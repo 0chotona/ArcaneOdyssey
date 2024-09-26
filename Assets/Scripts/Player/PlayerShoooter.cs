@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class PlayerShoooter : MonoBehaviour
 {
-    //Header("¿À¸¥ÂÊ ÆÈ²ÞÄ¡"), SerializeField] Transform _elbowRTrs;
+    [Header("¿À¸¥ÂÊ ÆÈ²ÞÄ¡"), SerializeField] Transform _elbowRTrs;
     [Header("¿ÞÂÊ ÆÈ²ÞÄ¡"), SerializeField] Transform _elbowLTrs;
-    //[Header("¿À¸¥ÂÊ ¼Õ"), SerializeField] Transform _handRTrs;
+    [Header("¿À¸¥ÂÊ ¼Õ"), SerializeField] Transform _handRTrs;
     [Header("¿ÞÂÊ ¼Õ"), SerializeField] Transform _handLTrs;
 
     Animator _anim;
@@ -17,7 +17,7 @@ public class PlayerShoooter : MonoBehaviour
     }
     private void OnAnimatorIK(int layerIndex)
     {
-        /*
+        
         _elbowRTrs.position = _anim.GetIKHintPosition(AvatarIKHint.RightElbow);
         _anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
 
@@ -26,7 +26,10 @@ public class PlayerShoooter : MonoBehaviour
         _anim.SetIKPosition(AvatarIKGoal.RightHand, _handRTrs.position);
 
         _anim.SetIKRotation(AvatarIKGoal.RightHand, _handRTrs.rotation);
-        */
+        
+
+        _elbowLTrs.position = _anim.GetIKHintPosition(AvatarIKHint.LeftElbow);
+
         _anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1f);
 
         _anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1f);
@@ -35,7 +38,7 @@ public class PlayerShoooter : MonoBehaviour
 
         _anim.SetIKRotation(AvatarIKGoal.LeftHand, _handLTrs.rotation);
 
-        _elbowLTrs.position = _anim.GetIKHintPosition(AvatarIKHint.LeftElbow);
+        
         
     }
 }

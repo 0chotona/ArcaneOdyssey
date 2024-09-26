@@ -13,6 +13,8 @@ public class Active_StrikeGun : MonoBehaviour, IActiveAttackable
 
     [Header("라인 출력 횟수"), SerializeField] int _printCount = 16;
 
+    [Header("발사 이펙트"), SerializeField] ParticleSystem _shootEffect;
+
     //[Header("발사 간격"), SerializeField] float _shootGap = 0.15f;
     [Header("유지 시간"), SerializeField] float _shootDur = 0.05f;
 
@@ -25,6 +27,7 @@ public class Active_StrikeGun : MonoBehaviour, IActiveAttackable
         _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.positionCount = 2;
         _lineRenderer.enabled = false;
+        _shootEffect.Stop();
     }
     public void ActiveInteract()
     {
@@ -87,6 +90,7 @@ public class Active_StrikeGun : MonoBehaviour, IActiveAttackable
     {
         _lineRenderer.SetPosition(0, _shootTrs.position);
         _lineRenderer.SetPosition(1, hitPos);
+        _shootEffect.Play();
         _lineRenderer.enabled = true;
     }
     Vector3 GetRandomPos()
