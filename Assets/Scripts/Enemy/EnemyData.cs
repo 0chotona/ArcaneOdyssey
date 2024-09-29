@@ -53,8 +53,8 @@ public class EnemyData : MonoBehaviour
 
     void SetEnemyData()
     {
-        _enemyDatas.Add(ENEMYTYPE.Zubat, new CEnemy(1, 0, 10, 10, 5, 5f));
-        _enemyDatas.Add(ENEMYTYPE.Golbat, new CEnemy(1, 1, 20, 20, 10, 5f));
-        _enemyDatas.Add(ENEMYTYPE.Crobat, new CEnemy(1, 2, 30, 30, 15, 5f));
+        _enemyDatas.Add(ENEMYTYPE.Zubat, new CEnemy(1, 0, 10, 10, 5, 2f));
+        _enemyDatas.Add(ENEMYTYPE.Golbat, new CEnemy(1, 1, 20, 20, 10, 3f));
+        _enemyDatas.Add(ENEMYTYPE.Crobat, new CEnemy(1, 2, 30, 30, 15, 4f));
     }
 }

@@ -6,7 +6,6 @@ public class Active_DashShield : MonoBehaviour, IActiveAttackable
 {
     bool _canAttack = false;
     [Header("ÄðÅ¸ÀÓ"), SerializeField] float _coolTime = 10f;
-    [Header("½¯µå ¾ç"), SerializeField] float _damage = 10f;
     [Header("ÀÌÆåÆ®"), SerializeField] ParticleSystem _effectParticle;
     ParticleSystem[] _effectParticles;
 

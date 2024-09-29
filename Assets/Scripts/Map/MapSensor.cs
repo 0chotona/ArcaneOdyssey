@@ -1,121 +1,90 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MapSensor : MonoBehaviour
 {
     [SerializeField] MapSpawner _mapSpawner;
 
-    [SerializeField] Vector3 _vectorIdx;
+    [Header("현재 위치"), SerializeField] Vector3 _curPos;
+    float _distance = 5f;
+    float _curTime = 0f;
+    float _maxTime = 3f;
+    public bool isCounting = false;
+    Coroutine checkCoroutine = null;
 
-    [SerializeField] Transform _playerTrs;
+    Collider _curEnteredCollider = null;
+    List<Collider> collidersInRange = new List<Collider>();  // To track all colliders in range
 
-    float _sideDist;
-    private void Awake()
+    private void OnTriggerEnter(Collider other)
     {
-        _sideDist = transform.lossyScale.x;
-    }
-
-    /*
-    private void OnCollisionExit(Collision collision)
-    {
-        if(collision.gameObject.tag == "Player")
+        if (other.CompareTag("MapSensor"))
         {
-            Vector3 quadToPlayer = _playerTrs.position - transform.position;
+            collidersInRange.Add(other);  // Add collider to the list
 
-            Vector3 targetPos = Vector3.zero;
-
-            if (quadToPlayer.x > _sideDist * 0.5f)
-                targetPos.x += _sideDist * 2f;
-            else
-                targetPos.x -= _sideDist * 2f;
-
-            if (quadToPlayer.z > _sideDist * 0.5f)
-                targetPos.z += _sideDist * 2f;
-            else
-                targetPos.z -= _sideDist * 2f;
+            // Start the coroutine only if it isn't already running
+            if (!isCounting)
+            {
+                checkCoroutine = StartCoroutine(CRT_CheckMapPart());
+            }
         }
     }
-    */
+
     private void OnTriggerExit(Collider other)
     {
-
-        if(other.CompareTag("MapSensor"))
+        if (other.CompareTag("MapSensor"))
         {
-            Vector3 quadToPlayer = _playerTrs.position - transform.position;
-            Vector3 targetDir = Vector3.zero;
-            if (quadToPlayer.x > 0) //6
+            collidersInRange.Remove(other);  // Remove collider from the list
+
+            // If no more colliders are in range, stop the coroutine
+            if (collidersInRange.Count == 0)
             {
-                if(quadToPlayer.x - _sideDist * 0.5f > 0)
+                if (checkCoroutine != null)
                 {
-                    targetDir.x = 1;
-                }
-                else if(quadToPlayer.x - _sideDist * 0.5f < 0)
-                {
-                    targetDir.x = 0;
+                    StopCoroutine(checkCoroutine);
+                    checkCoroutine = null;
+                    isCounting = false;
                 }
             }
-            else
-            {
-                if (quadToPlayer.x + _sideDist * 0.5f < 0)
-                {
-                    targetDir.x = -1;
-                }
-                else if (quadToPlayer.x + _sideDist * 0.5f > 0)
-                {
-                    targetDir.x = 0;
-                }
-            }
-            if (quadToPlayer.z > 0)
-            {
-                if (quadToPlayer.z - _sideDist * 0.5f > 0)
-                {
-                    targetDir.z = 1;
-                }
-                else if (quadToPlayer.z - _sideDist * 0.5f < 0)
-                {
-                    targetDir.z = 0;
-                }
-            }
-            else
-            {
-                if (quadToPlayer.z + _sideDist * 0.5f < 0)
-                {
-                    targetDir.z = -1;
-                }
-                else if (quadToPlayer.z + _sideDist * 0.5f > 0)
-                {
-                    targetDir.z = 0;
-                }
-            }
-
-            /*
-            if (quadToPlayer.x - _sideDist * 0.5f > 0)
-                targetDir.x = 1;
-            else
-                targetDir.x = -1;
-
-            if (quadToPlayer.z - _sideDist * 0.5f > 0)
-                targetDir.z = 1;
-            else
-                targetDir.z = -1;
-            */
-            _mapSpawner.SpawnMap(targetDir);
-            /*
-            Vector3 targetPos = Vector3.zero;
-
-            if (quadToPlayer.x > _sideDist * 0.5f)
-                targetPos.x += _sideDist * 2f;
-            else
-                targetPos.x -= _sideDist * 2f;
-
-            if(quadToPlayer.z > _sideDist * 0.5f)
-                targetPos.z += _sideDist * 2f;
-            else
-                targetPos.z -= _sideDist * 2f;
-            */
-            
         }
     }
-    
+
+    IEnumerator CRT_CheckMapPart()
+    {
+        isCounting = true;
+
+        // Wait for 3 seconds of sustained contact
+        yield return new WaitForSeconds(_maxTime);
+
+        // After 3 seconds, check the closest MapSensor in range
+        if (collidersInRange.Count > 0)
+        {
+            Collider closestCollider = GetClosestCollider();
+            MapPartsInfo mapParts = closestCollider.GetComponent<MapPartsInfo>();
+            _curPos = mapParts._PartPos;
+            _mapSpawner.ShiftMap(_curPos);
+        }
+
+        isCounting = false;
+    }
+
+    // Function to find the closest collider
+    private Collider GetClosestCollider()
+    {
+        Collider closestCollider = null;
+        float minDistance = Mathf.Infinity;
+
+        foreach (Collider col in collidersInRange)
+        {
+            float distance = Vector3.Distance(transform.position, col.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closestCollider = col;
+            }
+        }
+
+        return closestCollider;
+    }
 }

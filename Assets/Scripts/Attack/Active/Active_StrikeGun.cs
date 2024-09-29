@@ -5,6 +5,7 @@ using UnityEngine;
 public class Active_StrikeGun : MonoBehaviour, IActiveAttackable
 {
     [Header("총알 발사 위치"), SerializeField] Transform _shootTrs;
+    [Header("총알 이펙트 발사 위치"), SerializeField] Transform _shootLineTrs;
     [Header("각도"), SerializeField] float _angle = 30f;
     [Header("거리"), SerializeField] float _distance = 20f;
 
@@ -21,6 +22,7 @@ public class Active_StrikeGun : MonoBehaviour, IActiveAttackable
     [Header("데미지"), SerializeField] float _damage = 10f;
 
     LineRenderer _lineRenderer;
+    float _shootLineGap = 1.5f;
 
     private void Awake()
     {
@@ -88,7 +90,7 @@ public class Active_StrikeGun : MonoBehaviour, IActiveAttackable
     }
     void PrintLineRenderer(Vector3 hitPos)
     {
-        _lineRenderer.SetPosition(0, _shootTrs.position);
+        _lineRenderer.SetPosition(0, _shootLineTrs.position);
         _lineRenderer.SetPosition(1, hitPos);
         _shootEffect.Play();
         _lineRenderer.enabled = true;
@@ -98,9 +100,9 @@ public class Active_StrikeGun : MonoBehaviour, IActiveAttackable
         float randomAngle = Random.Range(-_angle, _angle);
 
         Quaternion randomRotation = Quaternion.Euler(0, randomAngle, 0);
-        Vector3 randomDirection = randomRotation * _shootTrs.forward;
+        Vector3 randomDirection = randomRotation * _shootLineTrs.forward;
 
-        Vector3 rndPos = _shootTrs.position + randomDirection.normalized * _distance;
+        Vector3 rndPos = _shootLineTrs.position + randomDirection.normalized * (_distance - _shootLineGap);
 
         return rndPos;
     }

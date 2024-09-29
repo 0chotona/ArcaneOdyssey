@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shootTrs: {fileID: 7677856903526453839}
+  _shootLineTrs: {fileID: 2374498051751099179}
   _angle: 30
   _distance: 20
   _attCount: 8
@@ -11805,6 +11806,37 @@ Transform:
   - {fileID: 9099693124067078494}
   m_Father: {fileID: 5411457985749471244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2789894944553872187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2374498051751099179}
+  m_Layer: 0
+  m_Name: ShootLinePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2374498051751099179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2789894944553872187}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.078, y: 0.952, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4006000809283605385}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2803817418062372679
 GameObject:
   m_ObjectHideFlags: 0
@@ -12923,9 +12955,11 @@ MonoBehaviour:
   _shotSpeed: 0
   _damageBoxObj: {fileID: 3194611459618785397, guid: 6bc21c036dd925b4d89070eacb1c056b, type: 3}
   _shootTrs: {fileID: 7677856903526453839}
+  _shootLineTrs: {fileID: 2374498051751099179}
   _shootGap: 0.15
   _shootDur: 0.03
   _shootEffect: {fileID: 1137684092954737173}
+  _thickness: 1
 --- !u!120 &2409353885772904958
 LineRenderer:
   serializedVersion: 2
@@ -13215,7 +13249,7 @@ Transform:
   m_GameObject: {fileID: 5479470479151701501}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.078, y: 0.952, z: 1.508}
+  m_LocalPosition: {x: 0.078, y: 0.952, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14170,6 +14204,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7677856903526453839}
+  - {fileID: 2374498051751099179}
   - {fileID: 7211200645522026511}
   - {fileID: 5372793937780543168}
   - {fileID: 6018008773369710969}

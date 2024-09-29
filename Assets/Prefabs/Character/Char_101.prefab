@@ -10827,7 +10827,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -25726,7 +25726,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -35923,7 +35923,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -41025,7 +41025,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _charAttackObj: {fileID: 621576247395489308}
-  _skill1: {fileID: 0}
+  _skill1: {fileID: 3223087783628307136}
   _skill2: {fileID: 3430613662398500488}
 --- !u!1 &4862430539508980929
 GameObject:
@@ -52422,7 +52422,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -57524,6 +57524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3223087783628307136}
+  - component: {fileID: 6465870999502224814}
   m_Layer: 0
   m_Name: Skill1
   m_TagString: Untagged
@@ -57547,6 +57548,20 @@ Transform:
   - {fileID: 2477478356081610494}
   m_Father: {fileID: 7849866938169332607}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6465870999502224814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8078347180777648700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db15e30104002804fac79aa7aa0d4300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coolTime: 10
+  _effectParticle: {fileID: 2006958006514040170}
 --- !u!1 &8131636839023887255
 GameObject:
   m_ObjectHideFlags: 0

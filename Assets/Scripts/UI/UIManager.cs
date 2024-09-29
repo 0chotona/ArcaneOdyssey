@@ -30,6 +30,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI _timerText;
 
+    [Header("Hp 바"), SerializeField] Slider _hpSlider;
+    [Header("경험치 바"), SerializeField] Slider _expSlider;
     float _curTime = 60;
 
     public bool _isPause = false;
@@ -43,9 +45,9 @@ public class UIManager : MonoBehaviour
     List<string> _passiveNames = new List<string>();
     private void Start()
     {
-        
 
-        
+
+        _expSlider.value = 0f;
 
         _skillButtons[0].onClick.AddListener(() => OnSelectSkill(0));
         _skillButtons[1].onClick.AddListener(() => OnSelectSkill(1));
@@ -152,6 +154,7 @@ public class UIManager : MonoBehaviour
     {
         for(int i = 0; i < 10; i++)
         {
+            Debug.Log(10 - i);
             yield return new WaitForSeconds(1f);
         }
         
@@ -164,5 +167,15 @@ public class UIManager : MonoBehaviour
             return false;
 
         return false;
+    }
+    public void UpdateHpBar(float maxHp, float curHp)
+    {
+        _hpSlider.maxValue = maxHp;
+        _hpSlider.value = curHp;
+    }
+    public void UpdateExpBar(float maxExp, float curExp)
+    {
+        _expSlider.maxValue = maxExp;
+        _expSlider.value = curExp;
     }
 }

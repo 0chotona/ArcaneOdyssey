@@ -13,6 +13,16 @@ public class EnemyMove : MonoBehaviour
     private void Awake()
     {
         _navMesh = GetComponent<NavMeshAgent>();
+        
+    }
+    private void Update()
+    {
+        if (_playerTrs != null)
+            MoveToPlayer();
+    }
+    void MoveToPlayer()
+    {
+        _navMesh.SetDestination(_playerTrs.position);
     }
     public void SetMoveSpeed(float moveSpeed)
     {
@@ -22,5 +32,7 @@ public class EnemyMove : MonoBehaviour
     public void SetPlayerTrs(Transform playerTrs)
     {
         _playerTrs = playerTrs;
+        
     }
+    
 }

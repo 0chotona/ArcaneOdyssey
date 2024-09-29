@@ -41,8 +41,7 @@ public class Active_Spin : MonoBehaviour, IActiveAttackable
         yield return new WaitForSeconds(_coolTime);
         
         _canAttack = true;
-    }//일시정지시 쿨타임 정지 https://www.inflearn.com/questions/1005470/%EC%9C%A0%EB%8B%88%ED%8B%B0-%EC%BF%A8%ED%83%80%EC%9E%84-%EC%BD%94%EB%A3%A8%ED%8B%B4%ED%99%9C%EC%9A%A9-%EC%A7%88%EB%AC%B8
-
+    }
 
 
     public void ActiveInteract()

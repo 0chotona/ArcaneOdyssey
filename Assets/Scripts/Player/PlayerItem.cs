@@ -54,7 +54,7 @@ public class PlayerItem : MonoBehaviour
                         _maxPoint = GameManager.Instance._Level * _pointOffset;
 
                     }
-                    
+                    UIManager.Instance.UpdateExpBar(_maxPoint, _curPoint);
                     break;
             }
             Destroy(other.gameObject);

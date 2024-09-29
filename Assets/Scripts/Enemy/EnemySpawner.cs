@@ -95,15 +95,24 @@ public class EnemySpawner : MonoBehaviour
                 UIManager.Instance.StartCoroutine(UIManager.Instance.CRT_BossCountDown());
                 yield return new WaitForSeconds(10f);
                 SpawnBoss();
-
+                break;
             }
             _curEnemy++;
         }
         
     }
+    IEnumerator CRT_BossWave()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(_spawnCoolTime);
+        }
+        
+    }
     void SpawnBoss()
     {
-
+        CRT_BossWave();
+        Debug.Log("보스 스폰");
     }
     void SpawnCircleWave()
     {
