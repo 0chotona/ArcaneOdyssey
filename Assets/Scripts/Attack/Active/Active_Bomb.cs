@@ -37,4 +37,5 @@ public class Active_Bomb : MonoBehaviour, IActiveAttackable
         
         _damageBox.Shoot(_yAngle, _shootPower);
     }
+    public void SetPlayerTrs(Transform playerTrs) { }
 }

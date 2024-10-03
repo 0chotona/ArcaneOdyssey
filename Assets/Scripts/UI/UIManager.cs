@@ -32,6 +32,8 @@ public class UIManager : MonoBehaviour
 
     [Header("Hp 바"), SerializeField] Slider _hpSlider;
     [Header("경험치 바"), SerializeField] Slider _expSlider;
+    [Header("쉴드 바"), SerializeField] Slider _shieldSlider;
+
     float _curTime = 60;
 
     public bool _isPause = false;
@@ -177,5 +179,10 @@ public class UIManager : MonoBehaviour
     {
         _expSlider.maxValue = maxExp;
         _expSlider.value = curExp;
+    }
+    public void UpdateShieldBar(float amount)
+    {
+        _shieldSlider.maxValue = _hpSlider.maxValue / 5f;
+        _shieldSlider.value = amount;
     }
 }

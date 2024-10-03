@@ -19,6 +19,18 @@ public class CChar
 }
 public class CharacterSelector : MonoBehaviour
 {
+    static CharacterSelector _instance;
+
+    public static CharacterSelector Instance
+    {
+        get
+        {
+            if (_instance == null)
+                _instance = FindObjectOfType<CharacterSelector>();
+            return _instance;
+        }
+
+    }
     List<CChar> _charList = new List<CChar>();
 
     SkillData _data;
@@ -28,6 +40,7 @@ public class CharacterSelector : MonoBehaviour
     [SerializeField] string _selected;
 
     [Header("캐릭터 프리펩"), SerializeField] List<GameObject> _characterPrefs;
+    Transform _playerTrs;
     private void Awake()
     {
         var obj = FindObjectsOfType<CharacterSelector>();
@@ -57,7 +70,8 @@ public class CharacterSelector : MonoBehaviour
     }
     IEnumerator CRT_SetSkillAwake()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f); //게임 씬 시작
+        _playerTrs = SkillManager.Instance._PlayerTrs;
         SkillManager.Instance.SetData(_data);
         SetCharacter();
         SkillManager.Instance.SetSkillAwake();
@@ -65,13 +79,15 @@ public class CharacterSelector : MonoBehaviour
     }
     void SetCharacter()
     {
-        GameObject selectedCharacter = Instantiate(GetObjByName(_selectedChar._prefName), SkillManager.Instance._PlayerTrs);
+        GameObject selectedCharacter = Instantiate(GetObjByName(_selectedChar._prefName), _playerTrs);
 
-        AnimController animController = SkillManager.Instance._PlayerTrs.GetComponent<AnimController>();
+        AnimController animController = _playerTrs.GetComponent<AnimController>();
         animController.SetAnimator();
 
 
         CharPrefInfo charPrefInfo = selectedCharacter.GetComponent<CharPrefInfo>();
+        
+        charPrefInfo.SetPlayerTrs(_playerTrs);
         Attack charAttack = charPrefInfo.GetCharAttack();
         SkillManager.Instance.SetCharSkillAwake(charAttack, _selectedChar);
         SkillManager.Instance.SetSkillMethod(charPrefInfo._Skill1, charPrefInfo._Skill2);

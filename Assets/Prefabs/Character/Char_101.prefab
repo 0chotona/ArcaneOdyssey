@@ -57562,6 +57562,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _coolTime: 10
   _effectParticle: {fileID: 2006958006514040170}
+  _dashTime: 0.15
+  _dashSpeed: 20
 --- !u!1 &8131636839023887255
 GameObject:
   m_ObjectHideFlags: 0

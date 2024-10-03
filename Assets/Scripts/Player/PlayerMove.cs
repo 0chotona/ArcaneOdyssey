@@ -19,6 +19,8 @@ public class PlayerMove : MonoBehaviour
     public Vector3 _moveDir;
 
     int _speedIncrease;
+
+    bool _canMove = true;
     private void Awake()
     {
         _charControl = GetComponent<CharacterController>();
@@ -27,10 +29,11 @@ public class PlayerMove : MonoBehaviour
     }
     private void Update()
     {
-        Move();
+        if(_canMove)
+            MovePlayer();
     }
 
-    private void Move()
+    private void MovePlayer()
     {
         if (_groundCheck.IsGrounded())
         {
@@ -58,6 +61,26 @@ public class PlayerMove : MonoBehaviour
     public void UpdatePassiveStat()
     {
         _speedIncrease += 5;
+    }
+    void Move(Vector3 dir)
+    {
+        _charControl.Move(dir * Time.deltaTime);
+    }
+    public void Dash(float time, float speed)
+    {
+        StartCoroutine(CRT_Dash(time, speed));
+    }
+    IEnumerator CRT_Dash(float time, float speed)
+    {
+        _canMove = false;
+        float timer = 0;
+        while(timer < time)
+        {
+            timer += Time.deltaTime;
+            Move(transform.forward * speed);
+            yield return null;
+        }
+        _canMove = true;
     }
 
 }

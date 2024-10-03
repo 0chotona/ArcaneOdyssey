@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ public class MapSensor : MonoBehaviour
     Collider _curEnteredCollider = null;
     List<Collider> collidersInRange = new List<Collider>();  // To track all colliders in range
 
+    [SerializeField] NavMeshSurface _navMeshSurface;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("MapSensor"))
@@ -65,7 +67,8 @@ public class MapSensor : MonoBehaviour
             _curPos = mapParts._PartPos;
             _mapSpawner.ShiftMap(_curPos);
         }
-
+        _navMeshSurface.RemoveData();
+        _navMeshSurface.BuildNavMesh();
         isCounting = false;
     }
 

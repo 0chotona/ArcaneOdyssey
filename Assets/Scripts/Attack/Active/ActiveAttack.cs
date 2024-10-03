@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public interface IActiveAttackable
 {
     void ActiveInteract();
+    void SetPlayerTrs(Transform playerTrs);
 }
 public class ActiveController
 {

@@ -22,7 +22,6 @@ public class LobbyUIManager : MonoBehaviour
     [Header("상품 창"),SerializeField] GameObject _productPanel;
     [Header("초상화 리스트"), SerializeField] List<Sprite> _productImgList;
     [SerializeField] Transform _contentTrs;
-    [SerializeField] CharacterSelector _characterSelector;
 
     GameObject _spawnedObj = null;
     [Header("모델링"), SerializeField] List<GameObject> _charModels;
@@ -69,12 +68,12 @@ public class LobbyUIManager : MonoBehaviour
     public void Click_Select(CChar cchar)
     {
         SpawnModelObj(cchar._modelName);
-        _characterSelector.SetSelectedChar(cchar);
+        CharacterSelector.Instance.SetSelectedChar(cchar);
     }
 
     void Click_StartGame()
     {
-        _characterSelector.StartGame();
+        CharacterSelector.Instance.StartGame();
     }
     GameObject GetModelObjByName(string modelName)
     {

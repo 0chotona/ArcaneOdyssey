@@ -121,4 +121,5 @@ public class Active_StrikeGun : MonoBehaviour, IActiveAttackable
         }
         
     }
+    public void SetPlayerTrs(Transform playerTrs) { }
 }

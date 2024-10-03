@@ -76,6 +76,8 @@ public class SkillManager : MonoBehaviour
     CChar _selectedChar = new CChar();
     Attack _selectedCharAttack = null;
     CSkill _selectedSkill = new CSkill();
+
+    
     
     private void Start()
     {
@@ -132,7 +134,7 @@ public class SkillManager : MonoBehaviour
         AddSkill(_selectedCharAttack._name);
         UpgradeLevel(_selectedCharAttack._name);
     }
-    public void AddSkill(eSKILL name)
+    public void AddSkill(eSKILL name) //½ºÅ³ Ã¹È¹µæ
     {
         _possedSkills.Add(name, FindSkillByName(name));
         StartAttack(name);

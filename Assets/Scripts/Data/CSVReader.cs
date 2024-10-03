@@ -11,7 +11,6 @@ public class CSVReader : MonoBehaviour
     [Header("캐릭터"), SerializeField] TextAsset _charDataFile;
     SkillData _skillData;
     [SerializeField] SkillManager _skillManager;
-    [SerializeField] CharacterSelector _characterSelector;
 
     List<string> _rowSkillDatas = new List<string>();
     List<string> _rowCharSkillDatas = new List<string>();
@@ -23,8 +22,8 @@ public class CSVReader : MonoBehaviour
         ReadCharSkillCSV();
         ReadCharCSV();
 
-        
-        _characterSelector.SetData(_skillData);
+
+        CharacterSelector.Instance.SetData(_skillData);
         //씬넘어갈때 시전
         //_skillManager.SetSkillAwake(_skillData);
     }

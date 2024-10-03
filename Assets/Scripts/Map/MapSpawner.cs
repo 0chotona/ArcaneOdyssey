@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MapSpawner : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class MapSpawner : MonoBehaviour
 
     [Header("가로 간격"), SerializeField] float _xGap = 70f;
     [Header("세로 간격"), SerializeField] float _zGap = 70f;
+
 
     private void Awake()
     {

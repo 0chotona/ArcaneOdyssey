@@ -14,6 +14,7 @@ public class Active_Spin : MonoBehaviour, IActiveAttackable
     [SerializeField] GameObject _effect;
     DamageBox_Spin _damageBox;
 
+
     bool _canAttack = false;
     [Header("쿨타임"), SerializeField] float _coolTime = 10f;
     [Header("데미지"), SerializeField] float _damage = 10f;
@@ -49,12 +50,17 @@ public class Active_Spin : MonoBehaviour, IActiveAttackable
         if(_canAttack)
         {
             _damageBox.UpdateDamage(_damage);
-            foreach (ParticleSystem particle in _effectParticles)
-                particle.Play();
+            ShowParticle();
             StartCoroutine(CRT_Attack());
             StartCoroutine(CRT_SetCoolTime());
 
         }
         
     }
+    void ShowParticle()
+    {
+        foreach (ParticleSystem particle in _effectParticles)
+            particle.Play();
+    }
+    public void SetPlayerTrs(Transform playerTrs) { }
 }
