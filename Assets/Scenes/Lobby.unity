@@ -5538,7 +5538,6 @@ MonoBehaviour:
   _charSkillDataFile: {fileID: 4900000, guid: 13872526dd958e949834c7b4a5bfb11d, type: 3}
   _charDataFile: {fileID: 4900000, guid: 5461b2ca77582664290513c6ff3cd402, type: 3}
   _skillManager: {fileID: 0}
-  _characterSelector: {fileID: 97723714}
 --- !u!4 &748244180
 Transform:
   m_ObjectHideFlags: 0
@@ -5980,7 +5979,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a240950b30152034ebbafd741387f190, type: 3}
   - {fileID: 21300000, guid: 9eb507f77300ac84cb0fc90359ff7c64, type: 3}
   _contentTrs: {fileID: 1009797461}
-  _characterSelector: {fileID: 97723714}
   _charModels:
   - {fileID: 7663405334880167374, guid: fe1dae19a5ba36041bb142e17046eb89, type: 3}
   - {fileID: 3517722130316783433, guid: 5ee426d77b7397e44899cd7c9d3cdfc0, type: 3}

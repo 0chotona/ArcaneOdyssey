@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack_Gun : Attack
+public class Momoi_Attack : Attack
 {
     [SerializeField] GameObject _damageBoxObj;
-    DamageBox_Gun _damageBox;
+    Momoi_DamageBox_Attack _damageBox;
 
     [Header("ÃÑ¾Ë ¹ß»ç À§Ä¡"), SerializeField] Transform _shootTrs;
     [Header("ÃÑ¾Ë ÀÌÆåÆ® ¹ß»ç À§Ä¡"), SerializeField] Transform _shootLineTrs;
@@ -30,13 +30,13 @@ public class Attack_Gun : Attack
     {
         Vector3 targetPos = _shootTrs.position + _shootTrs.forward * _distance;
         GameObject bullet = Instantiate(_damageBoxObj, _shootTrs.position, _shootTrs.rotation);
-        DamageBox_Gun damageBox = bullet.GetComponent<DamageBox_Gun>();
+        Momoi_DamageBox_Attack damageBox = bullet.GetComponent<Momoi_DamageBox_Attack>();
         damageBox.UpdateDamage(_damage);
         damageBox.UpdateSpeed(_speed);
+        damageBox.UpdateIsMaxLevel(_isMaxLevel);
         damageBox.Shot(targetPos);
 
     }
-    public void SetMaxLevel() { _isMaxLevel = true; }
     public override void SetSkill(CSkill skill)
     {
         _skill = skill;

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
 public class Explosion : MonoBehaviour
 {
@@ -11,13 +10,15 @@ public class Explosion : MonoBehaviour
     Collider _collider;
 
     ParticleSystem[] _particles;
-    private void Awake()
+    
+    public void ShowParticle()
     {
         _particles = GetComponentsInChildren<ParticleSystem>();
         foreach (ParticleSystem particle in _particles)
             particle.Play();
-
-        _tmpObj = gameObject;
+    }
+    public void Explode()
+    {
         _collider = GetComponent<Collider>();
         _collider.enabled = true;
         StartCoroutine(CRT_ColliderOff());
@@ -37,6 +38,7 @@ public class Explosion : MonoBehaviour
     }
     public void DestroyObj(float time)
     {
+        _tmpObj = gameObject;
         Destroy(_tmpObj, time);
         
     }

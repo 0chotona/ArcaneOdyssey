@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _att: 0
+  _attCoolTime: 2
 --- !u!1 &8058244012326127276
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +198,7 @@ GameObject:
   - component: {fileID: 3805681012911531618}
   - component: {fileID: 4681484351102857652}
   - component: {fileID: 7347604214534895233}
-  - component: {fileID: -6975298632192628158}
+  - component: {fileID: 1960207311305202598}
   m_Layer: 0
   m_Name: Golbat
   m_TagString: Enemy
@@ -264,6 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _att: 0
+  _attCoolTime: 2
 --- !u!195 &4681484351102857652
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -302,8 +304,8 @@ MonoBehaviour:
   _enemyMove: {fileID: 184855701959286619}
   _enemyHealth: {fileID: 600574933773514616}
   _enemyAttack: {fileID: 398906958938573187}
---- !u!135 &-6975298632192628158
-SphereCollider:
+--- !u!143 &1960207311305202598
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -317,9 +319,14 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
+  m_Height: 2
   m_Radius: 1
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}

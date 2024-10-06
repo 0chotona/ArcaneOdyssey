@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 8664745373741487862}
   - component: {fileID: 4173081612548556784}
   - component: {fileID: 6838986807673896494}
-  - component: {fileID: 2066050995064964520}
+  - component: {fileID: -9203707415711511366}
   m_Layer: 0
   m_Name: Zubat
   m_TagString: Enemy
@@ -220,8 +220,8 @@ MonoBehaviour:
   _enemyMove: {fileID: 8664745373741487862}
   _enemyHealth: {fileID: 9179448498304744625}
   _enemyAttack: {fileID: 1615700506375971781}
---- !u!135 &2066050995064964520
-SphereCollider:
+--- !u!143 &-9203707415711511366
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -235,11 +235,16 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
+  m_Height: 2
   m_Radius: 1
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9044173172561772605
 GameObject:
@@ -308,3 +313,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _att: 0
+  _attCoolTime: 2

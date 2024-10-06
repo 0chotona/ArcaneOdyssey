@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class DamageBox_Gun : MonoBehaviour
+public class Momoi_DamageBox_E : MonoBehaviour
 {
     float _damage;
     public float _speed;
@@ -16,6 +15,7 @@ public class DamageBox_Gun : MonoBehaviour
     bool _isMaxLevel = false;
 
     Vector3 _targetPos;
+    [Header("폭발 오브젝트"), SerializeField] GameObject _explodeObj;
 
     public void UpdateDamage(float damage) { _damage = damage; }
     public void UpdateSpeed(float speed) { _speed = speed; }
@@ -23,7 +23,7 @@ public class DamageBox_Gun : MonoBehaviour
     {
         _tmpObj = gameObject;
         _targetPos = targetPos;
-        transform.rotation = Quaternion.LookRotation(_targetPos);
+        transform.rotation = Quaternion.LookRotation(_targetPos - transform.position);
         StartCoroutine(CRT_MoveBullet());
     }
     IEnumerator CRT_MoveBullet()
@@ -33,18 +33,27 @@ public class DamageBox_Gun : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, _targetPos, _speed * Time.deltaTime);
             yield return null;
         }
-        //Destroy(_tmpObj);
-        
+        SpawnExplode();
+        Destroy(_tmpObj);
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             enemyHealth.LoseDamage(_damage);
-            if (!_isMaxLevel)
-                Destroy(_tmpObj);
+            SpawnExplode();
+            Destroy(_tmpObj);
         }
+    }
+    void SpawnExplode()
+    {
+        GameObject explodeObj = Instantiate(_explodeObj, transform.position, Quaternion.identity);
+        Explosion explosion = explodeObj.GetComponent<Explosion>();
+        explosion.UpdateDamage(_damage);
+        explosion.ShowParticle();
+        explosion.Explode();
+        explosion.DestroyObj(1f);
     }
 }
