@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GetDrag : MonoBehaviour
+public class Momoi_GetDrag : MonoBehaviour
 {
     [Header("범위 오브젝트"), SerializeField] GameObject _cursorObj;
+    [Header("액티브 R"), SerializeField] Momoi_Active_R _activeR;
+
     private void Awake()
     {
         _cursorObj.transform.SetParent(null);
@@ -28,10 +30,9 @@ public class GetDrag : MonoBehaviour
         mousePosition.z = 10f; // 카메라와의 거리 설정
         //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        // y좌표를 1로 고정
+        
         worldPosition.y = 1f;
 
-        // _cursorObj의 위치를 마우스가 클릭한 위치로 업데이트
         _cursorObj.transform.position = worldPosition;
 
     }
@@ -41,6 +42,8 @@ public class GetDrag : MonoBehaviour
         {
             Time.timeScale = 1;
             Debug.Log(_cursorObj.transform.position);
+
+            _activeR.ShootRocket(_cursorObj.transform.position);
             _cursorObj.SetActive(false);
             gameObject.SetActive(false);
         }

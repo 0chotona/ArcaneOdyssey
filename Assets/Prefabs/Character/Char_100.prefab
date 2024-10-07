@@ -364,6 +364,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _checkMouseObj: {fileID: 3776798364598790451}
+  _shootTrs: {fileID: 7677856903526453839}
+  _damage: 30
+  _roketPref: {fileID: 2214781104578963119, guid: 95d47f83b6ca24f47b279c72c8d15995, type: 3}
+  _speed: 25
+  _hpPercent: 70
 --- !u!1 &807304574126417623
 GameObject:
   m_ObjectHideFlags: 0
@@ -12091,6 +12096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cursorObj: {fileID: 6041884949739344415}
+  _activeR: {fileID: 8442928852036385214}
 --- !u!65 &788106474083881525
 BoxCollider:
   m_ObjectHideFlags: 0

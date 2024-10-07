@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7949307920720798313}
   - component: {fileID: 1136989221911219665}
   m_Layer: 0
-  m_Name: GunAttack
+  m_Name: Momoi_DamageBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

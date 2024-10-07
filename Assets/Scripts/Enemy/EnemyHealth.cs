@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour
 {
     [Header("최대 체력"), SerializeField] int _maxHp = 10;
-    public float _curHp;
+    [Header("현재 체력"), SerializeField] float _curHp;
 
     [Header("방어력"),SerializeField] int _def;
 
@@ -85,5 +85,11 @@ public class EnemyHealth : MonoBehaviour
         _isDead = true;
         
         Destroy(_tmpObj);
+    }
+    public float GetHpPercent()
+    {
+        float percent = 0;
+        percent = _curHp / _maxHp * 100;
+        return percent;
     }
 }
