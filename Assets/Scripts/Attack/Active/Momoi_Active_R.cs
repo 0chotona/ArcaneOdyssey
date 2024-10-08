@@ -15,6 +15,9 @@ public class Momoi_Active_R : MonoBehaviour, IActiveAttackable
 
     [Header("ÀÒÀº Ã¼·Â ÆÛ¼¾Æ®"), SerializeField] float _hpPercent = 70f;
 
+    [Header("ÄðÅ¸ÀÓ"), SerializeField] float _coolTime = 10f;
+
+    bool _canActive = true;
     Transform _playerTrs;
     Vector3 _targetPos;
     private void Awake()
@@ -24,9 +27,15 @@ public class Momoi_Active_R : MonoBehaviour, IActiveAttackable
     }
     public void ActiveInteract()
     {
-        _checkMouseObj.SetActive(true);
-        Time.timeScale = 0.1f;
-        _checkMouseObj.transform.position = _playerTrs.position;
+        if (_canActive)
+        {
+            _checkMouseObj.SetActive(true);
+            Time.timeScale = 0.1f;
+            _checkMouseObj.transform.position = _playerTrs.position;
+            StartCoroutine(CRT_CoolTime());
+            
+        }
+        
     }
     public void ShootRocket(Vector3 targetPos)
     {
@@ -36,10 +45,16 @@ public class Momoi_Active_R : MonoBehaviour, IActiveAttackable
         damageBox.UpdateSpeed(_speed);
         damageBox.UpdateHpPercent(_hpPercent);
         damageBox.Shot(targetPos);
+        UIManager.Instance.StartRCooltime(_coolTime - _coolTime * BuffController.Instance._CoolTimeBuff);
     }
     public void SetPlayerTrs(Transform playerTrs)
     {
         _playerTrs = playerTrs;
     }
-    
+    IEnumerator CRT_CoolTime()
+    {
+        _canActive = false;
+        yield return new WaitForSeconds(_coolTime - _coolTime * BuffController.Instance._CoolTimeBuff);
+        _canActive = true;
+    }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Momoi_DamageBox_Attack : MonoBehaviour
 {
     float _damage;
+    float _piercedDamage;
     public float _speed;
 
 
@@ -18,6 +19,7 @@ public class Momoi_DamageBox_Attack : MonoBehaviour
     Vector3 _targetPos;
 
     public void UpdateDamage(float damage) { _damage = damage; }
+    public void UpdatePierceDamage(float pierceDamage) { _piercedDamage = pierceDamage; }
     public void UpdateSpeed(float speed) { _speed = speed; }
     public void UpdateIsMaxLevel(bool isMaxLevel) { _isMaxLevel = isMaxLevel; }
     public void Shot(Vector3 targetPos)
@@ -46,6 +48,8 @@ public class Momoi_DamageBox_Attack : MonoBehaviour
             enemyHealth.LoseDamage(_damage);
             if (!_isMaxLevel)
                 Destroy(_tmpObj);
+            else
+                _damage = _piercedDamage;
         }
     }
 }

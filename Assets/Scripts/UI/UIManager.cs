@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    [SerializeField] PassiveManager _passiveManager;
+    [SerializeField] BuffManager _passiveManager;
 
     [SerializeField] GameObject _upgradePanel;
     [Header("물품"), SerializeField]
@@ -33,13 +33,15 @@ public class UIManager : MonoBehaviour
     [Header("Hp 바"), SerializeField] Slider _hpSlider;
     [Header("경험치 바"), SerializeField] Slider _expSlider;
     [Header("쉴드 바"), SerializeField] Slider _shieldSlider;
+    [Header("E 스킬 쿨타임바"), SerializeField] Image _imgECooltime;
+    [Header("R 스킬 쿨타임바"), SerializeField] Image _imgRCooltime;
 
     float _curTime = 60;
 
     public bool _isPause = false;
 
     List<CSkill> _skills = new List<CSkill>();
-    List<CPassive> _passives = new List<CPassive>();
+    List<CBuff> _passives = new List<CBuff>();
 
     List<string> _giftNames = new List<string>();
 
@@ -54,6 +56,9 @@ public class UIManager : MonoBehaviour
         _skillButtons[0].onClick.AddListener(() => OnSelectSkill(0));
         _skillButtons[1].onClick.AddListener(() => OnSelectSkill(1));
         _skillButtons[2].onClick.AddListener(() => OnSelectSkill(2));
+
+        _imgECooltime.fillAmount = 0;
+        _imgRCooltime.fillAmount = 0;
     }
     private void Update()
     {
@@ -71,7 +76,7 @@ public class UIManager : MonoBehaviour
             _skillNames.Add(skill._skillText);
         }
 
-        foreach (CPassive passive in _passives)
+        foreach (CBuff passive in _passives)
         {
             _giftNames.Add(passive._name);
             _passiveNames.Add(passive._name);
@@ -184,5 +189,39 @@ public class UIManager : MonoBehaviour
     {
         _shieldSlider.maxValue = _hpSlider.maxValue / 5f;
         _shieldSlider.value = amount;
+    }
+    public void StartECooltime(float coolTime)
+    {
+        StartCoroutine(CRT_ECoolTime(coolTime));
+    }
+    IEnumerator CRT_ECoolTime(float coolTime)
+    {
+        float curTime = coolTime;
+        float fill = 0;
+        while (curTime > 0)
+        {
+            curTime -= Time.deltaTime;
+            fill = curTime / coolTime;
+            _imgECooltime.fillAmount = fill;
+            yield return null;
+        }
+        
+    }
+    public void StartRCooltime(float coolTime)
+    {
+        StartCoroutine(CRT_RCoolTime(coolTime));
+    }
+    IEnumerator CRT_RCoolTime(float coolTime)
+    {
+        float curTime = coolTime;
+        float fill = 0;
+        while (curTime > 0)
+        {
+            curTime -= Time.deltaTime;
+            fill = curTime / coolTime;
+            _imgRCooltime.fillAmount = fill;
+            yield return null;
+        }
+
     }
 }

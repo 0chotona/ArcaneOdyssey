@@ -83,7 +83,8 @@ public class EnemyHealth : MonoBehaviour
     {
         SpawnJewel();
         _isDead = true;
-        
+
+        PassiveManager.Instance.UpdateDeathCount();
         Destroy(_tmpObj);
     }
     public float GetHpPercent()

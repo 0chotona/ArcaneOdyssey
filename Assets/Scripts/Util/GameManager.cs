@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     
     public void UpgradeLevel()
     {
+        _level++;
         UIManager.Instance.ShowUpgradePanel();
     }
     public void NextStage()

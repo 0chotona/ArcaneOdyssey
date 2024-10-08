@@ -99,7 +99,7 @@ public class SkillData
                     _skillText = values[(int)eSKILL_COLUMN.Skill_Name],
                     _skillName = (eSKILL)System.Enum.Parse(typeof(eSKILL), values[(int)eSKILL_COLUMN.Enum_Name]),
                     _iconName = values[(int)eSKILL_COLUMN.Icon_Name],
-                    _synergyType = (ePASSIVE_TYPE)System.Enum.Parse(typeof(ePASSIVE_TYPE), values[(int)eSKILL_COLUMN.SynergyType]),
+                    _synergyType = (eBUFF_TYPE)System.Enum.Parse(typeof(eBUFF_TYPE), values[(int)eSKILL_COLUMN.SynergyType]),
                     _skillMap = new Dictionary<int, CStat>()
                 };
                 skill._skillMap.Add(level, stat);
@@ -148,7 +148,7 @@ public class SkillData
                     _skillText = values[(int)eCHARSKILL_COLUMN.Skill_Name],
                     _skillName = (eSKILL)System.Enum.Parse(typeof(eSKILL), values[(int)eCHARSKILL_COLUMN.Enum_Name]),
                     _iconName = values[(int)eCHARSKILL_COLUMN.Icon_Name],
-                    _synergyType = (ePASSIVE_TYPE)System.Enum.Parse(typeof(ePASSIVE_TYPE), values[(int)eCHARSKILL_COLUMN.SynergyType]),
+                    _synergyType = (eBUFF_TYPE)System.Enum.Parse(typeof(eBUFF_TYPE), values[(int)eCHARSKILL_COLUMN.SynergyType]),
                     _skillMap = new Dictionary<int, CStat>(),
                     _char_Pref_Name = values[(int)eCHARSKILL_COLUMN.Char_Pref_Name]
                 };

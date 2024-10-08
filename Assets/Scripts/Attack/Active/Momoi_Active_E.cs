@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Momoi_Active_E : MonoBehaviour, IActiveAttackable
 {
+    
     [Header("ÃÑ¾Ë ¹ß»ç À§Ä¡"), SerializeField] Transform _shootTrs;
 
     [Header("°¢µµ"), SerializeField] float _angle = 15f;
@@ -17,9 +18,18 @@ public class Momoi_Active_E : MonoBehaviour, IActiveAttackable
     [Header("·ÎÄÏ ÇÁ¸®Æé"), SerializeField] GameObject _roketPref;
     [Header("ÃÑ¾Ë ¼Óµµ"), SerializeField] float _speed = 10f;
 
+    [Header("ÄðÅ¸ÀÓ"), SerializeField] float _coolTime = 10f;
+
+    bool _canActive = true;
     public void ActiveInteract()
     {
-        StartCoroutine(CRT_ShootRocket());
+        if(_canActive)
+        {
+            StartCoroutine(CRT_ShootRocket());
+            StartCoroutine(CRT_CoolTime());
+            UIManager.Instance.StartECooltime(_coolTime - _coolTime * BuffController.Instance._CoolTimeBuff);
+        }
+        
     }
 
     public void SetPlayerTrs(Transform playerTrs) { }
@@ -61,5 +71,11 @@ public class Momoi_Active_E : MonoBehaviour, IActiveAttackable
         damageBox.UpdateDamage(_damage);
         damageBox.UpdateSpeed(_speed);
         damageBox.Shot(targetPos);
+    }
+    IEnumerator CRT_CoolTime()
+    {
+        _canActive = false;
+        yield return new WaitForSeconds(_coolTime - _coolTime * BuffController.Instance._CoolTimeBuff);
+        _canActive = true;
     }
 }

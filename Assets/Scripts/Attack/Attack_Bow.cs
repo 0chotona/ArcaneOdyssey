@@ -50,7 +50,7 @@ public class Attack_Bow : Attack
     {
         while (true)
         {
-            yield return new WaitForSeconds(_coolTime);
+            yield return new WaitForSeconds(_coolTime - _coolTime * BuffController.Instance._CoolTimeBuff);
             AttackInteract();
         }
     }

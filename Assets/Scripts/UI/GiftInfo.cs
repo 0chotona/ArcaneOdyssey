@@ -10,7 +10,7 @@ public class GiftInfo : MonoBehaviour
     [Header("설명 텍스트"), SerializeField] TextMeshProUGUI _descText;
 
     CSkill _skill;
-    CPassive _passive;
+    CBuff _passive;
 
     string _name;
     public string _Name => _name;

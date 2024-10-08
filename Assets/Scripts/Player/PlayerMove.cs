@@ -40,13 +40,11 @@ public class PlayerMove : MonoBehaviour
             _inputH = _inputController._inputDir.x;
             _inputV = _inputController._inputDir.y;
 
-            _moveDir = new Vector3(_inputH, 0, _inputV) * _moveSpeed;
+            _moveDir = new Vector3(_inputH, 0, _inputV) * (_moveSpeed * (1 + BuffController.Instance._MoveSpeedBuff));
 
             if (_moveDir != Vector3.zero)
                 transform.rotation = Quaternion.Euler(0, Mathf.Atan2(_inputH, _inputV) * Mathf.Rad2Deg, 0);
 
-            if (Input.GetKeyDown(KeyCode.Space))
-                _moveDir.y += _jumpPower;
         }
         else
             ApplyGravity();

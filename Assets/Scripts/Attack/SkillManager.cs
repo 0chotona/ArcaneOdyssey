@@ -28,7 +28,7 @@ public class CSkill
 
     public Dictionary<int, CStat> _skillMap = new Dictionary<int, CStat>();
     
-    public ePASSIVE_TYPE _synergyType { get; set; }
+    public eBUFF_TYPE _synergyType { get; set; }
     public string _char_Pref_Name { get; set; }
 
     public void UpgradeLevel()
@@ -57,15 +57,13 @@ public class SkillManager : MonoBehaviour
     Dictionary<eSKILL, CSkill> _possedSkills = new Dictionary<eSKILL, CSkill>();
     List<string> _skillNames = new List<string>();
 
-    int _attIncrease;
-    int _rangeIncrease;
-    int _coolTimeDecrease;
+    
 
     Dictionary<eSKILL, CSkill> _skillDic = new Dictionary<eSKILL, CSkill>();
     List<Attack> _attacks = new List<Attack>();
     [Header("스킬 트랜스폼"), SerializeField] Transform _attackTrs;
 
-    [SerializeField] PassiveManager _passiveManager;
+    [SerializeField] BuffManager _passiveManager;
     [Header("플레이어 트랜스폼"), SerializeField] Transform _playerTrs;
     public Transform _PlayerTrs => _playerTrs;
     SkillData _skillData;
@@ -165,7 +163,7 @@ public class SkillManager : MonoBehaviour
             if (!_possedSkills.ContainsKey(name))
                 AddSkill(name);
         }
-        else
+        else if(FindSkillByName(name)._level < 6)
         {
             if (_passiveManager._Passives[FindSkillByName(name)._synergyType]._level > 0)
                 _skillDic[name].UpgradeLevel();
@@ -220,21 +218,7 @@ public class SkillManager : MonoBehaviour
         else
             return false;
     }
-    public void UpdatePassiveStat(ePASSIVE_TYPE type)
-    {
-        switch(type)
-        {
-            case ePASSIVE_TYPE.Attack_Up:
-                _attIncrease += 5;
-                break;
-            case ePASSIVE_TYPE.Range_Up:
-                _rangeIncrease += 5;
-                break;
-            case ePASSIVE_TYPE.CoolTime_Down:
-                _coolTimeDecrease -= 5;
-                break;
-        }
-    }
+    
     void SetAttackStat()
     {
         List<CSkill> skills = new List<CSkill>(_skillDic.Values);

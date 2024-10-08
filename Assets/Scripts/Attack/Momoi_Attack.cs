@@ -15,6 +15,9 @@ public class Momoi_Attack : Attack
     Vector3 _dir;
     [Header("총알 거리"), SerializeField] float _distance = 15f;
     [Header("총알 속도"), SerializeField] float _speed = 10f;
+    [Header("관통 감소 데미지"), SerializeField] float _piercedDmg = 56f;
+
+    public bool _IsMaxLevel => _isMaxLevel;
 
     private void OnEnable()
     {
@@ -32,6 +35,7 @@ public class Momoi_Attack : Attack
         GameObject bullet = Instantiate(_damageBoxObj, _shootTrs.position, _shootTrs.rotation);
         Momoi_DamageBox_Attack damageBox = bullet.GetComponent<Momoi_DamageBox_Attack>();
         damageBox.UpdateDamage(_damage);
+        damageBox.UpdatePierceDamage(_piercedDmg);
         damageBox.UpdateSpeed(_speed);
         damageBox.UpdateIsMaxLevel(_isMaxLevel);
         damageBox.Shot(targetPos);
@@ -50,7 +54,7 @@ public class Momoi_Attack : Attack
         while (true)
         {
 
-            yield return new WaitForSeconds(_coolTime - _attCount * _shootGap);
+            yield return new WaitForSeconds((_coolTime - _coolTime * BuffController.Instance._CoolTimeBuff) - _attCount * _shootGap);
             _dir = transform.forward;
             for (int i = 0; i < _attCount; i++)
             {

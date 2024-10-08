@@ -15,7 +15,7 @@ public class CChar
     public string _skill1 { get; set; }
     public string _skill2 { get; set; }
     public int _price { get; set; }
-    public bool _isPurchased = false;   
+    public bool _isPurchased = false;
 }
 public class CharacterSelector : MonoBehaviour
 {
@@ -36,6 +36,7 @@ public class CharacterSelector : MonoBehaviour
     SkillData _data;
 
     CChar _selectedChar = new CChar();
+    public CChar _SelectedChar => _selectedChar;
 
     [SerializeField] string _selected;
 
@@ -91,6 +92,8 @@ public class CharacterSelector : MonoBehaviour
         Attack charAttack = charPrefInfo.GetCharAttack();
         SkillManager.Instance.SetCharSkillAwake(charAttack, _selectedChar);
         SkillManager.Instance.SetSkillMethod(charPrefInfo._Skill1, charPrefInfo._Skill2);
+        PassiveManager.Instance.SetPassiveMethod(charPrefInfo._Passive);
+        PassiveManager.Instance.SetSelectedChar(_selectedChar);
     }
     GameObject GetObjByName(string name)
     {
