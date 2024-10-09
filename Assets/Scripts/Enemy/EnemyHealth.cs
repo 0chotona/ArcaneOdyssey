@@ -44,6 +44,8 @@ public class EnemyHealth : MonoBehaviour
             _hpSlider.value = _curHp;
         if (_curHp <= 0)
             Dead();
+
+        Debug.Log(damage);
     }
     public void GetBurn(int damage)
     {

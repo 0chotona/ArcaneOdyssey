@@ -5,7 +5,6 @@ using UnityEngine;
 public class Momoi_Attack : Attack
 {
     [SerializeField] GameObject _damageBoxObj;
-    Momoi_DamageBox_Attack _damageBox;
 
     [Header("ÃÑ¾Ë ¹ß»ç À§Ä¡"), SerializeField] Transform _shootTrs;
     [Header("ÃÑ¾Ë ÀÌÆåÆ® ¹ß»ç À§Ä¡"), SerializeField] Transform _shootLineTrs;
@@ -34,8 +33,19 @@ public class Momoi_Attack : Attack
         Vector3 targetPos = _shootTrs.position + _shootTrs.forward * _distance;
         GameObject bullet = Instantiate(_damageBoxObj, _shootTrs.position, _shootTrs.rotation);
         Momoi_DamageBox_Attack damageBox = bullet.GetComponent<Momoi_DamageBox_Attack>();
-        damageBox.UpdateDamage(_damage);
-        damageBox.UpdatePierceDamage(_piercedDmg);
+
+        float finalDamage = _damage + (_damage * BuffStat.Instance._AttBuff);
+        float finalPiercedDamage = _piercedDmg + (_piercedDmg * BuffStat.Instance._AttBuff);
+        
+
+        bool isCritical = BuffStat.Instance.IsCritical();
+        if (isCritical)
+        {
+            finalDamage *= BuffStat.Instance._BaseCriDmg;
+            finalPiercedDamage *= BuffStat.Instance._BaseCriDmg;
+        }
+        damageBox.UpdateDamage(finalDamage);
+        damageBox.UpdatePierceDamage(finalPiercedDamage);
         damageBox.UpdateSpeed(_speed);
         damageBox.UpdateIsMaxLevel(_isMaxLevel);
         damageBox.Shot(targetPos);
@@ -54,7 +64,7 @@ public class Momoi_Attack : Attack
         while (true)
         {
 
-            yield return new WaitForSeconds((_coolTime - _coolTime * BuffController.Instance._CoolTimeBuff) - _attCount * _shootGap);
+            yield return new WaitForSeconds((_coolTime - _coolTime * BuffStat.Instance._CoolTimeBuff) - _attCount * _shootGap);
             _dir = transform.forward;
             for (int i = 0; i < _attCount; i++)
             {

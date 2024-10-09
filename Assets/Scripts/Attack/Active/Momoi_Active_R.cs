@@ -41,11 +41,13 @@ public class Momoi_Active_R : MonoBehaviour, IActiveAttackable
     {
         GameObject rocket = Instantiate(_roketPref, _shootTrs.position, _shootTrs.rotation);
         Momoi_DamageBox_R damageBox = rocket.GetComponent<Momoi_DamageBox_R>();
-        damageBox.UpdateDamage(_damage);
+
+        float finalDamage = _damage + (_damage * BuffStat.Instance._AttBuff);
+        damageBox.UpdateDamage(finalDamage);
         damageBox.UpdateSpeed(_speed);
         damageBox.UpdateHpPercent(_hpPercent);
         damageBox.Shot(targetPos);
-        UIManager.Instance.StartRCooltime(_coolTime - _coolTime * BuffController.Instance._CoolTimeBuff);
+        UIManager.Instance.StartRCooltime(_coolTime - _coolTime * BuffStat.Instance._CoolTimeBuff);
     }
     public void SetPlayerTrs(Transform playerTrs)
     {
@@ -54,7 +56,7 @@ public class Momoi_Active_R : MonoBehaviour, IActiveAttackable
     IEnumerator CRT_CoolTime()
     {
         _canActive = false;
-        yield return new WaitForSeconds(_coolTime - _coolTime * BuffController.Instance._CoolTimeBuff);
+        yield return new WaitForSeconds(_coolTime - _coolTime * BuffStat.Instance._CoolTimeBuff);
         _canActive = true;
     }
 }

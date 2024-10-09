@@ -35,8 +35,8 @@ public class Momoi_Passive : MonoBehaviour, IPassive
     {
         _isActive = true;
         // Increase _moveSpeedIncrease by 1
-        BuffController.Instance.UpdateBuffStat(eBUFF_TYPE.MoveSpeed_Up, _moveSpeed);
-        BuffController.Instance.UpdateBuffStat(eBUFF_TYPE.CoolTime_Down, _coolDown);
+        BuffStat.Instance.UpdateBuffStat(eBUFF_TYPE.MoveSpeed_Up, _moveSpeed);
+        BuffStat.Instance.UpdateBuffStat(eBUFF_TYPE.CoolTime_Down, _coolDown);
         float elapsedTime = 0;
 
         // Gradually decrease _moveSpeedIncrease over _durTime
@@ -44,13 +44,13 @@ public class Momoi_Passive : MonoBehaviour, IPassive
         {
             elapsedTime += Time.deltaTime;
             float newSpeed = Mathf.Lerp(_moveSpeed, 0, elapsedTime / _durTime);
-            BuffController.Instance.UpdateBuffStat(eBUFF_TYPE.MoveSpeed_Up, newSpeed - BuffController.Instance._MoveSpeedBuff);
+            BuffStat.Instance.UpdateBuffStat(eBUFF_TYPE.MoveSpeed_Up, newSpeed - BuffStat.Instance._MoveSpeedBuff);
 
             yield return null;
         }
 
-        BuffController.Instance.UpdateBuffStat(eBUFF_TYPE.CoolTime_Down, -_coolDown);
-        BuffController.Instance.UpdateBuffStat(eBUFF_TYPE.MoveSpeed_Up, 0);
+        BuffStat.Instance.UpdateBuffStat(eBUFF_TYPE.CoolTime_Down, -_coolDown);
+        BuffStat.Instance.UpdateBuffStat(eBUFF_TYPE.MoveSpeed_Up, -BuffStat.Instance._MoveSpeedBuff);
         _isActive = false;
     }
 

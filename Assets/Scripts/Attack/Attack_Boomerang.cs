@@ -27,7 +27,7 @@ public class Attack_Boomerang : Attack
     {
         while (true)
         {
-            yield return new WaitForSeconds(_coolTime - _coolTime * BuffController.Instance._CoolTimeBuff);
+            yield return new WaitForSeconds(_coolTime - _coolTime * BuffStat.Instance._CoolTimeBuff);
             if (_level > 0)
                 AttackInteract();
         }

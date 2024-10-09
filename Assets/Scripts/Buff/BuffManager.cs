@@ -23,12 +23,17 @@ public class CBuff
 public enum eBUFF_TYPE
 {
     Attack_Up,
-    Range_Up,
-    CoolTime_Down,
     Def_Up,
+    MaxHP_Up,
+    HPRegen_Up,
     MoveSpeed_Up,
-    MaxHP_Up, 
-    CriRate_Up
+    ItemPickupRange_Up,
+    Range_Up,
+    Duration_Up,
+    CriRate_Up,
+    CoolTime_Down,
+    ExpGain_Up
+    
 }
 public class BuffManager : MonoBehaviour
 {
@@ -38,19 +43,23 @@ public class BuffManager : MonoBehaviour
     List<CBuff> _passiveNames = new List<CBuff>();
     public List<CBuff> _PassiveNames => _passiveNames;
 
-    [SerializeField] BuffController _passiveController;
+    [SerializeField] BuffStat _buffStat;
 
     private void Awake()
     {
         _passives = new Dictionary<eBUFF_TYPE, CBuff>();
 
-        _passives.Add(eBUFF_TYPE.Attack_Up, new CBuff("공격력 증가", 0, 0.05f, false));
-        _passives.Add(eBUFF_TYPE.Range_Up, new CBuff("공격 범위 증가", 0, 0.05f, false));
-        _passives.Add(eBUFF_TYPE.CoolTime_Down, new CBuff("쿨타임 감소", 0, 0.05f, false));
-        _passives.Add(eBUFF_TYPE.Def_Up, new CBuff("방어력 증가", 0, 0.05f, false));
+        _passives.Add(eBUFF_TYPE.Attack_Up, new CBuff("공격력 증가", 0, 0.1f, false));
+        _passives.Add(eBUFF_TYPE.Def_Up, new CBuff("방어력 증가", 0, 5f, false));
+        _passives.Add(eBUFF_TYPE.MaxHP_Up, new CBuff("최대체력 증가", 0, 0.1f, false));
+        _passives.Add(eBUFF_TYPE.HPRegen_Up, new CBuff("체력재생 증가", 0, 3f, false));
         _passives.Add(eBUFF_TYPE.MoveSpeed_Up, new CBuff("이동속도 증가", 0, 0.05f, false));
-        _passives.Add(eBUFF_TYPE.MaxHP_Up, new CBuff("최대체력 증가", 0, 0.05f, false));
+        _passives.Add(eBUFF_TYPE.ItemPickupRange_Up, new CBuff("획득범위 증가", 0, 0.05f, false));
+        _passives.Add(eBUFF_TYPE.Range_Up, new CBuff("공격 범위 증가", 0, 0.05f, false));
+        _passives.Add(eBUFF_TYPE.Duration_Up, new CBuff("지속시간 증가", 0, 0.05f, false));
         _passives.Add(eBUFF_TYPE.CriRate_Up, new CBuff("치명타 확률 증가", 0, 0.05f, false));
+        _passives.Add(eBUFF_TYPE.CoolTime_Down, new CBuff("쿨타임 감소", 0, 0.05f, false));
+        _passives.Add(eBUFF_TYPE.ExpGain_Up, new CBuff("경험치 획득량 증가", 0, 0.05f, false));
 
         foreach (var passive in _passives.Values)
         {
@@ -71,7 +80,7 @@ public class BuffManager : MonoBehaviour
     {
         _passives[GetTypeByName(name)]._level++;
         _passives[GetTypeByName(name)]._isGot = true;
-        _passiveController.UpdateBuffStat(GetTypeByName(name), _passives[GetTypeByName(name)]._rate);
+        _buffStat.UpdateBuffStat(GetTypeByName(name), _passives[GetTypeByName(name)]._rate);
         UIManager.Instance.RemoveGiftName(name);
     }
     public bool IsMaxLevel(string name)

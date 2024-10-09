@@ -26,7 +26,7 @@ public class Item_Type : MonoBehaviour
 
     private void Awake()
     {
-        _point = (GameManager.Instance._Level * 0.1f) + 1;
+        _point = 1;
     }
     private void Update()
     {

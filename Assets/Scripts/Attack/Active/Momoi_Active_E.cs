@@ -27,7 +27,7 @@ public class Momoi_Active_E : MonoBehaviour, IActiveAttackable
         {
             StartCoroutine(CRT_ShootRocket());
             StartCoroutine(CRT_CoolTime());
-            UIManager.Instance.StartECooltime(_coolTime - _coolTime * BuffController.Instance._CoolTimeBuff);
+            UIManager.Instance.StartECooltime(_coolTime - _coolTime * BuffStat.Instance._CoolTimeBuff);
         }
         
     }
@@ -68,14 +68,16 @@ public class Momoi_Active_E : MonoBehaviour, IActiveAttackable
 
         GameObject rocket = Instantiate(_roketPref, _shootTrs.position, _shootTrs.rotation);
         Momoi_DamageBox_E damageBox = rocket.GetComponent<Momoi_DamageBox_E>();
-        damageBox.UpdateDamage(_damage);
+
+        float finalDamage = _damage + (_damage * BuffStat.Instance._AttBuff);
+        damageBox.UpdateDamage(finalDamage);
         damageBox.UpdateSpeed(_speed);
         damageBox.Shot(targetPos);
     }
     IEnumerator CRT_CoolTime()
     {
         _canActive = false;
-        yield return new WaitForSeconds(_coolTime - _coolTime * BuffController.Instance._CoolTimeBuff);
+        yield return new WaitForSeconds(_coolTime - _coolTime * BuffStat.Instance._CoolTimeBuff);
         _canActive = true;
     }
 }

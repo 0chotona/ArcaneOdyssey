@@ -5,26 +5,29 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [Header("최대 Hp"), SerializeField] float _maxHp = 500f;
+    [Header("체력 리젠 간격"), SerializeField] float _hpRegenGap = 1f;
     float _curHp;
 
-    float _def = 10f;
+    float _hpRegenAmount = 0f;
 
-    public float _defIncrease;
-    public float _maxHpIncrease;
+    float _def = 20f;
+
 
     bool _isInvincible = false;
     float _shieldHp = 0f;
 
+    float _maxHpBuff = 0f;
     private void Awake()
     {
-        _curHp = _maxHp;
-        UIManager.Instance.UpdateHpBar(_maxHp, _maxHp);
+        _curHp = _maxHp + _maxHpBuff;
+        UIManager.Instance.UpdateHpBar(_maxHp + (_maxHp * _maxHpBuff), _curHp);
+        StartCoroutine(CRT_HpRegen());
     }
     public void GetDamage(int dmg)
     {
         if (!_isInvincible)
         {
-            float finalDef = 100 + _def + (_def * 0.01f * _defIncrease);
+            float finalDef = 100 + _def + BuffStat.Instance._DefBuff;
             float finalDamage = dmg * 100 / finalDef;
 
             if (_shieldHp > 0)
@@ -44,7 +47,7 @@ public class PlayerHealth : MonoBehaviour
             if (finalDamage > 0)
             {
                 _curHp -= finalDamage;
-                UIManager.Instance.UpdateHpBar(_maxHp, _curHp);
+                UIManager.Instance.UpdateHpBar(_maxHp + (_maxHp * _maxHpBuff), _curHp);
                 
                 if (_curHp <= 0)
                     Dead();
@@ -52,13 +55,13 @@ public class PlayerHealth : MonoBehaviour
             UIManager.Instance.UpdateShieldBar(_shieldHp);
         }
     }
-    public void GetHeal(float healRate)
+    public void GetHeal(float healAmount)
     {
-        _curHp += healRate * _maxHp;
-        if(_curHp > _maxHp)
-            _curHp = _maxHp;
+        _curHp += healAmount;
+        if(_curHp > _maxHp + (_maxHp * _maxHpBuff))
+            _curHp = _maxHp + (_maxHp * _maxHpBuff);
 
-        UIManager.Instance.UpdateHpBar(_maxHp, _curHp);
+        UIManager.Instance.UpdateHpBar(_maxHp + (_maxHp * _maxHpBuff), _curHp);
     }
     void Dead()
     {
@@ -86,9 +89,22 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(time);
         _isInvincible = false;
     }
-    public void UpdatePassiveStat()
+    public void UpdateMaxHpBuff(float value)
     {
-        _defIncrease += 5;
+        _maxHpBuff = value;
+        UIManager.Instance.UpdateHpBar(_maxHp + (_maxHp * _maxHpBuff), _curHp);
+    }
+    public void UpdateHpRegenBuff(float value)
+    {
+        _hpRegenAmount = value;
+    }
+    IEnumerator CRT_HpRegen()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(_hpRegenGap);
+            GetHeal(_hpRegenAmount);
+        }
         
     }
 }

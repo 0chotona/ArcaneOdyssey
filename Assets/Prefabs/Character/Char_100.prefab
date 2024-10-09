@@ -365,10 +365,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _checkMouseObj: {fileID: 3776798364598790451}
   _shootTrs: {fileID: 7677856903526453839}
-  _damage: 30
+  _damage: 200
   _roketPref: {fileID: 2214781104578963119, guid: 95d47f83b6ca24f47b279c72c8d15995, type: 3}
   _speed: 25
   _hpPercent: 70
+  _coolTime: 3
 --- !u!1 &807304574126417623
 GameObject:
   m_ObjectHideFlags: 0
@@ -11518,9 +11519,10 @@ MonoBehaviour:
   _distance: 20
   _attCount: 4
   _timeGap: 0.05
-  _damage: 10
+  _damage: 60
   _roketPref: {fileID: 2969601912505007384, guid: 1e39b72e9457d464fa789cdce18e1ee5, type: 3}
   _speed: 25
+  _coolTime: 10
 --- !u!1 &2601526569514654341
 GameObject:
   m_ObjectHideFlags: 0
@@ -12923,6 +12925,7 @@ MonoBehaviour:
   _thickness: 1
   _distance: 15
   _speed: 50
+  _piercedDmg: 56
 --- !u!1 &4941376724437674269
 GameObject:
   m_ObjectHideFlags: 0
@@ -14091,6 +14094,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _killCount: 5
+  _durTime: 8
+  _coolDown: 0.4
+  _moveSpeed: 1
 --- !u!1 &7621783968216291433
 GameObject:
   m_ObjectHideFlags: 0

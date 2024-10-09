@@ -10,18 +10,27 @@ public class PlayerItem : MonoBehaviour
 
     [SerializeField] GameObject _bombSensor;
 
-    float _healRate = 0.3f;
+    [Header("범위"), SerializeField] float _itemPickRange = 1f;
+    float _itemPickRangeBuff = 0f;
+
+    SphereCollider _collider;
+    float _healAmount = 100f;
     public float _curPoint = 0;
-    float _pointOffset = 5;
+    [Header("1레벨 최대 포인트"), SerializeField] float _baseMaxPoint = 2;
+    [Header("레벨 당 포인트 차이"), SerializeField] float _pointOffset = 3;
     float _maxPoint = 5;
 
 
-    int _expIncrease;
+    float _expGainBuff;
 
     private void Awake()
     {
-        _expIncrease = 0;
+        _collider = GetComponent<SphereCollider>();
+        _collider.radius = _itemPickRange + _itemPickRangeBuff;
+        _expGainBuff = 0;
         _itemSpawner.SetPlayerTrs(transform);
+
+        _maxPoint = _baseMaxPoint + GameManager.Instance._Level * _pointOffset;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -36,7 +45,7 @@ public class PlayerItem : MonoBehaviour
                     UIManager.Instance.ShowUpgradePanel();
                     break;
                 case Item_Type.ITEMTYPE.HpPlus:
-                    _playerHealth.GetHeal(_healRate);
+                    _playerHealth.GetHeal(_healAmount);
                     break;
                 case Item_Type.ITEMTYPE.Magnet:
                     _itemSpawner.SetMagnet();
@@ -45,13 +54,13 @@ public class PlayerItem : MonoBehaviour
                     StartCoroutine(CRT_Bomb());
                     break;
                 case Item_Type.ITEMTYPE.Jewel:
-                    _curPoint += itemType._point + (itemType._point * 0.01f * _expIncrease);
+                    _curPoint += itemType._point + (itemType._point * _expGainBuff);
                     if(_curPoint >= _maxPoint)
                     {
                         float remainPoint = _curPoint - _maxPoint;
                         GameManager.Instance.UpgradeLevel();
                         _curPoint = remainPoint;
-                        _maxPoint = GameManager.Instance._Level * _pointOffset;
+                        _maxPoint = _baseMaxPoint + GameManager.Instance._Level * _pointOffset;
 
                     }
                     UIManager.Instance.UpdateExpBar(_maxPoint, _curPoint);
@@ -67,9 +76,14 @@ public class PlayerItem : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         _bombSensor.SetActive(false);
     }
-    public void UpdatePassiveStat()
+    public void UpdateItemPickupRange(float value)
     {
-        _expIncrease += 5;
+        _itemPickRangeBuff = _itemPickRange * value;
+        _collider.radius = _itemPickRange + _itemPickRangeBuff;
+    }
+    public void UpdateExpGain(float value)
+    {
+        _expGainBuff = value;
     }
 
 
