@@ -60,6 +60,7 @@ public class SkillManager : MonoBehaviour
     
 
     Dictionary<eSKILL, CSkill> _skillDic = new Dictionary<eSKILL, CSkill>();
+    public Dictionary<eSKILL, CSkill> _SkillDic => _skillDic;
     List<Attack> _attacks = new List<Attack>();
     [Header("스킬 트랜스폼"), SerializeField] Transform _attackTrs;
 
@@ -75,8 +76,12 @@ public class SkillManager : MonoBehaviour
     Attack _selectedCharAttack = null;
     CSkill _selectedSkill = new CSkill();
 
-    
-    
+    CBuffStat _buffStat = new CBuffStat();
+
+    [Header("기본 치명타"), SerializeField] float _baseCriRate = 0.05f;
+    [Header("치명타 데미지"), SerializeField] float _baseCriDmg = 1.5f;
+    public float _BaseCriDmg => _baseCriDmg;
+
     private void Start()
     {
         SetAttackStat();
@@ -131,6 +136,7 @@ public class SkillManager : MonoBehaviour
         
         AddSkill(_selectedCharAttack._name);
         UpgradeLevel(_selectedCharAttack._name);
+        SetBuffStat(_buffStat);
     }
     public void AddSkill(eSKILL name) //스킬 첫획득
     {
@@ -227,6 +233,7 @@ public class SkillManager : MonoBehaviour
             _attacks[i].SetSkill(skills[i]);
             _attacks[i].UpdateStat(skills[i]._stat);
         }
+        //SetBuffStat(_buffStat);
     }
     void SetCharSkill(CChar selectedChar)
     {
@@ -245,5 +252,25 @@ public class SkillManager : MonoBehaviour
     public void SetSkillMethod(IActiveAttackable method1, IActiveAttackable method2)
     {
         _activeAttack.SetSkillMethod(method1, method2);
+    }
+    public void SetBuffStat(CBuffStat buffStat)
+    {
+        _buffStat = buffStat;
+        foreach (Attack attack in _attacks)
+            attack.UpdateBuffStat(buffStat);
+
+        _activeAttack.SetBuffStat(buffStat);
+    }
+    public bool IsCritical()
+    {
+        float rnd = Random.Range(0f, 1f);
+        if (rnd < _baseCriRate + _buffStat._CriRate)
+        {
+            Debug.Log("치명타 터짐 / _baseCriRate : " + _baseCriRate + "_CriRateBuff : " + _buffStat._CriRate + " rnd : " + rnd);
+
+            return true;
+        }
+        else
+            return false;
     }
 }

@@ -21,6 +21,7 @@ public class Momoi_Active_E : MonoBehaviour, IActiveAttackable
     [Header("ÄðÅ¸ÀÓ"), SerializeField] float _coolTime = 10f;
 
     bool _canActive = true;
+    CBuffStat _buffStat = new CBuffStat();
     public void ActiveInteract()
     {
         if(_canActive)
@@ -77,7 +78,12 @@ public class Momoi_Active_E : MonoBehaviour, IActiveAttackable
     IEnumerator CRT_CoolTime()
     {
         _canActive = false;
-        yield return new WaitForSeconds(_coolTime - _coolTime * BuffStat.Instance._CoolTimeBuff);
+        yield return new WaitForSeconds(_coolTime - _coolTime * _buffStat._CoolTime);
         _canActive = true;
+    }
+
+    public void SetBuffStat(CBuffStat buffStat)
+    {
+        _buffStat = buffStat;
     }
 }

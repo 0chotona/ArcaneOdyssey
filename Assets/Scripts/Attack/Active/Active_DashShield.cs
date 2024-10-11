@@ -58,4 +58,9 @@ public class Active_DashShield : MonoBehaviour, IActiveAttackable
         _playerHealth = _playerTrs.GetComponentInChildren<PlayerHealth>();
 
     }
+
+    public void SetBuffStat(CBuffStat buffStat)
+    {
+        throw new System.NotImplementedException();
+    }
 }

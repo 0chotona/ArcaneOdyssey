@@ -20,7 +20,7 @@ public class Momoi_Attack : Attack
 
     private void OnEnable()
     {
-        _name = eSKILL.Gun;
+        _name = eSKILL.MeowGun;
     }
     private void Start()
     {
@@ -34,15 +34,15 @@ public class Momoi_Attack : Attack
         GameObject bullet = Instantiate(_damageBoxObj, _shootTrs.position, _shootTrs.rotation);
         Momoi_DamageBox_Attack damageBox = bullet.GetComponent<Momoi_DamageBox_Attack>();
 
-        float finalDamage = _damage + (_damage * BuffStat.Instance._AttBuff);
-        float finalPiercedDamage = _piercedDmg + (_piercedDmg * BuffStat.Instance._AttBuff);
+        float finalDamage = _damage + (_damage * _buffStat._Att);
+        float finalPiercedDamage = _piercedDmg + (_piercedDmg * _buffStat._Att);
         
 
-        bool isCritical = BuffStat.Instance.IsCritical();
+        bool isCritical = SkillManager.Instance.IsCritical();
         if (isCritical)
         {
-            finalDamage *= BuffStat.Instance._BaseCriDmg;
-            finalPiercedDamage *= BuffStat.Instance._BaseCriDmg;
+            finalDamage *= SkillManager.Instance._BaseCriDmg;
+            finalPiercedDamage *= SkillManager.Instance._BaseCriDmg;
         }
         damageBox.UpdateDamage(finalDamage);
         damageBox.UpdatePierceDamage(finalPiercedDamage);
@@ -64,7 +64,7 @@ public class Momoi_Attack : Attack
         while (true)
         {
 
-            yield return new WaitForSeconds((_coolTime - _coolTime * BuffStat.Instance._CoolTimeBuff) - _attCount * _shootGap);
+            yield return new WaitForSeconds((_coolTime - _coolTime * _buffStat._CoolTime) - _attCount * _shootGap);
             _dir = transform.forward;
             for (int i = 0; i < _attCount; i++)
             {
@@ -87,5 +87,9 @@ public class Momoi_Attack : Attack
             _isMaxLevel = true;
     }
     public override void StartAttack() { return; }
-    
+
+    public override void UpdateBuffStat(CBuffStat buffStat)
+    {
+        _buffStat = buffStat;
+    }
 }

@@ -22,9 +22,12 @@ public abstract class Attack : MonoBehaviour
     public float _durTime;
     public float _shotSpeed;
 
+    public CBuffStat _buffStat;
+
     public abstract void StartAttack();
     public abstract void AttackInteract();
     public abstract IEnumerator CRT_Attack();
     public abstract void UpdateStat(CStat stat);
     public abstract void SetSkill(CSkill skill);
+    public abstract void UpdateBuffStat(CBuffStat buffStat);
 }

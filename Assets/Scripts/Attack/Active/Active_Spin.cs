@@ -63,4 +63,9 @@ public class Active_Spin : MonoBehaviour, IActiveAttackable
             particle.Play();
     }
     public void SetPlayerTrs(Transform playerTrs) { }
+
+    public void SetBuffStat(CBuffStat buffStat)
+    {
+        throw new System.NotImplementedException();
+    }
 }

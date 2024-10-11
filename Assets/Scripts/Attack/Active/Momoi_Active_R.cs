@@ -20,6 +20,7 @@ public class Momoi_Active_R : MonoBehaviour, IActiveAttackable
     bool _canActive = true;
     Transform _playerTrs;
     Vector3 _targetPos;
+    CBuffStat _buffStat = new CBuffStat();
     private void Awake()
     {
         _checkMouseObj.transform.SetParent(null);
@@ -56,7 +57,11 @@ public class Momoi_Active_R : MonoBehaviour, IActiveAttackable
     IEnumerator CRT_CoolTime()
     {
         _canActive = false;
-        yield return new WaitForSeconds(_coolTime - _coolTime * BuffStat.Instance._CoolTimeBuff);
+        yield return new WaitForSeconds(_coolTime - _coolTime * _buffStat._CoolTime);
         _canActive = true;
+    }
+    public void SetBuffStat(CBuffStat buffStat)
+    {
+        _buffStat = buffStat;
     }
 }

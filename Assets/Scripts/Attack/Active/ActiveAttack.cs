@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public interface IActiveAttackable
 {
     void ActiveInteract();
+    void SetBuffStat(CBuffStat buffStat);
     void SetPlayerTrs(Transform playerTrs);
 }
 public class ActiveController
@@ -23,6 +24,11 @@ public class ActiveController
     public IActiveAttackable GetAttackMethod()
     {
         return _skill1Method;
+    }
+    public void SetBuffStat(CBuffStat buffStat)
+    {
+        _skill1Method.SetBuffStat(buffStat);
+        _skill2Method.SetBuffStat(buffStat);
     }
     public void PerformAttack1()
     {
@@ -46,7 +52,7 @@ public class ActiveAttack : MonoBehaviour
     [Header("스킬 1 버튼"), SerializeField] Button _skill1Button;
     [Header("스킬 2 버튼"), SerializeField] Button _skill2Button;
 
-    
+    CBuffStat _buffStat = new CBuffStat();
     private void Awake()
     {
         _skill1Button.onClick.AddListener(() => Click_Skill1());
@@ -59,6 +65,11 @@ public class ActiveAttack : MonoBehaviour
 
         if(method2 != null)
             _controller.SetAttack2Method(method2);
+    }
+    public void SetBuffStat(CBuffStat buffStat)
+    {
+        _buffStat = buffStat;
+        _controller.SetBuffStat(buffStat);
     }
     void Click_Skill1()
     {

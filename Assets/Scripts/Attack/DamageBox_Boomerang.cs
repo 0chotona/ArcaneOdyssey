@@ -4,82 +4,69 @@ using UnityEngine;
 
 public class DamageBox_Boomerang : MonoBehaviour
 {
-    float _angle = 0;
-    float _radius = 4;
-
     float _damage;
-    Vector3 _boxScale = new Vector3(1, 1, 1);
+    public float _speed;
 
-    float _moveSpeed = 1;
 
-    Transform _playerTrs;
-
-    Vector3 _finalPos;
-    Vector3 _targetPos;
-
-    float _distance = 5;
-
-    float _stopSec = 2;
-
-    bool _isForward = true;
+    Vector3 _boxScale = Vector3.one;
 
     GameObject _tmpObj;
-    private void Awake()
+
+    bool _isMaxLevel = false;
+
+    Vector3 _targetPos;
+    [Header("작은 부메랑 오브젝트"), SerializeField] GameObject _smallBoomerang;
+    float _angle;
+
+    float _backDistance;
+    Transform _playerTrs;
+    public void Shot(Vector3 targetPos)
     {
         _tmpObj = gameObject;
-
-        //_startPos = _playerTrs.position;
-        _angle = Random.Range(0, 360);
-
-
-
+        _targetPos = targetPos;
+        transform.rotation = Quaternion.LookRotation(_targetPos - transform.position);
+        StartCoroutine(CRT_MoveBullet());
     }
-    private void Start()
+    IEnumerator CRT_MoveBullet()
     {
-        _finalPos = GetRandomAngle(_angle) * _distance + _playerTrs.position;
-        StartCoroutine(CRT_Move());
-        //Destroy(_tmpObj, _stopSec + 2);
+        while (Vector3.Distance(transform.position, _targetPos) > 0.05f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, _targetPos, _speed * Time.deltaTime);
+            yield return null;
+        }
+        StartCoroutine(CRT_BackBullet());
     }
-    private void Update()
+    IEnumerator CRT_BackBullet()
     {
-        MoveBoomerang();
+        Vector3 dir = (_playerTrs.position - transform.position).normalized;
 
-    }
-    Vector3 GetRandomAngle(float angle)
-    {
-        _angle *= Mathf.Deg2Rad;
-        float x = Mathf.Sin(_angle);
-        float z = Mathf.Cos(_angle);
-        Vector3 dir = new Vector3(x, 0, z).normalized;
-        return dir;
-    }
-    void MoveBoomerang()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, _targetPos, _moveSpeed * Time.timeScale);
-    }
-    IEnumerator CRT_Move()
-    {
-        _isForward = true;
-        _targetPos = _finalPos;
 
-        yield return new WaitForSeconds(_stopSec);
-        _targetPos = _playerTrs.position;
-        _isForward = false;
+        Vector3 targetPos = transform.position + dir * _backDistance;
+        while (Vector3.Distance(transform.position, targetPos) > 0.05f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, _speed * Time.deltaTime);
+            yield return null;
+        }
+        if(_isMaxLevel)
+        {
+            //갈라지기 구현
+        }
+        Destroy(_tmpObj);
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             enemyHealth.LoseDamage(_damage);
+            
         }
-        if (!_isForward && other.CompareTag("Player"))
-            Destroy(_tmpObj);
-    }
-    public void SetPlayerTrs(Transform playerTrs)
-    {
-        _playerTrs = playerTrs;
     }
     public void UpdateDamage(float damage) { _damage = damage; }
-    public void UpdateScale(float boxSize) { transform.localScale = _boxScale * boxSize; }
+    public void UpdateIsMaxLevel(bool isMaxLevel) { _isMaxLevel = isMaxLevel; }
+    public void SetAngle(float angle) { _angle = angle; }
+    public void SetPlayerTrs(Transform playerTrs) { _playerTrs = playerTrs; }
+    public void SetDistance(float distance) { _backDistance = distance; }
+    public void SetSpeed(float speed) { _speed = speed; }
 }

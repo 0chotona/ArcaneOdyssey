@@ -32,8 +32,8 @@ public enum eBUFF_TYPE
     Duration_Up,
     CriRate_Up,
     CoolTime_Down,
-    ExpGain_Up
-    
+    ExpGain_Up,
+    ProjectileCount_Up
 }
 public class BuffManager : MonoBehaviour
 {
@@ -60,6 +60,7 @@ public class BuffManager : MonoBehaviour
         _passives.Add(eBUFF_TYPE.CriRate_Up, new CBuff("치명타 확률 증가", 0, 0.05f, false));
         _passives.Add(eBUFF_TYPE.CoolTime_Down, new CBuff("쿨타임 감소", 0, 0.05f, false));
         _passives.Add(eBUFF_TYPE.ExpGain_Up, new CBuff("경험치 획득량 증가", 0, 0.05f, false));
+        _passives.Add(eBUFF_TYPE.ProjectileCount_Up, new CBuff("투사체 증가", 0, 0.5f, false));
 
         foreach (var passive in _passives.Values)
         {

@@ -41,12 +41,14 @@ public class PassiveManager : MonoBehaviour
     }
     PassiveController _controller = new PassiveController();
 
+    [SerializeField] EnemySensor _enemySensor;
     int _deathCount = 0;
     public int _DeathCount => _deathCount;
     CChar _selectedChar;
 
     public void UpdateDeathCount()
     {
+        _enemySensor.RemoveDestroyEnemy();
         _deathCount++;
         if (_selectedChar._charName == "¸ð¸ðÀÌ")
         {

@@ -133,4 +133,9 @@ public class Attack_Sword : Attack
     }
 
     public override void StartAttack() { return; }
+
+    public override void UpdateBuffStat(CBuffStat buffStat)
+    {
+        throw new System.NotImplementedException();
+    }
 }

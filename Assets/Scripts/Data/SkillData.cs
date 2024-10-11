@@ -4,12 +4,12 @@ using System.Security.Cryptography;
 using UnityEngine;
 public enum eSKILL
 {
+    MeowGun,
+    Slash,
     Boomerang,
-    SpinBall,
-    Meteor,
-    Bow,
-    Gun,
-    Slash
+    WhirlBlade,
+    IceArmor,
+    BunnyCrossbow
 }
 public enum eSKILL_COLUMN
 {
