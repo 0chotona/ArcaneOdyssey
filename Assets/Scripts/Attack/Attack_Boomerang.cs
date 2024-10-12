@@ -36,10 +36,10 @@ public class Attack_Boomerang : Attack
     {
         while (true)
         {
-            yield return new WaitForSeconds(_coolTime - _coolTime * BuffStat.Instance._CoolTimeBuff);
+            yield return new WaitForSeconds(_coolTime - _coolTime * _buffStat._CoolTime);
             if (_level > 0)
             {
-                for (int i = 0; i < _attCount; i++)
+                for (int i = 0; i < _attCount + _buffStat._ProjectileCount; i++)
                 {
                     AttackInteract();
                     yield return new WaitForSeconds(_gap);

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Explosion : MonoBehaviour
@@ -43,4 +42,9 @@ public class Explosion : MonoBehaviour
         
     }
     public void UpdateDamage(float damage) { _damage = damage; }
+    public void UpdateScale(float scale)
+    {
+        Vector3 scaleVec = new Vector3(scale, scale, scale);
+        transform.localScale = scaleVec;
+    }
 }

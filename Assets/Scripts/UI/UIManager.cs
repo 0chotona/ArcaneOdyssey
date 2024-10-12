@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,6 +32,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI _timerText;
 
     [Header("Hp 바"), SerializeField] Slider _hpSlider;
+    //[Header("Hp 바 필 이미지"),SerializeField] Image _fillImage;
+
     [Header("경험치 바"), SerializeField] Slider _expSlider;
     [Header("쉴드 바"), SerializeField] Slider _shieldSlider;
     [Header("E 스킬 쿨타임바"), SerializeField] Image _imgECooltime;
@@ -179,6 +182,13 @@ public class UIManager : MonoBehaviour
     {
         _hpSlider.maxValue = maxHp;
         _hpSlider.value = curHp;
+
+        RectTransform shieldRectTransform = _shieldSlider.GetComponent<RectTransform>();
+
+        Vector2 newPosition = shieldRectTransform.anchoredPosition;
+        float xPos = -(maxHp * (1 - (curHp / maxHp)));
+        newPosition.x = xPos;
+        shieldRectTransform.anchoredPosition = newPosition;
     }
     public void UpdateExpBar(float maxExp, float curExp)
     {
@@ -188,6 +198,8 @@ public class UIManager : MonoBehaviour
     public void UpdateShieldBar(float amount)
     {
         _shieldSlider.maxValue = _hpSlider.maxValue / 5f;
+        if(amount > _shieldSlider.maxValue)
+            amount = _shieldSlider.maxValue;
         _shieldSlider.value = amount;
     }
     public void StartECooltime(float coolTime)

@@ -10,6 +10,7 @@ public class EnemyMove : MonoBehaviour
     NavMeshAgent _navMesh;
 
     float _moveSpeed;
+    public bool _isFrozed = false;
     private void Awake()
     {
         _navMesh = GetComponent<NavMeshAgent>();
@@ -18,7 +19,20 @@ public class EnemyMove : MonoBehaviour
     private void Update()
     {
         if (_playerTrs != null)
-            MoveToPlayer();
+        {
+            if(!_isFrozed)
+                MoveToPlayer();
+        }
+    }
+    public void GetFroze(float time)
+    {
+        StartCoroutine(CRT_GetFroze(time));
+    }
+    IEnumerator CRT_GetFroze(float time)
+    {
+        _isFrozed = true;
+        yield return new WaitForSeconds(time);
+        _isFrozed = false;
     }
     void MoveToPlayer()
     {

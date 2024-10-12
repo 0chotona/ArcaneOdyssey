@@ -99,6 +99,7 @@ public class BuffStat : MonoBehaviour
                 break;
             case eBUFF_TYPE.Def_Up:
                 _buffStat.UpdateDef(value);
+                _playerHealth.UpdateDef(value);
                 break;
             case eBUFF_TYPE.MaxHP_Up:
                 _buffStat.UpdateMaxHp(value);

@@ -16,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
     bool _isInvincible = false;
     float _shieldHp = 0f;
 
+    float _defBuff = 0f;
     float _maxHpBuff = 0f;
     private void Awake()
     {
@@ -27,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (!_isInvincible)
         {
-            float finalDef = 100 + _def + BuffStat.Instance._DefBuff;
+            float finalDef = 100 + _def + _defBuff;
             float finalDamage = dmg * 100 / finalDef;
 
             if (_shieldHp > 0)
@@ -88,6 +89,10 @@ public class PlayerHealth : MonoBehaviour
         _isInvincible = true;
         yield return new WaitForSeconds(time);
         _isInvincible = false;
+    }
+    public void UpdateDef(float value)
+    {
+        _defBuff = value;
     }
     public void UpdateMaxHpBuff(float value)
     {

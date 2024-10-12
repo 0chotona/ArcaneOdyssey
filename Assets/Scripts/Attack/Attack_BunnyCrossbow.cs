@@ -50,7 +50,7 @@ public class Attack_BunnyCrossbow : Attack
     {
         while (true)
         {
-            yield return new WaitForSeconds(_coolTime - _coolTime * BuffStat.Instance._CoolTimeBuff);
+            yield return new WaitForSeconds(_coolTime - _coolTime * _buffStat._CoolTime);
             AttackInteract();
         }
     }
@@ -78,6 +78,6 @@ public class Attack_BunnyCrossbow : Attack
 
     public override void UpdateBuffStat(CBuffStat buffStat)
     {
-        
+        _buffStat = buffStat;
     }
 }
