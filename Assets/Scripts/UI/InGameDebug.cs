@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InGameDebug : MonoBehaviour
 {
+    [Header("업그레이드 버튼"), SerializeField] GameObject _upgradeButtons;
+
+    [Header("스킬 그룹"), SerializeField] Transform _skillTrs;
+    [Header("버프 그룹"), SerializeField] Transform _buffTrs;
+
     [Header("스킬 업그레이드 버튼"), SerializeField] List<Button> _skillUpgradeButtons;
     [Header("버프 업그레이드 버튼"), SerializeField] List<Button> _buffUpgradeButtons;
 
@@ -13,25 +19,23 @@ public class InGameDebug : MonoBehaviour
     [Header("디버그 버튼"), SerializeField] Button _debugButton;
     [Header("디버그 패널"), SerializeField] GameObject _debugPanel;
 
+    [Header("x 길이"), SerializeField] float _xDist = 160f;
+    [Header("y 길이"), SerializeField] float _yDist = 60f;
+
+    [Header("x 간격"), SerializeField] float _xGap = 20f;
+    [Header("y 간격"), SerializeField] float _yGap = 10f;
+
     [SerializeField] BuffManager _buffManager;
    
-    private void Awake()
+    private void Start()
     {
-        _debugButton.onClick.AddListener(() => Click_Debug());
-        for (int i = 0; i < _buffUpgradeButtons.Count; i++)
-        {
-            int index = i; // 클로저 문제를 피하기 위해 임시 변수 사용
-            _buffUpgradeButtons[index].onClick.AddListener(() =>
-                UpgradeBuff(_buffManager._Passives.ElementAt(index).Value._name)
-            );
-        }
-        for (int i = 0; i < _skillUpgradeButtons.Count; i++)
-        {
-            int index = i;
-            _skillUpgradeButtons[index].onClick.AddListener(() =>
-            UpgradeSkill(SkillManager.Instance._SkillDic.ElementAt(index).Value._skillName));
-        }
-           
+
+        StartCoroutine(CRT_CreateButton());
+
+
+
+
+
         /*
         _buffUpgradeButtons[0].onClick.AddListener(() => UpgradeBuff(_buffManager._Passives.ElementAt(0).Value._name));
         _buffUpgradeButtons[1].onClick.AddListener(() => UpgradeBuff("방어력 증가"));
@@ -55,8 +59,78 @@ public class InGameDebug : MonoBehaviour
     {
         _buffManager.UpgradeLevel(name);
     }
+    void UpgradeLevelText(TextMeshProUGUI textMesh, int level)
+    {
+        textMesh.text = level.ToString();
+    }
     void Click_Debug()
     {
         _debugPanel.SetActive(!_debugPanel.activeSelf);
+    }
+    IEnumerator CRT_CreateButton()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        RectTransform panelTrs = _debugPanel.GetComponent<RectTransform>();
+        panelTrs.sizeDelta = new Vector2(_xGap * 3 + _xDist * 2, (_buffManager._Passives.Count + 1) * _yGap + (_buffManager._Passives.Count) * _yDist);
+
+        for (int i = 0; i < SkillManager.Instance._SkillDic.Count; i++)
+        {
+            GameObject button = Instantiate(_upgradeButtons, _skillTrs);
+            button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = SkillManager.Instance._SkillDic.ElementAt(i).Value._level.ToString();
+            button.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = SkillManager.Instance._SkillDic.ElementAt(i).Value._skillText;
+
+            _skillUpgradeButtons.Add(button.GetComponent<Button>());
+
+            RectTransform rectTrs = _skillUpgradeButtons[i].GetComponent<RectTransform>();
+            Vector3 buttonScale = new Vector3(_xDist, _yDist, 0f);
+            rectTrs.sizeDelta = buttonScale;
+
+            Vector3 buttonPos = new Vector3(_xGap, -_yGap - (_yGap + _yDist) * i, 0f);
+            rectTrs.anchoredPosition = buttonPos;
+
+            int index = i;
+            _skillUpgradeButtons[index].onClick.AddListener(() =>
+            UpgradeSkill(SkillManager.Instance._SkillDic.ElementAt(index).Value._skillName));
+            _skillUpgradeButtons[index].onClick.AddListener(() =>
+            UpgradeLevelText(button.transform.GetChild(0).GetComponent<TextMeshProUGUI>(), SkillManager.Instance._SkillDic.ElementAt(index).Value._level));
+        }
+        for (int i = 0; i < _buffManager._Passives.Count; i++)
+        {
+            GameObject button = Instantiate(_upgradeButtons, _buffTrs);
+            button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _buffManager._Passives.ElementAt(i).Value._level.ToString();
+            button.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _buffManager._Passives.ElementAt(i).Value._name;
+
+            _buffUpgradeButtons.Add(button.GetComponent<Button>());
+
+            RectTransform rectTrs = _buffUpgradeButtons[i].GetComponent<RectTransform>();
+            Vector3 buttonScale = new Vector3(_xDist, _yDist, 0f);
+            rectTrs.sizeDelta = buttonScale;
+
+            Vector3 buttonPos = new Vector3(_xGap * 2f + _xDist, -_yGap - (_yGap + _yDist) * i, 0f);
+            rectTrs.anchoredPosition = buttonPos;
+
+            int index = i;
+            _buffUpgradeButtons[index].onClick.AddListener(() =>
+                UpgradeBuff(_buffManager._Passives.ElementAt(index).Value._name));
+            _buffUpgradeButtons[index].onClick.AddListener(() => 
+            UpgradeLevelText(button.transform.GetChild(0).GetComponent<TextMeshProUGUI>(), _buffManager._Passives.ElementAt(index).Value._level));
+        }
+        _debugButton.onClick.AddListener(() => Click_Debug());
+        /*
+        for (int i = 0; i < _buffUpgradeButtons.Count; i++)
+        {
+            int index = i; 
+            _buffUpgradeButtons[index].onClick.AddListener(() =>
+                UpgradeBuff(_buffManager._Passives.ElementAt(index).Value._name)
+            );
+        }
+        for (int i = 0; i < _skillUpgradeButtons.Count; i++)
+        {
+            int index = i;
+            _skillUpgradeButtons[index].onClick.AddListener(() =>
+            UpgradeSkill(SkillManager.Instance._SkillDic.ElementAt(index).Value._skillName));
+        }
+        */
     }
 }
