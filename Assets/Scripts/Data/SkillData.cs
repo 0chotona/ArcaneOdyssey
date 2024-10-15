@@ -9,7 +9,9 @@ public enum eSKILL
     Boomerang,
     WhirlBlade,
     IceArmor,
-    BunnyCrossbow
+    BunnyCrossbow,
+    RadiantBarrier,
+    CuteLauncher
 }
 public enum eSKILL_COLUMN
 {
@@ -19,11 +21,11 @@ public enum eSKILL_COLUMN
     Icon_Name,
     Level,
     Damage,
-    AttCount,
     AttRange,
     CoolTime,
     DurTime,
-    ShotSpeed,
+    CriRate,
+    ProjectileCount,
     SynergyType
 }
 public enum eCHARSKILL_COLUMN
@@ -34,11 +36,11 @@ public enum eCHARSKILL_COLUMN
     Icon_Name,
     Level,
     Damage,
-    AttCount,
     AttRange,
     CoolTime,
     DurTime,
-    ShotSpeed,
+    CriRate,
+    ProjectileCount,
     SynergyType,
     Char_Pref_Name
 }
@@ -83,11 +85,11 @@ public class SkillData
             CStat stat = new CStat
             {
                 _damage = float.Parse(values[(int)eSKILL_COLUMN.Damage]),
-                _attCount = string.IsNullOrEmpty(values[(int)eSKILL_COLUMN.AttCount]) ? 0 : int.Parse(values[(int)eSKILL_COLUMN.AttCount]),
                 _attRange = string.IsNullOrEmpty(values[(int)eSKILL_COLUMN.AttRange]) ? 0 : float.Parse(values[(int)eSKILL_COLUMN.AttRange]),
                 _coolTime = string.IsNullOrEmpty(values[(int)eSKILL_COLUMN.CoolTime]) ? 0 : float.Parse(values[(int)eSKILL_COLUMN.CoolTime]),
                 _durTime = string.IsNullOrEmpty(values[(int)eSKILL_COLUMN.DurTime]) ? 0 : float.Parse(values[(int)eSKILL_COLUMN.DurTime]),
-                _shotSpeed = string.IsNullOrEmpty(values[(int)eSKILL_COLUMN.ShotSpeed]) ? 0 : float.Parse(values[(int)eSKILL_COLUMN.ShotSpeed])
+                _criRate = string.IsNullOrEmpty(values[(int)eSKILL_COLUMN.CriRate]) ? 0 : float.Parse(values[(int)eSKILL_COLUMN.CriRate]),
+                _projectileCount = string.IsNullOrEmpty(values[(int)eSKILL_COLUMN.ProjectileCount]) ? 0 : int.Parse(values[(int)eSKILL_COLUMN.ProjectileCount])
             };
 
             if (!skillDictionary.ContainsKey(id))
@@ -131,12 +133,12 @@ public class SkillData
 
             CStat stat = new CStat
             {
-                _damage = float.Parse(values[(int)eCHARSKILL_COLUMN.Damage]),
-                _attCount = string.IsNullOrEmpty(values[(int)eCHARSKILL_COLUMN.AttCount]) ? 0 : int.Parse(values[(int)eCHARSKILL_COLUMN.AttCount]),
-                _attRange = string.IsNullOrEmpty(values[(int)eCHARSKILL_COLUMN.AttRange]) ? 0 : float.Parse(values[(int)eCHARSKILL_COLUMN.AttRange]),
-                _coolTime = string.IsNullOrEmpty(values[(int)eCHARSKILL_COLUMN.CoolTime]) ? 0 : float.Parse(values[(int)eCHARSKILL_COLUMN.CoolTime]),
-                _durTime = string.IsNullOrEmpty(values[(int)eCHARSKILL_COLUMN.DurTime]) ? 0 : float.Parse(values[(int)eCHARSKILL_COLUMN.DurTime]),
-                _shotSpeed = string.IsNullOrEmpty(values[(int)eCHARSKILL_COLUMN.ShotSpeed]) ? 0 : float.Parse(values[(int)eCHARSKILL_COLUMN.ShotSpeed])
+                _damage = float.Parse(values[(int)eSKILL_COLUMN.Damage]),
+                _attRange = string.IsNullOrEmpty(values[(int)eSKILL_COLUMN.AttRange]) ? 0 : float.Parse(values[(int)eSKILL_COLUMN.AttRange]),
+                _coolTime = string.IsNullOrEmpty(values[(int)eSKILL_COLUMN.CoolTime]) ? 0 : float.Parse(values[(int)eSKILL_COLUMN.CoolTime]),
+                _durTime = string.IsNullOrEmpty(values[(int)eSKILL_COLUMN.DurTime]) ? 0 : float.Parse(values[(int)eSKILL_COLUMN.DurTime]),
+                _criRate = string.IsNullOrEmpty(values[(int)eSKILL_COLUMN.CriRate]) ? 0 : float.Parse(values[(int)eSKILL_COLUMN.CriRate]),
+                _projectileCount = string.IsNullOrEmpty(values[(int)eSKILL_COLUMN.ProjectileCount]) ? 0 : int.Parse(values[(int)eSKILL_COLUMN.ProjectileCount])
             };
 
             if (!skillDictionary.ContainsKey(id))

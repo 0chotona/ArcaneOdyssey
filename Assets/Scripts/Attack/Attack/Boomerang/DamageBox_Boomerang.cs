@@ -85,7 +85,7 @@ public class DamageBox_Boomerang : MonoBehaviour
     public void UpdateDamage(float damage) { _damage = damage; }
     public void UpdateIsMaxLevel(bool isMaxLevel) { _isMaxLevel = isMaxLevel; }
     public void SetAngle(float angle) { _angle = angle; }
-    public void SetPlayerTrs(Transform playerTrs) { _playerTrs = playerTrs; }
+    public void SetShootTrs(Transform playerTrs) { _playerTrs = playerTrs; }
     public void SetDistance(float distance) { _backDistance = distance; }
     public void SetSpeed(float speed) { _speed = speed; }
     public void SetSmallDistance(float distance) { _smallDistance = distance; }

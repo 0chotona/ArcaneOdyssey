@@ -65,7 +65,7 @@ public class Attack_Sword : Attack
         _canAttack = true;
         while (true)
         {
-            float coolTime = _coolTime - _attCount * 0.25f;
+            float coolTime = _coolTime - _projectileCount * 0.25f;
 
             yield return new WaitForSeconds(coolTime);
 
@@ -73,7 +73,7 @@ public class Attack_Sword : Attack
 
             
 
-            for (int i = 0; i < _attCount; i++)
+            for (int i = 0; i < _projectileCount; i++)
             {
                 _damageBoxTrs.gameObject.SetActive(true);
                 _damageBox.UpdateDamage(_damage);
@@ -107,6 +107,7 @@ public class Attack_Sword : Attack
     
     void SpawnEffect(eSTATE eState)
     {
+        /*
         GameObject effect = (eState == eSTATE.Attack) ? 
             Instantiate(_effect, _damageBoxTrs.position, transform.rotation,transform) : 
             Instantiate(_finalEffect, transform.position, transform.rotation, transform);
@@ -116,6 +117,7 @@ public class Attack_Sword : Attack
 
         
         Destroy(effect, 1);
+        */
     }
     public override void UpdateStat(CStat stat)
     {
@@ -125,7 +127,7 @@ public class Attack_Sword : Attack
             _eState = eSTATE.FinalAttack;
 
         _damage = stat._damage;
-        _attCount = stat._attCount;
+        _projectileCount = stat._projectileCount;
         _attRange = stat._attRange;
         _coolTime = stat._coolTime;
         

@@ -25,7 +25,10 @@ public class Attack_IceArmor : Attack
     [SerializeField] PlayerHealth _playerHealth;
     ParticleSystem[] _effectParticles;
 
-    float _dmgPerMaxHp = 50f;
+
+    [Header("발사 위치"), SerializeField] Transform _shootTrs;
+
+    [Header("최대 Hp당 데미지"), SerializeField] float _dmgPerMaxHp = 100f;
     float _shieldPerMaxHp = 0.5f;
     private void Awake()
     {
@@ -44,7 +47,7 @@ public class Attack_IceArmor : Attack
     {
         
 
-        GameObject explodeObj = Instantiate(_explodeObj, transform.position, Quaternion.identity);
+        GameObject explodeObj = Instantiate(_explodeObj, _shootTrs.position, Quaternion.identity);
         Explosion_IceArmor explosion = explodeObj.GetComponent<Explosion_IceArmor>();
 
         float finalDamage = _damage + _damage * _buffStat._Att + _buffStat._Def + _buffStat._MaxHp * _dmgPerMaxHp;

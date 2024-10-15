@@ -52,7 +52,6 @@ public class Momoi_DamageBox_E : MonoBehaviour
         GameObject explodeObj = Instantiate(_explodeObj, transform.position, Quaternion.identity);
         Explosion explosion = explodeObj.GetComponent<Explosion>();
         explosion.UpdateDamage(_damage);
-        explosion.ShowParticle();
         explosion.Explode();
         explosion.DestroyObj(1f);
     }

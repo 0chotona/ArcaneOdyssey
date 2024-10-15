@@ -7,7 +7,6 @@ public class Momoi_Attack : Attack
     [SerializeField] GameObject _damageBoxObj;
 
     [Header("총알 발사 위치"), SerializeField] Transform _shootTrs;
-    [Header("총알 이펙트 발사 위치"), SerializeField] Transform _shootLineTrs;
     [Header("발사 간격"), SerializeField] float _shootGap = 0.15f;
     [Header("발사 이펙트"), SerializeField] ParticleSystem _shootEffect;
     [Header("총알 두께"), SerializeField] float _thickness = 0.1f;
@@ -38,7 +37,7 @@ public class Momoi_Attack : Attack
         float finalPiercedDamage = _piercedDmg + (_piercedDmg * _buffStat._Att);
         
 
-        bool isCritical = SkillManager.Instance.IsCritical();
+        bool isCritical = SkillManager.Instance.IsCritical(0f);
         if (isCritical)
         {
             finalDamage *= SkillManager.Instance._BaseCriDmg;
@@ -64,9 +63,9 @@ public class Momoi_Attack : Attack
         while (true)
         {
 
-            yield return new WaitForSeconds((_coolTime - _coolTime * _buffStat._CoolTime) - _attCount * _shootGap);
+            yield return new WaitForSeconds((_coolTime - _coolTime * _buffStat._CoolTime) - _projectileCount * _shootGap);
             _dir = transform.forward;
-            for (int i = 0; i < _attCount; i++)
+            for (int i = 0; i < _projectileCount; i++)
             {
                 _shootEffect.Play();
                 AttackInteract();
@@ -80,7 +79,7 @@ public class Momoi_Attack : Attack
     public override void UpdateStat(CStat stat)
     {
         _damage = stat._damage;
-        _attCount = stat._attCount;
+        _projectileCount = stat._projectileCount;
         _attRange = stat._attRange;
         _coolTime = stat._coolTime;
         if(_level >= 6)

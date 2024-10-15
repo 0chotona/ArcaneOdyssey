@@ -26,6 +26,7 @@ public class Attack_Boomerang : Attack
 
     [Header("간격"), SerializeField] float _gap = 0.1f;
 
+    [Header("발사 위치"), SerializeField] Transform _shootTrs;
     private void OnEnable()
     {
         _name = eSKILL.Boomerang;
@@ -34,7 +35,7 @@ public class Attack_Boomerang : Attack
     public override void UpdateStat(CStat stat)
     {
         _damage = stat._damage;
-        _attCount = stat._attCount;
+        _projectileCount = stat._projectileCount;
         _attRange = stat._attRange;
         _coolTime = stat._coolTime;
         if (_level >= 6)
@@ -50,7 +51,7 @@ public class Attack_Boomerang : Attack
             yield return new WaitForSeconds(_coolTime - _coolTime * _buffStat._CoolTime);
             if (_level > 0)
             {
-                for (int i = 0; i < _attCount + _buffStat._ProjectileCount; i++)
+                for (int i = 0; i < _projectileCount + _buffStat._ProjectileCount; i++)
                 {
                     AttackInteract();
                     yield return new WaitForSeconds(_gap);
@@ -63,10 +64,10 @@ public class Attack_Boomerang : Attack
     public override void AttackInteract()
     {
         Transform nearestEnemy = _enemySensor.GetNearestEnemy();
-        Vector3 dir = (nearestEnemy != null) ? (nearestEnemy.position - transform.position).normalized : transform.forward;
-        Vector3 targetPos = transform.position + dir * _distance;
+        Vector3 dir = (nearestEnemy != null) ? (nearestEnemy.position - _shootTrs.position).normalized : _shootTrs.forward;
+        Vector3 targetPos = _shootTrs.position + dir * _distance;
 
-        Vector3 spawnPos = transform.position;
+        Vector3 spawnPos = _shootTrs.position;
         spawnPos.y = 1f;
 
         GameObject damageBox = Instantiate(_damageBoxObj, spawnPos, Quaternion.identity);
@@ -74,7 +75,7 @@ public class Attack_Boomerang : Attack
         _damageBox = damageBox.GetComponent<DamageBox_Boomerang>();
 
         float finalDamage = _damage + _damage * _buffStat._Att;
-        bool isCritical = SkillManager.Instance.IsCritical();
+        bool isCritical = SkillManager.Instance.IsCritical(0f);
         if (isCritical)
         {
             finalDamage *= SkillManager.Instance._BaseCriDmg;
@@ -82,7 +83,7 @@ public class Attack_Boomerang : Attack
         _damageBox.UpdateDamage(finalDamage);
         _damageBox.UpdateIsMaxLevel(_isMaxLevel);
         _damageBox.SetAngle(_angle);
-        _damageBox.SetPlayerTrs(transform);
+        _damageBox.SetShootTrs(_shootTrs);
         _damageBox.SetSpeed(_speed);
         _damageBox.SetDistance(_backDistance);
         _damageBox.SetSmallDistance(_smallDistance);

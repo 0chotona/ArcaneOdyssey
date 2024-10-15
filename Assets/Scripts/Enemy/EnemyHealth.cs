@@ -20,6 +20,11 @@ public class EnemyHealth : MonoBehaviour
     Transform _spawnerTrs;
     GameObject _tmpObj;
 
+    bool _isPlanted = false;
+
+    GameObject _explodeObj = null;
+    float _explodeDamage = 0f;
+
     private void Awake()
     {
         _isDead = false;
@@ -41,9 +46,22 @@ public class EnemyHealth : MonoBehaviour
     {
         _curHp -= damage;
         if (_hpSlider != null)
+        {
             _hpSlider.value = _curHp;
+        }
+
         if (_curHp <= 0)
+        {
+            if(_isPlanted)
+            {
+                GameObject explode = Instantiate(_explodeObj, transform.position, Quaternion.identity);
+                Explosion explosion = explode.GetComponent<Explosion>();
+                explosion.UpdateDamage(_explodeDamage);
+                explosion.Explode();
+                explosion.DestroyObj(1f);
+            }
             Dead();
+        }
 
         Debug.Log(damage);
     }
@@ -69,6 +87,15 @@ public class EnemyHealth : MonoBehaviour
         _curHp = _maxHp;
 
         _def = def;
+    }
+    public void SetPlant(bool isPlanted)
+    {
+        _isPlanted = isPlanted;
+    }
+    public void PlantExplosion(GameObject explodeObj, float damage)
+    {
+        _explodeObj = explodeObj;
+        _explodeDamage = damage;
     }
     void SpawnJewel()
     {

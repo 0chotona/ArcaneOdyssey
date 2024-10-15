@@ -6,13 +6,22 @@ using UnityEngine;
 public class CStat
 {
     //데미지 / 공격횟수 / 공격범위 / 쿨타임 / 유지시간
-
+    /*
+     * Damage,
+    AttRange,
+    CoolTime,
+    DurTime,
+    CriRate,
+    Duration,
+    ProjectileCount,
+     * */
     public float _damage { get; set; }
-    public int _attCount { get; set; }
     public float _attRange { get; set; }
     public float _coolTime { get; set; }
     public float _durTime { get; set; }
-    public float _shotSpeed { get; set; }
+
+    public float _criRate { get; set; }
+    public int _projectileCount { get; set; }
 
     
 }
@@ -261,12 +270,12 @@ public class SkillManager : MonoBehaviour
 
         _activeAttack.SetBuffStat(buffStat);
     }
-    public bool IsCritical()
+    public bool IsCritical(float skillCriRate)
     {
         float rnd = Random.Range(0f, 1f);
-        if (rnd < _baseCriRate + _buffStat._CriRate)
+        if (rnd < _baseCriRate + _buffStat._CriRate + skillCriRate)
         {
-            Debug.Log("치명타 터짐 / _baseCriRate : " + _baseCriRate + "_CriRateBuff : " + _buffStat._CriRate + " rnd : " + rnd);
+            Debug.Log("치명타 터짐 / _baseCriRate : " + _baseCriRate + "_CriRateBuff : " + _buffStat._CriRate + " rnd : " + rnd + " skillCriRate : " + skillCriRate);
 
             return true;
         }

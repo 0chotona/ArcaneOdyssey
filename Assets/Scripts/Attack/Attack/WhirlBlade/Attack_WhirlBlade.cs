@@ -23,6 +23,7 @@ public class Attack_WhirlBlade : Attack
 
     float _curCount = 0;
     public bool _IsMaxLevel => _isMaxLevel;
+    [Header("발사 위치"), SerializeField] Transform _shootTrs;
     private void Awake()
     {
         _isMaxLevel = false;
@@ -33,7 +34,7 @@ public class Attack_WhirlBlade : Attack
     }
     public override void AttackInteract()
     {
-        int finalAttCount = _attCount + (int)_buffStat._ProjectileCount;
+        int finalAttCount = _projectileCount + (int)_buffStat._ProjectileCount;
         _angle = 360 / finalAttCount;
 
         // If damage boxes already exist and it's max level, just update them
@@ -64,7 +65,7 @@ public class Attack_WhirlBlade : Attack
             float finalRange = 1 + _buffStat._Range;
             damageBox.UpdateScale(finalRange);
 
-            damageBox.SetTarget(transform);
+            damageBox.SetTarget(_shootTrs);
 
             damageBox.SetStartAngle(_angle * count);
             count++;
@@ -80,7 +81,7 @@ public class Attack_WhirlBlade : Attack
                 Destroy(_damageBoxList[i]);
                 _damageBoxList.RemoveAt(i);
             }
-            int finalAttCount = _attCount + (int)_buffStat._ProjectileCount;
+            int finalAttCount = _projectileCount + (int)_buffStat._ProjectileCount;
             _angle = 360 / finalAttCount;
 
             for (int i = 0; i < finalAttCount; i++)
@@ -124,7 +125,7 @@ public class Attack_WhirlBlade : Attack
     public override void UpdateStat(CStat stat)
     {
         _damage = stat._damage;
-        _attCount = stat._attCount;
+        _projectileCount = stat._projectileCount;
         
         _coolTime = stat._coolTime;
         _durTime = stat._durTime;

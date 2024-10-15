@@ -18,6 +18,7 @@ public class Explosion : MonoBehaviour
     }
     public void Explode()
     {
+        ShowParticle();
         _collider = GetComponent<Collider>();
         _collider.enabled = true;
         StartCoroutine(CRT_ColliderOff());
