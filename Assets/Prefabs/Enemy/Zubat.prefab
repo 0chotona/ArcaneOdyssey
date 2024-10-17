@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 4173081612548556784}
   - component: {fileID: 6838986807673896494}
   - component: {fileID: -9203707415711511366}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Zubat
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d88751c24610947883162d21511847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isFrozed: 0
 --- !u!195 &4173081612548556784
 NavMeshAgent:
   m_ObjectHideFlags: 0

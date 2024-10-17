@@ -3,7 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
-
+/*
+ * - 중간보스_0 Kill하고나서
+~ 1분 몬스터_0_0
+1분뒤에 몬스터_3 원패턴
+1분 ~ 2분 몬스터_0_0 + 몬스터_0_1
+2분 ~ 2분 30초 몬스터_0_1
+2분30초 다음보스
+*/
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] EnemyData _enemyData;
@@ -12,6 +19,8 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] GameObject[] _enemyObj;
     [SerializeField] GameObject[] _bossObj;
+
+    [Header("테스트"), SerializeField] Dictionary<GameObject, GameObject> _enemyObjDict;
 
     Vector3 _spawnAreaSize = new Vector3(40, 0, 40);
     public Transform _playerTrs;

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2396950467745498986}
   - component: {fileID: 2418850853732004266}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Momoi_DamageBox_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 4376984577157046977}
   - component: {fileID: 1480994431508271412}
   - component: {fileID: 8174163737482922841}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

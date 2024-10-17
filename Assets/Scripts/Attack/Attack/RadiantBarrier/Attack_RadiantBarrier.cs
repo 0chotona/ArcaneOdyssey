@@ -109,7 +109,7 @@ public class Attack_RadiantBarrier : Attack
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Enemy"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             _nearEnemyList.Add(other.transform);
             if(_isMaxLevel)
@@ -122,7 +122,7 @@ public class Attack_RadiantBarrier : Attack
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             _nearEnemyList.Remove(other.transform);
             if (_isMaxLevel)

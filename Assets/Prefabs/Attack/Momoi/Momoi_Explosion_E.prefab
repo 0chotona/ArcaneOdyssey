@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7045666799067223870}
   - component: {fileID: 8937967812605264660}
   - component: {fileID: 2075522576955771849}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4817,7 +4817,7 @@ GameObject:
   - component: {fileID: 5483370711906024646}
   - component: {fileID: 8250439380243619063}
   - component: {fileID: 6811257766589309827}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9623,7 +9623,7 @@ GameObject:
   - component: {fileID: 6293427498938904229}
   - component: {fileID: 6000420429067612836}
   - component: {fileID: 6003794629235427118}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14429,7 +14429,7 @@ GameObject:
   - component: {fileID: 2880749417428268809}
   - component: {fileID: 929278785744883092}
   - component: {fileID: 2701505738678818686}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Momoi_Explosion_E
   m_TagString: Untagged
   m_Icon: {fileID: 0}

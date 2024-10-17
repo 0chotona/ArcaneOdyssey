@@ -151,6 +151,8 @@ public class SkillManager : MonoBehaviour
     {
         _possedSkills.Add(name, FindSkillByName(name));
         StartAttack(name);
+        //Debug.Log(_possedSkills.Count);
+
     }
     public void AddAttacks()
     {
@@ -176,12 +178,16 @@ public class SkillManager : MonoBehaviour
         {
             _skillDic[name].UpgradeLevel();
             if (!_possedSkills.ContainsKey(name))
+            {
                 AddSkill(name);
+            }
         }
         else if(FindSkillByName(name)._level < 6)
         {
             if (_passiveManager._Passives[FindSkillByName(name)._synergyType]._level > 0)
+            {
                 _skillDic[name].UpgradeLevel();
+            }
         }
         SetAttackStat();
         UIManager.Instance.RemoveGiftName(FindSkillByName(name)._skillText);

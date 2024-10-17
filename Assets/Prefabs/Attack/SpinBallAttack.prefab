@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4918801133728335110}
   - component: {fileID: 1006442720970516833}
   - component: {fileID: 6492741132516386136}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4853,7 +4853,7 @@ GameObject:
   - component: {fileID: 5246690262706556992}
   - component: {fileID: 5643084649366937361}
   - component: {fileID: 3271575666846293824}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpinBallAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4889,6 +4889,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 325b44f0f0e0c7e4ea750e852f0629ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _angle: 0
+  _startAngle: 0
+  _radius: 4
+  _speed: 400
   _playerTrs: {fileID: 0}
 --- !u!135 &3271575666846293824
 SphereCollider:
@@ -4922,7 +4926,7 @@ GameObject:
   - component: {fileID: 54676861339134773}
   - component: {fileID: 1209941242744993874}
   - component: {fileID: 5096652420253285758}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spark
   m_TagString: Untagged
   m_Icon: {fileID: 0}

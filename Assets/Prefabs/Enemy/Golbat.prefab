@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 4681484351102857652}
   - component: {fileID: 7347604214534895233}
   - component: {fileID: 1960207311305202598}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Golbat
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -252,6 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d88751c24610947883162d21511847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isFrozed: 0
 --- !u!114 &3805681012911531618
 MonoBehaviour:
   m_ObjectHideFlags: 0

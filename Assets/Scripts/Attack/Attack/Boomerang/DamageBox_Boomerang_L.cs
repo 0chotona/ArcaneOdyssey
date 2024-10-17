@@ -34,7 +34,7 @@ public class DamageBox_Boomerang_L : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             enemyHealth.LoseDamage(_damage * 0.6f);

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4910718027637788963}
   - component: {fileID: 5499042023311148232}
   - component: {fileID: 3691089234325700951}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BowArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0554c16393ea7df4d989368b282ac2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 0
 --- !u!1 &3299473238517892635
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +108,7 @@ GameObject:
   - component: {fileID: 793729975223480618}
   - component: {fileID: 8744422169252665356}
   - component: {fileID: 1757950864030241784}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4949,7 +4950,7 @@ GameObject:
   - component: {fileID: 211484029408982185}
   - component: {fileID: 7532843713649957629}
   - component: {fileID: 2019867132618301216}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

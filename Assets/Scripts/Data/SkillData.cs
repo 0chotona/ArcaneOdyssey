@@ -11,7 +11,8 @@ public enum eSKILL
     IceArmor,
     BunnyCrossbow,
     RadiantBarrier,
-    CuteLauncher
+    CuteLauncher,
+    EchoBatBlade
 }
 public enum eSKILL_COLUMN
 {

@@ -33,7 +33,7 @@ public class Momoi_Explosion : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             float percent = enemyHealth.GetHpPercent(); //적 현재 체력

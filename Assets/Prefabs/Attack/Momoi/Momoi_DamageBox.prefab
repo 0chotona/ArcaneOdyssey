@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 804346909202889550}
   - component: {fileID: 7949307920720798313}
   - component: {fileID: 1136989221911219665}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Momoi_DamageBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,3 +118,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92672a86b7a21ea4cae44a5e57617b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 0

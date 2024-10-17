@@ -35,3 +35,9 @@ ID,Skill_Name,Enum_Name,Icon_Name,Level,Damage,AttRange,CoolTime,DurTime,CriRate
 1005,귀여운 발사기,CuteLauncher,skill_05,4,60,,0.65,,,2,CoolTime_Down
 1005,귀여운 발사기,CuteLauncher,skill_05,5,65,,0.5,,,3,CoolTime_Down
 1005,귀여운 발사기,CuteLauncher,skill_05,6,65,,0.25,,,3,CoolTime_Down
+1006,메아리치는 박쥐칼날,EchoBatBlade,skill_06,1,35,,3,,,4,ProjectileCount_Up
+1006,메아리치는 박쥐칼날,EchoBatBlade,skill_06,2,55,,3,,,5,ProjectileCount_Up
+1006,메아리치는 박쥐칼날,EchoBatBlade,skill_06,3,75,,2.25,,,5,ProjectileCount_Up
+1006,메아리치는 박쥐칼날,EchoBatBlade,skill_06,4,95,,2.25,,,6,ProjectileCount_Up
+1006,메아리치는 박쥐칼날,EchoBatBlade,skill_06,5,115,,1.5,,,6,ProjectileCount_Up
+1006,메아리치는 박쥐칼날,EchoBatBlade,skill_06,6,115,,1.5,,,6,ProjectileCount_Up

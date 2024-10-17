@@ -46,7 +46,7 @@ public class DamageBox_WhirlBlade : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             enemyHealth.LoseDamage(_damage);

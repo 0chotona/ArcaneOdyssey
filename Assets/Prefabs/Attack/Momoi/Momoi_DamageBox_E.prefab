@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1991855979362864011}
   - component: {fileID: 4561484949024561361}
   - component: {fileID: 723337015890487543}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Momoi_DamageBox_E
   m_TagString: Untagged
   m_Icon: {fileID: 0}

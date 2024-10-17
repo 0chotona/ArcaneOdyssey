@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour
 {
-    [SerializeField] EnemySpawner _enemySpawner;
     [SerializeField] GameObject[] _enemyObj;
     [SerializeField] GameObject[] _bossObj;
 

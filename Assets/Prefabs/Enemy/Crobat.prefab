@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1594603898180640711}
   - component: {fileID: 5449482373650751820}
   - component: {fileID: 5884117121753849753}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Crobat
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d88751c24610947883162d21511847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isFrozed: 0
 --- !u!114 &9028033059861594414
 MonoBehaviour:
   m_ObjectHideFlags: 0

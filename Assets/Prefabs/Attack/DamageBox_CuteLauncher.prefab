@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7668146937431871594}
   - component: {fileID: 6421488751996752675}
   - component: {fileID: 7522076248174061080}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DamageBox_CuteLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}

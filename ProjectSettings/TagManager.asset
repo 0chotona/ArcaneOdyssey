@@ -9,6 +9,8 @@ TagManager:
   - Ground
   - MapSensor
   - PlayerHitbox
+  - Bullet
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -18,9 +20,9 @@ TagManager:
   - UI
   - MapSensor
   - MouseChecker
-  - 
-  - 
-  - 
+  - Wall
+  - Bullet
+  - Enemy
   - 
   - 
   - 

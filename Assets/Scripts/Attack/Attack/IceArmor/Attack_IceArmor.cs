@@ -102,7 +102,7 @@ public class Attack_IceArmor : Attack
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Enemy"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             PlayParticles();
             AttackInteract();

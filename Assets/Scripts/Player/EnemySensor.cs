@@ -7,13 +7,17 @@ public class EnemySensor : MonoBehaviour
     List<Transform> _nearEnemyList = new List<Transform>();
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Enemy"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
             _nearEnemyList.Add(other.transform);
+        }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
             _nearEnemyList.Remove(other.transform);
+        }
     }
     public Transform GetNearestEnemy()
     {
