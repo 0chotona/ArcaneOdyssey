@@ -14,10 +14,13 @@ public class DamageBox_EchoBatBlade : MonoBehaviour
     GameObject _tmpObj;
     float _distance = 0f;
 
+    float _increaseRate = 0f;
+
     Vector3 _targetPos;
     public void UpdateIsMaxLevel(bool isMaxLevel) { _isMaxLevel = isMaxLevel; }
     public void UpdateDamage(float damage) { _damage = damage; }
     public void UpdateSpeed(float speed) { _speed = speed; }
+    public void SetIncreaseRate(float rate) { _increaseRate = rate; }
     public void Shot(Vector3 targetPos)
     {
         _tmpObj = gameObject;
@@ -49,6 +52,7 @@ public class DamageBox_EchoBatBlade : MonoBehaviour
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
+            _damage *= _increaseRate;
             float rndAngle = Random.Range(0, 360f);
             float distance = Vector3.Distance(_startPos, transform.position);
             _distance -= distance;

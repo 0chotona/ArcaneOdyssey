@@ -22,6 +22,7 @@ public class Attack_EchoBatBlade : Attack
 
     [Header("발사 위치"), SerializeField] Transform _shootTrs;
 
+    [Header("충돌 당 증가 비율"), SerializeField] float _increaseRate = 1.5f;
 
     private void Awake()
     {
@@ -47,6 +48,7 @@ public class Attack_EchoBatBlade : Attack
         }
         damageBox.UpdateDamage(finalDamage);
         damageBox.UpdateSpeed(_speed);
+        damageBox.SetIncreaseRate(_increaseRate);
         damageBox.Shot(targetPos);
 
 

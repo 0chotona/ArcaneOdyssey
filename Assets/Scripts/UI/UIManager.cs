@@ -68,8 +68,13 @@ public class UIManager : MonoBehaviour
         _curTime -= Time.deltaTime;
 
         _timerText.text = ((int)_curTime).ToString();
+
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            GameManager.Instance.UpgradeLevel();
+        }
     }
-    public void SetGiftNames(List<CSkill> skills)
+    public void SetGiftNames(List<CSkill> skills) //시작하자마자 상품 이름 세팅
     {
         _skills = skills;
         _passives = _passiveManager._PassiveNames;
@@ -135,9 +140,13 @@ public class UIManager : MonoBehaviour
 
         string upgradeGiftName = _giftInfos[index]._Name;
         if (IsSkill(upgradeGiftName))
+        {
             SkillManager.Instance.UpgradeLevel(SkillManager.Instance.GetSkillByName(upgradeGiftName));
+        }
         else
+        {
             _passiveManager.UpgradeLevel(upgradeGiftName);
+        }
 
         RemoveGiftName(upgradeGiftName);
             
@@ -155,6 +164,54 @@ public class UIManager : MonoBehaviour
             if (_passiveManager.IsMaxLevel(upgradeGiftName))
                 _giftNames.Remove(upgradeGiftName);
         }
+    }
+    public void RemoveEntireSkillNames(List<CSkill> possedSkills)
+    {
+        // 현재의 _giftNames를 안전하게 복사본으로 작업
+        List<string> giftNamesToKeep = new List<string>();
+
+        // possedSkills에서 모든 이름을 가져와 Set에 저장
+        HashSet<string> skillNamesSet = new HashSet<string>();
+        foreach (CSkill skill in possedSkills)
+        {
+            skillNamesSet.Add(skill._skillText);
+        }
+
+        // _giftNames에서 possedSkills에 없는 이름을 유지
+        foreach (string name in _giftNames)
+        {
+            if (skillNamesSet.Contains(name) || !IsSkill(name))
+            {
+                giftNamesToKeep.Add(name);
+            }
+        }
+
+        // 기존 리스트를 새로운 리스트로 교체
+        _giftNames = giftNamesToKeep;
+    }
+    public void RemoveEntireBuffNames(List<CBuff> possedSkills)
+    {
+        // 현재의 _giftNames를 안전하게 복사본으로 작업
+        List<string> giftNamesToKeep = new List<string>();
+
+        // possedSkills에서 모든 이름을 가져와 Set에 저장
+        HashSet<string> buffNamesSet = new HashSet<string>();
+        foreach (CBuff skill in possedSkills)
+        {
+            buffNamesSet.Add(skill._name);
+        }
+
+        // _giftNames에서 possedSkills에 없는 이름을 유지
+        foreach (string name in _giftNames)
+        {
+            if (buffNamesSet.Contains(name) || IsSkill(name))
+            {
+                giftNamesToKeep.Add(name);
+            }
+        }
+
+        // 기존 리스트를 새로운 리스트로 교체
+        _giftNames = giftNamesToKeep;
     }
     public void SetTimerString(int timer)
     {

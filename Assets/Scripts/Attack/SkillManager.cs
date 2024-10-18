@@ -63,6 +63,8 @@ public class SkillManager : MonoBehaviour
         }
 
     }
+
+    [Header("소유 가능 스킬 수"), SerializeField] int _skillSlotLimit = 5;
     Dictionary<eSKILL, CSkill> _possedSkills = new Dictionary<eSKILL, CSkill>();
     List<string> _skillNames = new List<string>();
 
@@ -173,24 +175,51 @@ public class SkillManager : MonoBehaviour
     }
     public void UpgradeLevel(eSKILL name)
     {
-        
-        if(!IsMaxLevel(name))
+        if(CanAddSkill())
         {
-            _skillDic[name].UpgradeLevel();
-            if (!_possedSkills.ContainsKey(name))
-            {
-                AddSkill(name);
-            }
-        }
-        else if(FindSkillByName(name)._level < 6)
-        {
-            if (_passiveManager._Passives[FindSkillByName(name)._synergyType]._level > 0)
+            if (!IsMaxLevel(name))
             {
                 _skillDic[name].UpgradeLevel();
+                if (!_possedSkills.ContainsKey(name))
+                {
+                    AddSkill(name);
+                }
+            }
+            else if (FindSkillByName(name)._level == 5)
+            {
+                if (_passiveManager._Passives[FindSkillByName(name)._synergyType]._level > 0)
+                {
+                    _skillDic[name].UpgradeLevel();
+                }
+            }
+            SetAttackStat();
+            UIManager.Instance.RemoveGiftName(FindSkillByName(name)._skillText);
+            if(!CanAddSkill())
+            {
+                UIManager.Instance.RemoveEntireSkillNames(new List<CSkill>(_possedSkills.Values));
             }
         }
-        SetAttackStat();
-        UIManager.Instance.RemoveGiftName(FindSkillByName(name)._skillText);
+        else
+        {
+            if (_possedSkills.ContainsKey(name))
+            {
+                if (!IsMaxLevel(name))
+                {
+                    _skillDic[name].UpgradeLevel();
+                }
+                else if (FindSkillByName(name)._level == 5)
+                {
+                    if (_passiveManager._Passives[FindSkillByName(name)._synergyType]._level > 0)
+                    {
+                        _skillDic[name].UpgradeLevel();
+                    }
+                }
+            }
+            
+            SetAttackStat();
+            UIManager.Instance.RemoveGiftName(FindSkillByName(name)._skillText);
+        }
+        
 
     }
     void StartAttack(eSKILL name)
@@ -239,7 +268,17 @@ public class SkillManager : MonoBehaviour
         else
             return false;
     }
-    
+    bool CanAddSkill()
+    {
+        if(_possedSkills.Count < _skillSlotLimit + 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     void SetAttackStat()
     {
         List<CSkill> skills = new List<CSkill>(_skillDic.Values);

@@ -45,6 +45,9 @@ public class BuffManager : MonoBehaviour
 
     [SerializeField] BuffStat _buffStat;
 
+    [Header("소유 가능 버프 수"), SerializeField] int _buffSlotLimit = 6;
+    List<eBUFF_TYPE> _possedBuffs = new List<eBUFF_TYPE>();
+
     private void Awake()
     {
         _passives = new Dictionary<eBUFF_TYPE, CBuff>();
@@ -79,10 +82,52 @@ public class BuffManager : MonoBehaviour
     }
     public void UpgradeLevel(string name)
     {
-        _passives[GetTypeByName(name)]._level++;
-        _passives[GetTypeByName(name)]._isGot = true;
-        _buffStat.UpdateBuffStat(GetTypeByName(name), _passives[GetTypeByName(name)]._rate);
-        UIManager.Instance.RemoveGiftName(name);
+        if(CanAddBuff())
+        {
+            if (!_possedBuffs.Contains(GetBuffByName(name)))
+            {
+                _possedBuffs.Add(GetBuffByName(name));
+            }
+            _passives[GetTypeByName(name)]._level++;
+            _passives[GetTypeByName(name)]._isGot = true;
+            _buffStat.UpdateBuffStat(GetTypeByName(name), _passives[GetTypeByName(name)]._rate);
+            UIManager.Instance.RemoveGiftName(name);
+            if(!CanAddBuff())
+            {
+                List<CBuff> possedBuffs = new List<CBuff>();
+                foreach(eBUFF_TYPE buff in _possedBuffs)
+                {
+                    possedBuffs.Add(_passives[buff]);
+                }
+                UIManager.Instance.RemoveEntireBuffNames(new List<CBuff>(possedBuffs));
+            }
+        }
+        else
+        {
+            if (_possedBuffs.Contains(GetBuffByName(name)))
+            {
+                if (!IsMaxLevel(name))
+                {
+                    _passives[GetTypeByName(name)]._level++;
+                }
+            }
+
+            _buffStat.UpdateBuffStat(GetTypeByName(name), _passives[GetTypeByName(name)]._rate);
+            UIManager.Instance.RemoveGiftName(name);
+        }
+
+    }
+    public eBUFF_TYPE GetBuffByName(string name)
+    {
+        eBUFF_TYPE eBuff = 0;
+        foreach (eBUFF_TYPE buffType in _passives.Keys)
+        {
+            if (_passives[buffType]._name == name)
+            {
+                eBuff = buffType;
+            }
+        }
+        return eBuff;
     }
     public bool IsMaxLevel(string name)
     {
@@ -102,5 +147,15 @@ public class BuffManager : MonoBehaviour
         }
         return type;
     }
-    
+    bool CanAddBuff()
+    {
+        if (_possedBuffs.Count < _buffSlotLimit)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

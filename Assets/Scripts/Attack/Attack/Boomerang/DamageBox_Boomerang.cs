@@ -41,6 +41,7 @@ public class DamageBox_Boomerang : MonoBehaviour
     {
         Vector3 dir = (_playerTrs.position - transform.position).normalized;
         Vector3 targetPos = transform.position + dir * _backDistance;
+        targetPos.y = 1f;
 
         while (Vector3.Distance(transform.position, targetPos) > 0.05f)
         {
@@ -60,14 +61,21 @@ public class DamageBox_Boomerang : MonoBehaviour
             DamageBox_Boomerang_L damageBox1 = boomerang1.GetComponent<DamageBox_Boomerang_L>();
             damageBox1.UpdateDamage(_damage);
             damageBox1.UpdateSpeed(_speed);
-            damageBox1.Shot(transform.position + dir1 * dir * _smallDistance);
+
+            Vector3 targetPos1 = transform.position + dir1 * dir * _smallDistance;
+            targetPos1.y = 1f;
+            damageBox1.Shot(targetPos1);
 
             Quaternion dir2 = Quaternion.Euler(0f, -_angle, 0f);
             GameObject boomerang2 = Instantiate(_smallBoomerang, transform.position, Quaternion.identity);
             DamageBox_Boomerang_L damageBox2 = boomerang2.GetComponent<DamageBox_Boomerang_L>();
             damageBox2.UpdateDamage(_damage);
             damageBox2.UpdateSpeed(_speed);
-            damageBox2.Shot(transform.position + dir2 * dir * _smallDistance);
+
+
+            Vector3 targetPos2 = transform.position + dir2 * dir * _smallDistance;
+            targetPos2.y = 1f;
+            damageBox2.Shot(targetPos2);
         }
 
         Destroy(_tmpObj);
