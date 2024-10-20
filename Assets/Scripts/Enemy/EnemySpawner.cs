@@ -4,12 +4,26 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 /*
- * - 중간보스_0 Kill하고나서
-~ 1분 몬스터_0_0
-1분뒤에 몬스터_3 원패턴
-1분 ~ 2분 몬스터_0_0 + 몬스터_0_1
-2분 ~ 2분 30초 몬스터_0_1
-2분30초 다음보스
+ * ~ 1분 30초 몬스터0_0 Cryogonal 프리지오
+1분 30초 ~ 중간보스_0 죽을때까지 몬스터0_0 + 몬스터0_1 
+2분 중간보스_0  Regice
+
+중간보스_0 Kill하고나서 ~ 1분 몬스터1_0 Bergmite 꽁어름
+1분뒤 몬스터1_0 원패턴
+1분 ~ 2분 몬스터1_0 + 몬스터1_1 Avalugg 크레베이스
+2분 ~ 2분 30초 몬스터1_1
+2분30초 중간보스_1 --- 5분30초  Glalie
+
+중간보스_1 Kill하고나서 ~ 1분 몬스터2_0
+1분뒤 몬스터2_0 원패턴
+1분 ~ 2분 30초 몬스터2_0   Vanillite 바닐프티
+2분30초 중간보스_2 --- 9분 Froslass
+
+중간보스_2 Kill하고나서 ~ 1분 몬스터3_0  Vanillish 바닐리치
+1분뒤 몬스터3_0 원패턴
+1분 ~ 2분 몬스터3_0 + 몬스터3_1   Vanilluxe 배바닐라
+2분 ~ 2분 30초 몬스터3_1
+2분30초 최종보스--- 12분 30초 Kyurem
 */
 public class EnemySpawner : MonoBehaviour
 {
@@ -20,7 +34,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject[] _enemyObj;
     [SerializeField] GameObject[] _bossObj;
 
-    [Header("테스트"), SerializeField] Dictionary<GameObject, GameObject> _enemyObjDict;
 
     Vector3 _spawnAreaSize = new Vector3(40, 0, 40);
     public Transform _playerTrs;

@@ -2,11 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ENEMYTYPE
+public enum eMOBTYPE
 {
-    Zubat,
-    Golbat,
-    Crobat
+    Cryogonal,
+    Bergmite,
+    Avalugg,
+    Vanillite,
+    Vanillish,
+    Vanilluxe,
+
+    Regice,
+    Glalie,
+    Froslass,
+    Kyurem
 }
 public class CEnemy
 {
@@ -27,6 +35,8 @@ public class CEnemy
 
     float _moveSpeed;
     public float _MoveSpeed => _moveSpeed;
+    bool _isBoss = false;
+    public bool _IsBoss => _isBoss; 
 
     
     
@@ -40,11 +50,15 @@ public class CEnemy
         _def = def;
         _moveSpeed = moveSpeed;
     }
+    public void SetIsBoss()
+    {
+        _isBoss = true;
+    }
 }
 public class EnemyData : MonoBehaviour
 {
-    Dictionary<ENEMYTYPE, CEnemy> _enemyDatas = new Dictionary<ENEMYTYPE, CEnemy>();
-    public Dictionary<ENEMYTYPE, CEnemy> _EnemyDatas => _enemyDatas;
+    Dictionary<eMOBTYPE, CEnemy> _enemyDatas = new Dictionary<eMOBTYPE, CEnemy>();
+    public Dictionary<eMOBTYPE, CEnemy> _EnemyDatas => _enemyDatas;
 
     private void Awake()
     {
@@ -53,8 +67,9 @@ public class EnemyData : MonoBehaviour
 
     void SetEnemyData()
     {
-        _enemyDatas.Add(ENEMYTYPE.Zubat, new CEnemy(1, 0, 120, 10, 30, 2f));
-        _enemyDatas.Add(ENEMYTYPE.Golbat, new CEnemy(1, 1, 180, 20, 40, 3f));
-        _enemyDatas.Add(ENEMYTYPE.Crobat, new CEnemy(1, 2, 240, 30, 50, 4f));
+        _enemyDatas.Add(eMOBTYPE.Vanillite, new CEnemy(1, 0, 120, 10, 30, 2f));
+        _enemyDatas.Add(eMOBTYPE.Vanillish, new CEnemy(1, 1, 180, 20, 40, 3f));
+        _enemyDatas.Add(eMOBTYPE.Vanilluxe, new CEnemy(1, 2, 240, 30, 50, 4f));
+        _enemyDatas.Add(eMOBTYPE.Cryogonal, new CEnemy(1, 2, 240, 30, 50, 4f));
     }
 }

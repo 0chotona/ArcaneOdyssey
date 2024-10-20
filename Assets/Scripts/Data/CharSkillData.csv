@@ -1,13 +1,13 @@
 ID,Skill_Name,Enum_Name,Icon_Name,Level,Damage,AttRange,CoolTime,DurTime,CriRate,ProjectileCount,SynergyType,Char_Pref_Name
-100,야옹 야옹,MeowGun,skill_000,1,60,,2.5,,,3,CoolTime_Down,Char_100
-100,야옹 야옹,MeowGun,skill_000,2,80,,2.5,,,4,CoolTime_Down,Char_100
-100,야옹 야옹,MeowGun,skill_000,3,100,,2.5,,,5,CoolTime_Down,Char_100
-100,야옹 야옹,MeowGun,skill_000,4,120,,2.5,,,6,CoolTime_Down,Char_100
-100,야옹 야옹,MeowGun,skill_000,5,140,,2.5,,,7,CoolTime_Down,Char_100
-100,야옹 야옹,MeowGun,skill_000,6,140,,1.25,,,7,CoolTime_Down,Char_100
-101,기본 베기,Slash,skill_001,1,5,1,0.8,2,,,MaxHP_Up,Char_101
-101,기본 베기,Slash,skill_001,2,7,1,0.8,2,,,MaxHP_Up,Char_101
-101,기본 베기,Slash,skill_001,3,7,2,0.8,2,,,MaxHP_Up,Char_101
-101,기본 베기,Slash,skill_001,4,9,2,1,1.5,,,MaxHP_Up,Char_101
-101,기본 베기,Slash,skill_001,5,9,2,1,1.5,,,MaxHP_Up,Char_101
-101,기본 베기,Slash,skill_001,6,11,3,1.2,1.5,,,MaxHP_Up,Char_101
+100,야옹 야옹,MeowGun,skill_00,1,60,,2.5,,,3,CoolTime_Down,Char_100
+100,야옹 야옹,MeowGun,skill_00,2,80,,2.5,,,4,CoolTime_Down,Char_100
+100,야옹 야옹,MeowGun,skill_00,3,100,,2.5,,,5,CoolTime_Down,Char_100
+100,야옹 야옹,MeowGun,skill_00,4,120,,2.5,,,6,CoolTime_Down,Char_100
+100,야옹 야옹,MeowGun,skill_00,5,140,,2.5,,,7,CoolTime_Down,Char_100
+100,야옹 야옹,MeowGun,skill_00,6,140,,1.25,,,7,CoolTime_Down,Char_100
+101,기본 베기,Slash,skill_01,1,5,1,0.8,2,,,MaxHP_Up,Char_101
+101,기본 베기,Slash,skill_01,2,7,1,0.8,2,,,MaxHP_Up,Char_101
+101,기본 베기,Slash,skill_01,3,7,2,0.8,2,,,MaxHP_Up,Char_101
+101,기본 베기,Slash,skill_01,4,9,2,1,1.5,,,MaxHP_Up,Char_101
+101,기본 베기,Slash,skill_01,5,9,2,1,1.5,,,MaxHP_Up,Char_101
+101,기본 베기,Slash,skill_01,6,11,3,1.2,1.5,,,MaxHP_Up,Char_101

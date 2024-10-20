@@ -39,6 +39,13 @@ public class UIManager : MonoBehaviour
     [Header("E 스킬 쿨타임바"), SerializeField] Image _imgECooltime;
     [Header("R 스킬 쿨타임바"), SerializeField] Image _imgRCooltime;
 
+    [Header("스킬 아이콘"), SerializeField] List<Image> _skillIcons;
+    [Header("스킬 아이콘 스프라이트"), SerializeField] List<Sprite> _skillIconSprites;
+
+    [Header("버프 아이콘"), SerializeField] List<Image> _buffIcons;
+    [Header("버프 아이콘 창"), SerializeField] List<GameObject> _buffIconsPanels;
+    [Header("버프 아이콘 스프라이트"), SerializeField] List<Sprite> _buffIconSprites;
+
     float _curTime = 60;
 
     public bool _isPause = false;
@@ -50,6 +57,9 @@ public class UIManager : MonoBehaviour
 
     List<string> _skillNames = new List<string>();
     List<string> _passiveNames = new List<string>();
+
+    int _skillCount = 0;
+    int _buffCount = 0;
     private void Start()
     {
 
@@ -62,6 +72,11 @@ public class UIManager : MonoBehaviour
 
         _imgECooltime.fillAmount = 0;
         _imgRCooltime.fillAmount = 0;
+
+        foreach(GameObject panel in _buffIconsPanels)
+        {
+            panel.SetActive(false);
+        }
     }
     private void Update()
     {
@@ -292,5 +307,36 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
 
+    }
+    public void UpdatePossesedIcon(CSkill cSkill)
+    {
+        SetSkillIcon(_skillCount, cSkill._iconName);
+        _skillCount++;
+    }
+    public void UpdatePossesedIcon(CBuff cBuff)
+    {
+        _buffIconsPanels[_buffCount].SetActive(true);
+        SetBuffIcon(_buffCount, cBuff._IconName);
+        _buffCount++;
+    }
+    void SetSkillIcon(int index, string iconName)
+    {
+        foreach(Sprite icon in _skillIconSprites)
+        {
+            if(icon.name == iconName)
+            {
+                _skillIcons[index].sprite = icon;
+            }
+        }
+    }
+    void SetBuffIcon(int index, string iconName)
+    {
+        foreach (Sprite icon in _buffIconSprites)
+        {
+            if (icon.name == iconName)
+            {
+                _buffIcons[index].sprite = icon;
+            }
+        }
     }
 }

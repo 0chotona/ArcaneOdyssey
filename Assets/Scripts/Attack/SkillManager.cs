@@ -153,6 +153,7 @@ public class SkillManager : MonoBehaviour
     {
         _possedSkills.Add(name, FindSkillByName(name));
         StartAttack(name);
+        UIManager.Instance.UpdatePossesedIcon(FindSkillByName(name));
         //Debug.Log(_possedSkills.Count);
 
     }

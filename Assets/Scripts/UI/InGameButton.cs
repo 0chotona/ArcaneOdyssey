@@ -17,14 +17,14 @@ public class InGameButton : MonoBehaviour
     [Header("다시하기 버튼"), SerializeField] Button _replaybutton;
     private void Awake()
     {
-        _skillButton.onClick.AddListener(() => Click_Skill());
+        //_skillButton.onClick.AddListener(() => Click_Skill());
         _pauseButton.onClick.AddListener(() => Click_Pause());
 
         _mainmenuButton.onClick.AddListener(() => Click_MainMenu());
         _playButton.onClick.AddListener(() => Click_Play());
         _replaybutton.onClick.AddListener(() => Click_Replay());
 
-        _skillPanel.SetActive(false);
+        //_skillPanel.SetActive(false);
         _pausePanel.SetActive(false);
     }
     void Click_Skill()
