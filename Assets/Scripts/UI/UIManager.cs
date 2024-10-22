@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
     [Header("버프 아이콘 창"), SerializeField] List<GameObject> _buffIconsPanels;
     [Header("버프 아이콘 스프라이트"), SerializeField] List<Sprite> _buffIconSprites;
 
-    float _curTime = 60;
+    float _curTime = 0;
 
     public bool _isPause = false;
 
@@ -80,7 +80,7 @@ public class UIManager : MonoBehaviour
     }
     private void Update()
     {
-        _curTime -= Time.deltaTime;
+        _curTime += Time.deltaTime;
 
         _timerText.text = ((int)_curTime).ToString();
 

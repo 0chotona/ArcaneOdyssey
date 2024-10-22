@@ -5,14 +5,18 @@ using UnityEngine;
 public class Factory_NormalMob : MobFactory
 {
     [Header("¸÷ ÇÁ¸®Æé"), SerializeField] List<GameObject> _normalPrefs;
-    [Header("½ºÆù À§Ä¡"), SerializeField] List<Transform> _spawnPoses;
-    public override void Spawn(eMOBTYPE type)
+    Dictionary<eNORMALMOB_TYPE, CEnemy> _enemyDatas = new Dictionary<eNORMALMOB_TYPE, CEnemy>();
+    public override void Spawn(eNORMALMOB_TYPE type, Vector3 pos)
     {
-        int rnd = Random.Range(0, _spawnPoses.Count);
         GameObject mob = GetMobByType(type);
-        Instantiate(mob, _spawnPoses[rnd].position, Quaternion.identity);
+        GameObject spawnedMob = Instantiate(mob, pos, Quaternion.identity);
+        EnemyInfo info = spawnedMob.GetComponent<EnemyInfo>();
+        info.SetStat(_enemyDatas[type]);
+
+        EnemyMove move = spawnedMob.GetComponent<EnemyMove>();
+        move.SetPlayerTrs(_playerTrs);
     }
-    public GameObject GetMobByType(eMOBTYPE type)
+    public GameObject GetMobByType(eNORMALMOB_TYPE type)
     {
         GameObject mob = null;
         foreach(GameObject obj in _normalPrefs)
@@ -24,5 +28,14 @@ public class Factory_NormalMob : MobFactory
             }
         }
         return mob;
+    }
+    public override void SetData(Dictionary<eNORMALMOB_TYPE, CEnemy> enemyDatas)
+    {
+        _enemyDatas = enemyDatas;
+    }
+
+    public override void SetTarget(Transform playerTrs)
+    {
+        _playerTrs = playerTrs;
     }
 }

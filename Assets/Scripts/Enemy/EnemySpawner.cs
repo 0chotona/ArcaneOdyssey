@@ -151,7 +151,7 @@ public class EnemySpawner : MonoBehaviour
     {
         EnemyInfo enemyInfo = obj.GetComponent<EnemyInfo>();
         CEnemy cEnemy = _enemyData._EnemyDatas[enemyInfo._EnemyType];
-        enemyInfo.SetStat(cEnemy._Hp, cEnemy._Att + _curLevel, cEnemy._Def + _curLevel, cEnemy._MoveSpeed);
+        //enemyInfo.SetStat(cEnemy._Hp, cEnemy._Att + _curLevel, cEnemy._Def + _curLevel, cEnemy._MoveSpeed);
 
         obj.GetComponent<EnemyHealth>().SetSpawner(transform);
         obj.GetComponent<EnemyMove>().SetPlayerTrs(_playerTrs);

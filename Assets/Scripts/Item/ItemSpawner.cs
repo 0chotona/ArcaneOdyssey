@@ -10,7 +10,7 @@ public class ItemSpawner : MonoBehaviour
     public void SetPlayerTrs(Transform playerTrs)
     {
         _playerTrs = playerTrs;
-        GetComponent<EnemySpawner>().SetPlayerTrs(playerTrs);
+        //GetComponent<EnemySpawner>().SetPlayerTrs(playerTrs);
     }
     public void SetMagnet()
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum eMOBTYPE
+public enum eNORMALMOB_TYPE
 {
     Cryogonal,
     Bergmite,
@@ -41,10 +41,8 @@ public class CEnemy
     
     
 
-    public CEnemy(int stage, int level, int hp, int att, int def, float moveSpeed)
+    public CEnemy(int hp, int att, int def, float moveSpeed)
     {
-        _stage = stage;
-        _level = level;
         _hp = hp;
         _att = att;
         _def = def;
@@ -57,8 +55,8 @@ public class CEnemy
 }
 public class EnemyData : MonoBehaviour
 {
-    Dictionary<eMOBTYPE, CEnemy> _enemyDatas = new Dictionary<eMOBTYPE, CEnemy>();
-    public Dictionary<eMOBTYPE, CEnemy> _EnemyDatas => _enemyDatas;
+    Dictionary<eNORMALMOB_TYPE, CEnemy> _enemyDatas = new Dictionary<eNORMALMOB_TYPE, CEnemy>();
+    public Dictionary<eNORMALMOB_TYPE, CEnemy> _EnemyDatas => _enemyDatas;
 
     private void Awake()
     {
@@ -67,9 +65,17 @@ public class EnemyData : MonoBehaviour
 
     void SetEnemyData()
     {
-        _enemyDatas.Add(eMOBTYPE.Vanillite, new CEnemy(1, 0, 120, 10, 30, 2f));
-        _enemyDatas.Add(eMOBTYPE.Vanillish, new CEnemy(1, 1, 180, 20, 40, 3f));
-        _enemyDatas.Add(eMOBTYPE.Vanilluxe, new CEnemy(1, 2, 240, 30, 50, 4f));
-        _enemyDatas.Add(eMOBTYPE.Cryogonal, new CEnemy(1, 2, 240, 30, 50, 4f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Cryogonal, new CEnemy(120, 10, 30, 2f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Bergmite, new CEnemy(150, 15, 30, 3f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Avalugg, new CEnemy(180, 20, 40, 2f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Vanillite, new CEnemy(180, 30, 35, 3f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Vanillish, new CEnemy(240, 35, 40, 3.5f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Vanilluxe, new CEnemy(300, 40, 45, 4f));
+
+
+        _enemyDatas.Add(eNORMALMOB_TYPE.Regice, new CEnemy(1000, 50, 50, 3f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Glalie, new CEnemy(2000, 80, 70, 3f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Froslass, new CEnemy(3000, 110, 90, 3f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Kyurem, new CEnemy(4000, 150, 110, 3f));
     }
 }
