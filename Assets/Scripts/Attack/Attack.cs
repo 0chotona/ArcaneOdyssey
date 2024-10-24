@@ -28,4 +28,5 @@ public abstract class Attack : MonoBehaviour
     public abstract void UpdateStat(CStat stat);
     public abstract void SetSkill(CSkill skill);
     public abstract void UpdateBuffStat(CBuffStat buffStat);
+    public abstract void SetPlayerTrs(Transform playerTrs);
 }

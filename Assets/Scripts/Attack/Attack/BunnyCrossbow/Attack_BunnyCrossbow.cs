@@ -89,4 +89,5 @@ public class Attack_BunnyCrossbow : Attack
     {
         _buffStat = buffStat;
     }
+    public override void SetPlayerTrs(Transform playerTrs) { }
 }

@@ -178,4 +178,6 @@ public class Attack_WhirlBlade : Attack
             UpdateDamageBox(_damageBoxList);
         }
     }
+
+    public override void SetPlayerTrs(Transform playerTrs) { }
 }

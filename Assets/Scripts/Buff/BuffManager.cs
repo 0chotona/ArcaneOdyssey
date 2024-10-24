@@ -92,6 +92,10 @@ public class BuffManager : MonoBehaviour
                 _possedBuffs.Add(GetBuffByName(name));
                 UIManager.Instance.UpdatePossesedIcon(_passives[GetTypeByName(name)]);
             }
+            if (!IsMaxLevel(name))
+            {
+                //디버깅 화면에서도 레벨제한 두고 싶으면 이거 사용
+            }
             _passives[GetTypeByName(name)]._level++;
             _passives[GetTypeByName(name)]._isGot = true;
             _buffStat.UpdateBuffStat(GetTypeByName(name), _passives[GetTypeByName(name)]._rate);

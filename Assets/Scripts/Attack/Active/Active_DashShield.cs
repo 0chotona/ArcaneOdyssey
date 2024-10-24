@@ -61,6 +61,5 @@ public class Active_DashShield : MonoBehaviour, IActiveAttackable
 
     public void SetBuffStat(CBuffStat buffStat)
     {
-        throw new System.NotImplementedException();
     }
 }

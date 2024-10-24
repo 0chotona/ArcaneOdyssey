@@ -66,6 +66,6 @@ public class Active_Spin : MonoBehaviour, IActiveAttackable
 
     public void SetBuffStat(CBuffStat buffStat)
     {
-        throw new System.NotImplementedException();
+        
     }
 }

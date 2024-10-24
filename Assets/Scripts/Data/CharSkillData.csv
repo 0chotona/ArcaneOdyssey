@@ -5,9 +5,9 @@ ID,Skill_Name,Enum_Name,Icon_Name,Level,Damage,AttRange,CoolTime,DurTime,CriRate
 100,야옹 야옹,MeowGun,skill_00,4,120,,2.5,,,6,CoolTime_Down,Char_100
 100,야옹 야옹,MeowGun,skill_00,5,140,,2.5,,,7,CoolTime_Down,Char_100
 100,야옹 야옹,MeowGun,skill_00,6,140,,1.25,,,7,CoolTime_Down,Char_100
-101,기본 베기,Slash,skill_01,1,5,1,0.8,2,,,MaxHP_Up,Char_101
-101,기본 베기,Slash,skill_01,2,7,1,0.8,2,,,MaxHP_Up,Char_101
-101,기본 베기,Slash,skill_01,3,7,2,0.8,2,,,MaxHP_Up,Char_101
-101,기본 베기,Slash,skill_01,4,9,2,1,1.5,,,MaxHP_Up,Char_101
-101,기본 베기,Slash,skill_01,5,9,2,1,1.5,,,MaxHP_Up,Char_101
-101,기본 베기,Slash,skill_01,6,11,3,1.2,1.5,,,MaxHP_Up,Char_101
+101,부러진 날개,BrokenWing,skill_01,1,65,,2,,0.05,,MoveSpeed_Up,Char_101
+101,부러진 날개,BrokenWing,skill_01,2,110,,2,,0.1,,MoveSpeed_Up,Char_101
+101,부러진 날개,BrokenWing,skill_01,3,155,,2,,0.15,,MoveSpeed_Up,Char_101
+101,부러진 날개,BrokenWing,skill_01,4,200,,2,,0.2,,MoveSpeed_Up,Char_101
+101,부러진 날개,BrokenWing,skill_01,5,245,,2,,0.25,,MoveSpeed_Up,Char_101
+101,부러진 날개,BrokenWing,skill_01,6,245,,2,,0.25,,MoveSpeed_Up,Char_101

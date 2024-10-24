@@ -137,4 +137,6 @@ public class Attack_IceArmor : Attack
             particle.Stop();
         }
     }
+
+    public override void SetPlayerTrs(Transform playerTrs) { }
 }

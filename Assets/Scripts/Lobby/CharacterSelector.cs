@@ -88,8 +88,8 @@ public class CharacterSelector : MonoBehaviour
 
         CharPrefInfo charPrefInfo = selectedCharacter.GetComponent<CharPrefInfo>();
         
-        charPrefInfo.SetPlayerTrs(_playerTrs);
         Attack charAttack = charPrefInfo.GetCharAttack();
+        charAttack.SetPlayerTrs(_playerTrs);
         SkillManager.Instance.SetCharSkillAwake(charAttack, _selectedChar);
         SkillManager.Instance.SetSkillMethod(charPrefInfo._Skill1, charPrefInfo._Skill2);
         PassiveManager.Instance.SetPassiveMethod(charPrefInfo._Passive);

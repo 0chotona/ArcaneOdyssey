@@ -15,13 +15,9 @@ public class AnimController : MonoBehaviour
     {
         _anim = GetComponentInChildren<Animator>();
     }
-    public void SetAttackAnimation(int level)
+    public void SetChiseAnimation(int combo)
     {
-        _anim.SetTrigger("isAttack");
-        _anim.SetInteger("SwordLevel", level);
-    }
-    public void SetAttackAnimation(bool isFinished)
-    {
-        _anim.SetBool("isFinished", isFinished);
+        _anim.SetInteger("Combo", combo);
+        _anim.SetTrigger("StartCombo");
     }
 }

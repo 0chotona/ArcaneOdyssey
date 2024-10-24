@@ -2,10 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+/*
+ * SharkHunterMine (상어잡이 해양 기뢰)
+UrbanTransit (최후의 도시 대중교통)
+FootprintTrap (발자국 중독 장치)
+LionRain (사자의 비가)
+EchoBatBlade (메아리치는 박쥐칼날)
+T_Ber (티.버)
+GatlingRabbitGun (개틀링 토끼 건)
+AnimalMine (동물 지뢰)
+FlamingLongbow (타오르는 단궁)
+BunnyMegaExplosion (토끼 초강력 폭발)
+StaticSword (스태틱의 검)
+VortexArmor (소용돌이 장갑)
+YumiBot (유미봇)
+Exterminator (절멸자)
+*/
 public enum eSKILL
 {
     MeowGun,
-    Slash,
+    BrokenWing,
     Boomerang,
     WhirlBlade,
     IceArmor,

@@ -10089,7 +10089,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5526695468351517940}
   - component: {fileID: 2788487943767209278}
-  - component: {fileID: 2197055865821804612}
+  - component: {fileID: 743375481533731018}
   m_Layer: 0
   m_Name: SwordAttack
   m_TagString: Untagged
@@ -10134,7 +10134,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 3.3
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2197055865821804612
+--- !u!114 &743375481533731018
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10143,22 +10143,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 621576247395489308}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dcf9aa94c192b040b0bff99b6d27812, type: 3}
+  m_Script: {fileID: 11500000, guid: 55fbfeb4a1a30a84585ee217fdcb955d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _effect: {fileID: 29688390524494935, guid: 8bce65900a7fbab47832d96c4bedb273, type: 3}
-  _finalEffect: {fileID: 3674533795464779046, guid: 3c76e5c242eec8c4ea93347c56c44435, type: 3}
   _canAttack: 0
   _level: 0
   _name: 0
   _isMaxLevel: 0
-  _damage: 1
-  _attCount: 0
+  _damage: 0
   _attRange: 0
-  _coolTime: 1
+  _coolTime: 0
   _durTime: 0
-  _shotSpeed: 0
-  _damageBoxTrs: {fileID: 5009370577515968019}
+  _criRate: 0
+  _projectileCount: 0
+  _damageBoxObj: {fileID: 5973670700687191933}
+  _dashSpeed: 10
+  _dashDistance: 2
+  _coolDistance: 7
+  _timer: 0
 --- !u!1 &835327573133782855
 GameObject:
   m_ObjectHideFlags: 0
@@ -41002,9 +41004,9 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: aaab9eebada4976488f3cb0301dad62b, type: 3}
   m_Controller: {fileID: 9100000, guid: 8441d6d0f325f88489a7f22ad8e1c6da, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -41027,6 +41029,7 @@ MonoBehaviour:
   _charAttackObj: {fileID: 621576247395489308}
   _skill1: {fileID: 3223087783628307136}
   _skill2: {fileID: 3430613662398500488}
+  _passiveObj: {fileID: 0}
 --- !u!1 &4862430539508980929
 GameObject:
   m_ObjectHideFlags: 0
@@ -46552,7 +46555,7 @@ GameObject:
   - component: {fileID: 4201445038085897651}
   - component: {fileID: 2114310981937297013}
   - component: {fileID: 131986608459550451}
-  - component: {fileID: 2446746256685398868}
+  - component: {fileID: 7607298390615022249}
   m_Layer: 0
   m_Name: DamageBox
   m_TagString: Untagged
@@ -46646,7 +46649,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2446746256685398868
+--- !u!114 &7607298390615022249
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46655,7 +46658,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5973670700687191933}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acc1e16941d0c7b4aa9cc7cbc3af9326, type: 3}
+  m_Script: {fileID: 11500000, guid: 84a1f41a78ad00d4f99448dd742ad9af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5993827871277947081
@@ -57564,6 +57567,8 @@ MonoBehaviour:
   _effectParticle: {fileID: 2006958006514040170}
   _dashTime: 0.15
   _dashSpeed: 20
+  _shieldAmount: 50
+  _shieldDur: 3
 --- !u!1 &8131636839023887255
 GameObject:
   m_ObjectHideFlags: 0

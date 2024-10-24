@@ -132,4 +132,6 @@ public class Attack_RadiantBarrier : Attack
             }
         }
     }
+
+    public override void SetPlayerTrs(Transform playerTrs) { }
 }

@@ -107,4 +107,6 @@ public class Attack_Boomerang : Attack
     {
         _buffStat = buffStat;
     }
+
+    public override void SetPlayerTrs(Transform playerTrs) { }
 }

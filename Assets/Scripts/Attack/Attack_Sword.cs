@@ -30,7 +30,7 @@ public class Attack_Sword : Attack
     //[SerializeField] AnimController _anim;
     private void OnEnable()
     {
-        _name = eSKILL.Slash;
+        //_name = eSKILL.Slash;
     }
     private void Awake()
     {
@@ -104,7 +104,7 @@ public class Attack_Sword : Attack
         }
         
     }
-    
+    public override void SetPlayerTrs(Transform playerTrs) { }
     void SpawnEffect(eSTATE eState)
     {
         /*

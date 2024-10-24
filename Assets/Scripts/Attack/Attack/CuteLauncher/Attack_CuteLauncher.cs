@@ -90,4 +90,6 @@ public class Attack_CuteLauncher : Attack
     {
         _buffStat = buffStat;
     }
+
+    public override void SetPlayerTrs(Transform playerTrs) { }
 }

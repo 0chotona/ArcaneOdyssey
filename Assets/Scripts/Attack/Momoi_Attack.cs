@@ -91,4 +91,6 @@ public class Momoi_Attack : Attack
     {
         _buffStat = buffStat;
     }
+
+    public override void SetPlayerTrs(Transform playerTrs) { }
 }

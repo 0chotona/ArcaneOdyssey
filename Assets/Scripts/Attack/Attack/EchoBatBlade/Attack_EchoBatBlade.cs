@@ -94,4 +94,6 @@ public class Attack_EchoBatBlade : Attack
     {
         _buffStat = buffStat;
     }
+
+    public override void SetPlayerTrs(Transform playerTrs) { }
 }

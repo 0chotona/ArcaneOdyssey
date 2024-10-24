@@ -46,6 +46,9 @@ public class UIManager : MonoBehaviour
     [Header("버프 아이콘 창"), SerializeField] List<GameObject> _buffIconsPanels;
     [Header("버프 아이콘 스프라이트"), SerializeField] List<Sprite> _buffIconSprites;
 
+    [Header("스킬 게이지"), SerializeField] SkillGage _skillGame;
+    public SkillGage _SkillGage => _skillGame;
+
     float _curTime = 0;
 
     public bool _isPause = false;

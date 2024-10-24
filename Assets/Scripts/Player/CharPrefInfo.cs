@@ -33,7 +33,8 @@ public class CharPrefInfo : MonoBehaviour
         _playerTrs = playerTrs;
         _Skill1.SetPlayerTrs(playerTrs);
         _Skill2.SetPlayerTrs(playerTrs);
-        _passive.SetPlayerTrs(playerTrs);
+        if(_passive != null)
+            _passive.SetPlayerTrs(playerTrs);
     }
     public Attack GetCharAttack()
     {

@@ -111,6 +111,7 @@ public class BuffStat : MonoBehaviour
                 break;
             case eBUFF_TYPE.MoveSpeed_Up:
                 _buffStat.UpdateMoveSpeed(value);
+                _playerMove.UpdateBuffSpeed(_buffStat._MoveSpeed);
                 break;
             case eBUFF_TYPE.ItemPickupRange_Up:
                 _buffStat.UpdateItemPickRange(value);
