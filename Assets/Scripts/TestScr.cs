@@ -1,23 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
-public class TestScr : MonoBehaviour
+public class Example
 {
-    void Update()
+    public static void Main()
     {
-        if (Input.GetMouseButtonDown(0)) // 마우스 왼쪽 버튼 클릭
-        {
-            // 카메라에서 마우스 위치로 레이 발사
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+        string input = string.Empty;
+        
+        char first = input[0];
 
-            // 레이캐스트가 오브젝트에 충돌했을 경우
-            if (Physics.Raycast(ray, out hit))
+
+        while (true)
+        {
+            input = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(input))
             {
-                // 충돌한 오브젝트의 이름을 출력
-                Debug.Log("Clicked Object: " + hit.collider.gameObject.name);
+                break;
             }
         }
+
+        Console.WriteLine("Hello World!");
     }
 }

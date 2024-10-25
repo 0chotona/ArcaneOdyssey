@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class Chise_Attack : Attack
 {
-
+    [Header("데미지 박스 위치"), SerializeField] Transform _damageBoxPos;
     [Header("데미지 박스"), SerializeField] GameObject _damageBoxObj;
     Chise_DamageBox_Attack _damageBox;
 
@@ -33,6 +34,7 @@ public class Chise_Attack : Attack
     private void Start()
     {
         _damageBox = _damageBoxObj.GetComponent<Chise_DamageBox_Attack>();
+        //_damageBoxObj.transform.SetParent(null);
         //StartCoroutine(CRT_Attack());
         _isMaxLevel = false;
         _skillGage = UIManager.Instance._SkillGage;
@@ -40,6 +42,8 @@ public class Chise_Attack : Attack
 
         _damageBoxObj.SetActive(false);
         _canAttack = true;
+
+        _particle.Stop();
     }
     private void Update()
     {
@@ -84,6 +88,7 @@ public class Chise_Attack : Attack
         _damageBox.UpdateDamage(finalDamage);
         _damageBox.UpdateIsMaxLevel(_isMaxLevel);
         _damageBox.UpdateScale(_damageBoxScale * (1 + _buffStat._Range));
+        _damageBoxObj.transform.position = _damageBoxPos.position;
         _damageBoxObj.SetActive(true);
     }
     public override void SetSkill(CSkill skill)
@@ -100,13 +105,20 @@ public class Chise_Attack : Attack
         
         Vector3 targetPos = _playerTrs.position + _playerTrs.forward * _dashDistance;
         _playerMove.Dash(targetPos, _dashSpeed, _skillCombo);
+        _playerMove.SetCanMove(false);
         _skillCombo = (_skillCombo == 0) ? 1 : 0;
-        yield return new WaitForSeconds(0.5f);
         AttackInteract();
-        yield return new WaitForSeconds(0.05f);
+        
+        yield return new WaitForSeconds(0.1f);
+        _particle.Play();
+        yield return new WaitForSeconds(0.2f);
+        _damageBoxObj.SetActive(false);
+        _playerMove.SetCanMove(true);
+        yield return new WaitForSeconds(0.2f);
+
+        
         _skillGage.UpdateSkillGage(0f);
         _canAttack = true;
-        _damageBoxObj.SetActive(false);
     }
     public override void UpdateStat(CStat stat)
     {

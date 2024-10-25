@@ -86,7 +86,7 @@ public class PlayerMove : MonoBehaviour
     }
     public void Dash(float time, float speed)
     {
-        StartCoroutine(CRT_Dash(time, speed));
+        //StartCoroutine(CRT_Dash(time, speed));
     }
     public void Dash(Vector3 targetPos, float speed, int combo)
     {
@@ -106,14 +106,18 @@ public class PlayerMove : MonoBehaviour
     }
     IEnumerator CRT_Dash(Vector3 targetPos, float speed, int combo)
     {
-        _canMove = false;
+        //_canMove = false;
         _animController.SetChiseAnimation(combo);
         while (Vector3.Distance(transform.position, targetPos) > 0.05f)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
             yield return null;
         }
-        _canMove = true;
+        //_canMove = true;
+    }
+    public void SetCanMove(bool canMove)
+    {
+        _canMove = canMove;
     }
 
 }
