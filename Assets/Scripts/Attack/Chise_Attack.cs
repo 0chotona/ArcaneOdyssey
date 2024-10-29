@@ -10,6 +10,7 @@ public class Chise_Attack : Attack
     Chise_DamageBox_Attack _damageBox;
 
 
+
     [Header("돌진 속도"), SerializeField] float _dashSpeed = 1f;
     [Header("돌진 거리"), SerializeField] float _dashDistance = 5f;
     
@@ -20,9 +21,17 @@ public class Chise_Attack : Attack
 
     [Header("쿨타임 거리"), SerializeField] float _coolDistance = 7f;
     [Header("슬래쉬 파티클"), SerializeField] ParticleSystem _particle;
+    [Header("에어본 파티클"), SerializeField] ParticleSystem _airborneParticle;
 
     [Header("데미지 박스 크기"), SerializeField] Vector3 _damageBoxScale = new Vector3(3f, 0.5f, 3f);
 
+    [Header("에어본 시간"), SerializeField] float _airborneTime = 0.5f;
+    [Header("에어본 스피드"), SerializeField] float _airborneSpeed = 5f;
+
+
+    [Header("에어본 박스"), SerializeField] GameObject _airborneBox;
+
+    [Header("에어본 크기"), SerializeField] Vector3 _airborneScale = new Vector3(6f, 1f, 6f);
     public float _timer = 0f;
 
     SkillGage _skillGage;
@@ -43,7 +52,10 @@ public class Chise_Attack : Attack
         _damageBoxObj.SetActive(false);
         _canAttack = true;
 
+        StartCoroutine(CRT_ParticleAwake());
         _particle.Stop();
+
+        _damageBox.SetAirborneSetting(_airborneTime, _airborneSpeed);
     }
     private void Update()
     {
@@ -85,11 +97,19 @@ public class Chise_Attack : Attack
         {
             finalDamage *= SkillManager.Instance._BaseCriDmg;
         }
+        _damageBox.UpdateCombo(_skillCombo);
+
+
         _damageBox.UpdateDamage(finalDamage);
         _damageBox.UpdateIsMaxLevel(_isMaxLevel);
         _damageBox.UpdateScale(_damageBoxScale * (1 + _buffStat._Range));
         _damageBoxObj.transform.position = _damageBoxPos.position;
         _damageBoxObj.SetActive(true);
+
+        if (_isMaxLevel && _skillCombo == 1)
+        {
+            MaxLevelAirborne();
+        }
     }
     public override void SetSkill(CSkill skill)
     {
@@ -106,11 +126,15 @@ public class Chise_Attack : Attack
         Vector3 targetPos = _playerTrs.position + _playerTrs.forward * _dashDistance;
         _playerMove.Dash(targetPos, _dashSpeed, _skillCombo);
         _playerMove.SetCanMove(false);
-        _skillCombo = (_skillCombo == 0) ? 1 : 0;
-        AttackInteract();
         
-        yield return new WaitForSeconds(0.1f);
+        AttackInteract();
+        if(_skillCombo == 1)
+        {
+            StartCoroutine(CRT_PlayAirborneParticle());
+        }
         _particle.Play();
+        yield return new WaitForSeconds(0.1f);
+        
         yield return new WaitForSeconds(0.2f);
         _damageBoxObj.SetActive(false);
         _playerMove.SetCanMove(true);
@@ -118,13 +142,19 @@ public class Chise_Attack : Attack
 
         
         _skillGage.UpdateSkillGage(0f);
+
+
+        _skillCombo = (_skillCombo == 0) ? 1 : 0;
         _canAttack = true;
     }
     public override void UpdateStat(CStat stat)
     {
         _damage = stat._damage;
-        _coolTime = _coolDistance / _playerMove._FinalSpeed;
         _criRate = stat._criRate;
+
+        _playerMove.UpdatePassiveSpeed(_criRate);
+        _coolTime = _coolDistance / _playerMove._FinalSpeed;
+        
         if (_level >= 6)
             _isMaxLevel = true;
 
@@ -141,16 +171,37 @@ public class Chise_Attack : Attack
         _playerTrs = playerTrs;
         _playerMove = _playerTrs.GetComponent<PlayerMove>();
     }
-    IEnumerator CRT_Dash()
+    IEnumerator CRT_ParticleAwake()
     {
-        Vector3 targetPos = _playerTrs.position + _playerTrs.forward * _dashDistance;
-        while(Vector3.Distance(_playerTrs.position, targetPos) > 0.05f)
+        _airborneParticle.Stop();
+        _airborneParticle.Play();
+        yield return new WaitForSeconds(0.5f);
+        _airborneParticle.Pause();
+    }
+    IEnumerator CRT_PlayAirborneParticle()
+    {
+        _airborneParticle.Play();
+        yield return new WaitForSeconds(0.6f);
+        _airborneParticle.Stop();
+        _airborneParticle.Play();   
+        yield return new WaitForSeconds(0.4f);
+        _airborneParticle.Pause();
+    }
+    void MaxLevelAirborne()
+    {
+        GameObject airborneBoxObj = Instantiate(_airborneBox, transform.position, Quaternion.identity);
+        Chise_DamageBox_Airborne airborneBox = airborneBoxObj.GetComponent<Chise_DamageBox_Airborne>();
+        float finalDamage = _damage + (_damage * _buffStat._Att);
+
+
+        bool isCritical = SkillManager.Instance.IsCritical(0f);
+        if (isCritical)
         {
-            transform.position = Vector3.MoveTowards(_playerTrs.position, targetPos, _dashSpeed * Time.deltaTime);
-            yield return null;
+            finalDamage *= SkillManager.Instance._BaseCriDmg;
         }
-        AttackInteract();
-        yield return new WaitForSeconds(0.05f);
-        _damageBoxObj.SetActive(false);
+        airborneBox.SetAirborneSetting(_airborneTime, _airborneSpeed);
+        airborneBox.UpdateDamage(finalDamage);
+        airborneBox.UpdateScale(_airborneScale * (1 + _buffStat._Range));
+        airborneBox.StartAirborne();
     }
 }

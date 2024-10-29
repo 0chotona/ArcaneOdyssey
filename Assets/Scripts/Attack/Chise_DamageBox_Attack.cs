@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Chise_DamageBox_Attack : MonoBehaviour
@@ -8,6 +9,16 @@ public class Chise_DamageBox_Attack : MonoBehaviour
     Vector3 _boxScale = Vector3.one;
     bool _isMaxLevel = false;
 
+    int _skillCombo;
+
+    float _airborneTime = 0f;
+    float _airborneSpeed = 0f;
+    public void SetAirborneSetting(float time, float speed)
+    {
+        _airborneTime = time;
+        _airborneSpeed = speed;
+    }
+    public void UpdateCombo(int combo) { _skillCombo = combo; }
     public void UpdateIsMaxLevel(bool isMaxLevel) { _isMaxLevel = isMaxLevel; }
     public void UpdateDamage(float damage) { _damage = damage; }
     public void UpdateScale(Vector3 scale) 
@@ -15,4 +26,19 @@ public class Chise_DamageBox_Attack : MonoBehaviour
         _boxScale = scale;
         transform.localScale = _boxScale;
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
+            enemyHealth.LoseDamage(_damage);
+            if(_skillCombo == 1)
+            {
+                EnemyMove enemyMove = other.GetComponent<EnemyMove>();
+                enemyMove.GetAirborne(_airborneTime, _airborneSpeed);
+                
+            }
+        }
+    }
+    
 }

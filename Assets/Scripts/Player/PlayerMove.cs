@@ -42,7 +42,7 @@ public class PlayerMove : MonoBehaviour
         }
         
         if (Input.GetKeyDown(KeyCode.K))
-        Debug.Log((1 + _speedBuff + _passiveSpeed));
+        Debug.Log((1 + _speedBuff + _passiveSpeed + "/" + _speedBuff + "/" + _passiveSpeed));
         
     }
 
@@ -67,7 +67,7 @@ public class PlayerMove : MonoBehaviour
 
         _animController._moveSpeed = _moveDir.magnitude * _moveSpeed;
 
-        _finalSpeed = _moveSpeed * (1 + _speedBuff + _passiveSpeed);
+        
         _charControl.Move(_moveDir * _finalSpeed * Time.deltaTime);
     }
 
@@ -75,10 +75,12 @@ public class PlayerMove : MonoBehaviour
     public void UpdateBuffSpeed(float moveSpeed)
     {
         _speedBuff = moveSpeed;
+        _finalSpeed = _moveSpeed * (1 + _speedBuff + _passiveSpeed);
     }
     public void UpdatePassiveSpeed(float moveSpeed)
     {
         _passiveSpeed = moveSpeed;
+        _finalSpeed = _moveSpeed * (1 + _speedBuff + _passiveSpeed);
     }
     void Move(Vector3 dir)
     {
