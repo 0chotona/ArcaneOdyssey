@@ -29,6 +29,8 @@ public class Attack_IceArmor : Attack
     [Header("발사 위치"), SerializeField] Transform _shootTrs;
 
     [Header("최대 Hp당 데미지"), SerializeField] float _dmgPerMaxHp = 100f;
+
+    bool _isCoolTime = false;
     float _shieldPerMaxHp = 0.5f;
     private void Awake()
     {
@@ -38,6 +40,7 @@ public class Attack_IceArmor : Attack
         {
             particle.Stop();
         }
+        
     }
     private void OnEnable()
     {
@@ -61,11 +64,14 @@ public class Attack_IceArmor : Attack
 
     public override IEnumerator CRT_Attack()
     {
-
+        yield return new WaitForSeconds(0.05f);
+        
+        _playerHealth.SetInvincible(false);
         _collider.enabled = false;
-        _playerHealth.SetShield(_shieldAmount + _buffStat._MaxHp * _shieldPerMaxHp, _shieldDur);
+        //_playerHealth.SetShield(_shieldAmount + _buffStat._MaxHp * _shieldPerMaxHp, _shieldDur);
         yield return new WaitForSeconds(_coolTime - _coolTime * _buffStat._CoolTime);
         _collider.enabled = true;
+        _playerHealth.SetInvincible(true);
         StopParticles();
         StartCoroutine(CRT_PlayParticles());
     }
@@ -79,6 +85,7 @@ public class Attack_IceArmor : Attack
     public override void StartAttack()
     {
         _collider.enabled = true;
+        _playerHealth.SetInvincible(true);
         StartCoroutine(CRT_PlayParticles());
     }
 
@@ -97,17 +104,44 @@ public class Attack_IceArmor : Attack
         
         if (_level >= 6)
         {
+            if (!_isMaxLevel)
+            {
+                StopAllCoroutines();
+                _playerHealth.SetInvincible(false);
+                _playerHealth.SetIceArmor(_shieldAmount + _buffStat._MaxHp * _shieldPerMaxHp); //여기가 문제
+            }
             _isMaxLevel = true;
         }
+        
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            PlayParticles();
-            AttackInteract();
-            StartCoroutine(CRT_Attack());
+            if(!_isMaxLevel)
+            {
+                PlayParticles();
+                AttackInteract();
+                StartCoroutine(CRT_Attack());
+            }
+            else
+            {
+                if(!_isCoolTime && _playerHealth.IsShieldBroken())
+                {
+                    PlayParticles();
+                    AttackInteract();
+                    StartCoroutine(CRT_SetShield(_coolTime - _coolTime * _buffStat._CoolTime));
+                }
+            }
+            
         }
+    }
+    IEnumerator CRT_SetShield(float coolTime)
+    {
+        _isCoolTime = true;
+        yield return new WaitForSeconds(coolTime);
+        _isCoolTime = false;
+        _playerHealth.SetIceArmor(_shieldAmount + _buffStat._MaxHp * _shieldPerMaxHp);
     }
     IEnumerator CRT_PlayParticles()
     {

@@ -80,5 +80,10 @@ public class EnemyMove : MonoBehaviour
         _playerTrs = playerTrs;
         
     }
+    public float DistToPlayer()
+    {
+        float dist = Vector3.Distance(transform.position, _playerTrs.position);
+        return dist;
+    }
     
 }

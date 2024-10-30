@@ -261,7 +261,7 @@ public class UIManager : MonoBehaviour
         RectTransform shieldRectTransform = _shieldSlider.GetComponent<RectTransform>();
 
         Vector2 newPosition = shieldRectTransform.anchoredPosition;
-        float xPos = -(maxHp * (1 - (curHp / maxHp)));
+        float xPos = -(_hpSlider.GetComponent<RectTransform>().sizeDelta.x * (1 - (curHp / maxHp)));
         newPosition.x = xPos;
         shieldRectTransform.anchoredPosition = newPosition;
     }

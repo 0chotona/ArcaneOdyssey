@@ -5,10 +5,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+public enum eCHARACTER
+{
+    Momoi,
+    Chise
+}
 public class CChar
 {
     public int _id { get; set; }
     public string _charName { get; set; }
+    public eCHARACTER _charType { get; set; }
     public string _prefName { get; set; }
     public string _modelName { get; set; }
     public string _baseSkillName { get; set; }
@@ -72,6 +78,7 @@ public class CharacterSelector : MonoBehaviour
     IEnumerator CRT_SetSkillAwake()
     {
         yield return new WaitForSeconds(0.5f); //∞‘¿” æ¿ Ω√¿€
+        GameManager.Instance.SetCharacter(_selectedChar);
         _playerTrs = SkillManager.Instance._PlayerTrs;
         SkillManager.Instance.SetData(_data);
         SetCharacter();
@@ -89,6 +96,7 @@ public class CharacterSelector : MonoBehaviour
         CharPrefInfo charPrefInfo = selectedCharacter.GetComponent<CharPrefInfo>();
         
         Attack charAttack = charPrefInfo.GetCharAttack();
+        charPrefInfo.SetPlayerTrs(_playerTrs);
         charAttack.SetPlayerTrs(_playerTrs);
         SkillManager.Instance.SetCharSkillAwake(charAttack, _selectedChar);
         SkillManager.Instance.SetSkillMethod(charPrefInfo._Skill1, charPrefInfo._Skill2);

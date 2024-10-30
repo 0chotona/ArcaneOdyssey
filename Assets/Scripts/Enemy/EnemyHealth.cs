@@ -11,6 +11,8 @@ public class EnemyHealth : MonoBehaviour
     [Header("방어력"),SerializeField] int _def;
 
     [Header("Hp 바"), SerializeField] Slider _hpSlider;
+
+    [Header("몬스터 이동"), SerializeField] EnemyMove _enemyMove;
     bool _isDead;
     public bool _IsDead => _isDead;
 
@@ -31,7 +33,10 @@ public class EnemyHealth : MonoBehaviour
         
 
         _tmpObj = gameObject;
-        
+
+        _enemyMove = GetComponent<EnemyMove>();
+
+
     }
     private void Start()
     {
@@ -44,7 +49,16 @@ public class EnemyHealth : MonoBehaviour
     }
     public void LoseDamage(float damage)
     {
+        if(GameManager.Instance._SelectedChar._charType == eCHARACTER.Chise)
+        {
+            float dist = _enemyMove.DistToPlayer();
+            if (dist < 3f)
+            {
+                damage = damage + (damage * ((3f-dist) / 3f) * 0.15f);
+            }
+        }
         _curHp -= damage;
+        GameManager.Instance.EnemyDamage(damage);
         if (_hpSlider != null)
         {
             _hpSlider.value = _curHp;

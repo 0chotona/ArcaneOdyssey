@@ -65,6 +65,7 @@ public enum eCHARACTER_COLUMN
 {
     ID,
     Char_Name,
+    Char_Type,
     Pref_Name,
     Model_Name,
     BaseSkill_Name,
@@ -201,6 +202,7 @@ public class SkillData
             {
                 _id = int.Parse(values[(int)eCHARACTER_COLUMN.ID]),
                 _charName = values[(int)eCHARACTER_COLUMN.Char_Name],
+                _charType = (eCHARACTER)System.Enum.Parse(typeof(eCHARACTER), values[(int)eCHARACTER_COLUMN.Char_Type]),
                 _prefName = values[(int)eCHARACTER_COLUMN.Pref_Name],
                 _modelName = values[(int)eCHARACTER_COLUMN.Model_Name],
                 _baseSkillName = values[(int)eCHARACTER_COLUMN.BaseSkill_Name],
