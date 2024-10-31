@@ -86,22 +86,20 @@ public class PlayerMove : MonoBehaviour
     {
         _charControl.Move(dir * Time.deltaTime);
     }
-    public void Dash(float time, float speed)
+    public void Dash(Vector3 targetPos, float speed)
     {
-        //StartCoroutine(CRT_Dash(time, speed));
+        StartCoroutine(CRT_Dash(targetPos, speed));
     }
     public void Dash(Vector3 targetPos, float speed, int combo)
     {
         StartCoroutine(CRT_Dash(targetPos, speed, combo));
     }
-    IEnumerator CRT_Dash(float time, float speed)
+    public IEnumerator CRT_Dash(Vector3 targetPos, float speed)
     {
         _canMove = false;
-        float timer = 0;
-        while(timer < time)
+        while (Vector3.Distance(transform.position, targetPos) > 0.05f)
         {
-            timer += Time.deltaTime;
-            Move(transform.forward * speed);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
             yield return null;
         }
         _canMove = true;

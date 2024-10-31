@@ -22,8 +22,9 @@ public class PlayerHealth : MonoBehaviour
 
     float _defBuff = 0f;
     float _maxHpBuff = 0f;
+    int _shieldIndex = 0;
 
-    private List<float> _temporaryShields = new List<float>();
+    Dictionary<int,float> _temporaryShields = new Dictionary<int, float>();
 
     private void Awake()
     {
@@ -39,23 +40,35 @@ public class PlayerHealth : MonoBehaviour
             float finalDamage = dmg * 100 / finalDef;
 
             // Temporary shields consume first
-            for (int i = 0; i < _temporaryShields.Count && finalDamage > 0; i++)
+            foreach (var key in _temporaryShields.Keys.ToList())
             {
-                if (_temporaryShields[i] > finalDamage)
+                if (finalDamage <= 0)
+                    break;
+
+                if (_temporaryShields[key] > finalDamage)
                 {
-                    _temporaryShields[i] -= finalDamage;
+                    _temporaryShields[key] -= finalDamage;
                     finalDamage = 0;
                 }
                 else
                 {
-                    finalDamage -= _temporaryShields[i];
-                    _temporaryShields[i] = 0;
+                    finalDamage -= _temporaryShields[key];
+                    _temporaryShields[key] = 0;
+                }
+
+                // Remove the entry if its value is zero
+                if (_temporaryShields[key] <= 0)
+                {
+                    _temporaryShields.Remove(key);
                 }
             }
-
-            // Remove consumed shields
-            _temporaryShields.RemoveAll(shield => shield <= 0);
-
+            /*
+            List<int> keysToRemove = _temporaryShields.Where(pair => pair.Value == 0).Select(pair => pair.Key).ToList();
+            foreach (int key in keysToRemove)
+            {
+                _temporaryShields.Remove(key);
+            }
+            */
             // Use main shield if any damage remains
             if (finalDamage > 0 && _shieldHp > 0)
             {
@@ -81,7 +94,7 @@ public class PlayerHealth : MonoBehaviour
                     Dead();
             }
 
-            UIManager.Instance.UpdateShieldBar(_shieldHp + _temporaryShields.Sum());
+            UIManager.Instance.UpdateShieldBar(_shieldHp + _temporaryShields.Values.Sum());
         }
     }
     public void GetHeal(float healAmount)
@@ -113,16 +126,20 @@ public class PlayerHealth : MonoBehaviour
         {
             finalAmount = _maxHp * 0.02f;
         }
-        _temporaryShields.Add(finalAmount);
-        UIManager.Instance.UpdateShieldBar(_shieldHp + _temporaryShields.Sum());
-
+        _temporaryShields.Add(_shieldIndex, finalAmount);
+        UIManager.Instance.UpdateShieldBar(_shieldHp + _temporaryShields.Values.Sum());
+        int index = _shieldIndex;
+        _shieldIndex++;
         yield return new WaitForSeconds(durTime);
-
+        /*
         if (_temporaryShields.Contains(finalAmount))
         {
             _temporaryShields.Remove(finalAmount);
             UIManager.Instance.UpdateShieldBar(_shieldHp + _temporaryShields.Sum());
         }
+        */
+        _temporaryShields.Remove(index);
+        UIManager.Instance.UpdateShieldBar(_shieldHp + _temporaryShields.Values.Sum());
     }
     public bool IsShieldBroken()
     {

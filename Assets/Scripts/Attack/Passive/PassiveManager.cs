@@ -6,9 +6,11 @@ using UnityEngine;
 public interface IPassive
 {
     int GetKillCount();
+    void SetEnemyDamage(float amount);
     bool IsActive();
     void PassiveInteract();
     void SetPlayerTrs(Transform playerTrs);
+
 }
 public class PassiveController
 {
@@ -46,11 +48,12 @@ public class PassiveManager : MonoBehaviour
     public int _DeathCount => _deathCount;
     CChar _selectedChar;
 
+    [Header("플레이어 체력"), SerializeField] PlayerHealth _playerHealth;
     public void UpdateDeathCount()
     {
         _enemySensor.RemoveDestroyEnemy();
         _deathCount++;
-        if (_selectedChar._charName == "모모이")
+        if (_selectedChar._charType == eCHARACTER.Momoi)
         {
             if(!_controller._PassiveMethod.IsActive())
             {
@@ -74,5 +77,15 @@ public class PassiveManager : MonoBehaviour
     {
         _selectedChar = selectedChar;
     }
-    
+    public void EnemyDamage(float amount)
+    {
+        if (_playerHealth != null)
+        {
+            if(_selectedChar._charType == eCHARACTER.Chise)
+            {
+                _controller._PassiveMethod.SetEnemyDamage(amount);
+            }
+        }
+
+    }
 }

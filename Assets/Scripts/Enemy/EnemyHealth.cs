@@ -58,7 +58,7 @@ public class EnemyHealth : MonoBehaviour
             }
         }
         _curHp -= damage;
-        GameManager.Instance.EnemyDamage(damage);
+        PassiveManager.Instance.EnemyDamage(damage);
         if (_hpSlider != null)
         {
             _hpSlider.value = _curHp;

@@ -27,6 +27,11 @@ public class Momoi_Passive : MonoBehaviour, IPassive
         StartCoroutine(CRT_Passive());
     }
 
+    public void SetEnemyDamage(float amount)
+    {
+        
+    }
+
     public void SetPlayerTrs(Transform playerTrs)
     {
         _playerTrs = playerTrs;

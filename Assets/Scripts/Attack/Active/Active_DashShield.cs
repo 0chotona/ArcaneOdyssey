@@ -43,7 +43,7 @@ public class Active_DashShield : MonoBehaviour, IActiveAttackable
     public void ActiveInteract()
     {
         ShowParticle();
-        _playerMove.Dash(_dashTime, _dashSpeed);
+        //_playerMove.Dash(_dashTime, _dashSpeed);
         _playerHealth.SetShield(_shieldAmount, _shieldDur);
     }
     void ShowParticle()

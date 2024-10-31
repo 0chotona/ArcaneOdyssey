@@ -30,7 +30,7 @@ public class Attack_IceArmor : Attack
 
     [Header("최대 Hp당 데미지"), SerializeField] float _dmgPerMaxHp = 100f;
 
-    bool _isCoolTime = false;
+    public bool _isCoolTime = false;
     float _shieldPerMaxHp = 0.5f;
     private void Awake()
     {
