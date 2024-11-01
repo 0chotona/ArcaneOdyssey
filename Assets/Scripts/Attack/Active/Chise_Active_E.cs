@@ -24,6 +24,7 @@ public class Chise_Active_E : MonoBehaviour, IActiveAttackable
     private void Awake()
     {
         _collider.enabled = false;
+        ShowParticle(false);
     }
     public void ActiveInteract()
     {
@@ -59,17 +60,24 @@ public class Chise_Active_E : MonoBehaviour, IActiveAttackable
     }
     IEnumerator CRT_Attack()
     {
-        ShowParticle();
+        ShowParticle(true);
         _collider.enabled = true;
         yield return new WaitForSeconds(0.05f);
         _collider.enabled = false;
     }
-    public void ShowParticle()
+    public void ShowParticle(bool isShow)
     {
         _particles = GetComponentsInChildren<ParticleSystem>();
         foreach (ParticleSystem particle in _particles)
         {
-            particle.Play();
+            if(isShow)
+            {
+                particle.Play();
+            }
+            else
+            {
+                particle.Stop();
+            }
         }
     }
     public void SetBuffStat(CBuffStat buffStat)

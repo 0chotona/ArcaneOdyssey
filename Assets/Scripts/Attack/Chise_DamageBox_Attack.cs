@@ -13,6 +13,11 @@ public class Chise_DamageBox_Attack : MonoBehaviour
 
     float _airborneTime = 0f;
     float _airborneSpeed = 0f;
+    Collider _collider;
+    private void Awake()
+    {
+        _collider = GetComponent<Collider>();
+    }
     public void SetAirborneSetting(float time, float speed)
     {
         _airborneTime = time;
@@ -25,6 +30,10 @@ public class Chise_DamageBox_Attack : MonoBehaviour
     { 
         _boxScale = scale;
         transform.localScale = _boxScale;
+    }
+    public void UpdateCollider(bool isActive)
+    {
+        _collider.enabled = isActive;
     }
     private void OnTriggerEnter(Collider other)
     {

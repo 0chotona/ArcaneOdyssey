@@ -32,28 +32,30 @@ public class Chise_Attack : Attack
     [Header("에어본 박스"), SerializeField] GameObject _airborneBox;
 
     [Header("에어본 크기"), SerializeField] Vector3 _airborneScale = new Vector3(6f, 1f, 6f);
-    public float _timer = 0f;
+
+    [Header("R 공격"), SerializeField] Chise_Active_R _activeR;
+    float _timer = 0f;
 
     SkillGage _skillGage;
     int _skillCombo = 0;
     private void OnEnable()
     {
         _name = eSKILL.BrokenWing;
+        _particle.Stop();
     }
     private void Start()
     {
         _damageBox = _damageBoxObj.GetComponent<Chise_DamageBox_Attack>();
+        _damageBox.UpdateCollider(false);
         //_damageBoxObj.transform.SetParent(null);
         //StartCoroutine(CRT_Attack());
         _isMaxLevel = false;
         _skillGage = UIManager.Instance._SkillGage;
         _skillGage.SetSliderSetting(_coolDistance);
 
-        _damageBoxObj.SetActive(false);
         _canAttack = true;
 
         StartCoroutine(CRT_ParticleAwake());
-        _particle.Stop();
 
         _damageBox.SetAirborneSetting(_airborneTime, _airborneSpeed);
     }
@@ -104,7 +106,7 @@ public class Chise_Attack : Attack
         _damageBox.UpdateIsMaxLevel(_isMaxLevel);
         _damageBox.UpdateScale(_damageBoxScale * (1 + _buffStat._Range));
         _damageBoxObj.transform.position = _damageBoxPos.position;
-        _damageBoxObj.SetActive(true);
+        _damageBox.UpdateCollider(true);
 
         if (_isMaxLevel && _skillCombo == 1)
         {
@@ -127,16 +129,23 @@ public class Chise_Attack : Attack
         _playerMove.Dash(targetPos, _dashSpeed, _skillCombo);
         _playerMove.SetCanMove(false);
         
-        AttackInteract();
-        if(_skillCombo == 1)
+        
+        _particle.Play();
+        yield return new WaitForSeconds(0.2f);
+        AttackInteract(); //콜라이더 On
+        if (_skillCombo == 1)
         {
             StartCoroutine(CRT_PlayAirborneParticle());
         }
-        _particle.Play();
+        if (_activeR._IsActive)
+        {
+            _activeR.ShootAttack();
+        }
+        yield return new WaitForSeconds(0.05f);
+        _damageBox.UpdateCollider(false);
         yield return new WaitForSeconds(0.1f);
         
-        yield return new WaitForSeconds(0.2f);
-        _damageBoxObj.SetActive(false);
+        
         _playerMove.SetCanMove(true);
         yield return new WaitForSeconds(0.2f);
 

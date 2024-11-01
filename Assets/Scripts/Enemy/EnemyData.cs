@@ -65,17 +65,17 @@ public class EnemyData : MonoBehaviour
 
     void SetEnemyData()
     {
-        _enemyDatas.Add(eNORMALMOB_TYPE.Cryogonal, new CEnemy(120, 10, 30, 2f));
-        _enemyDatas.Add(eNORMALMOB_TYPE.Bergmite, new CEnemy(150, 15, 30, 3f));
-        _enemyDatas.Add(eNORMALMOB_TYPE.Avalugg, new CEnemy(180, 20, 40, 2f));
-        _enemyDatas.Add(eNORMALMOB_TYPE.Vanillite, new CEnemy(180, 30, 35, 3f));
-        _enemyDatas.Add(eNORMALMOB_TYPE.Vanillish, new CEnemy(240, 35, 40, 3.5f));
-        _enemyDatas.Add(eNORMALMOB_TYPE.Vanilluxe, new CEnemy(300, 40, 45, 4f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Cryogonal, new CEnemy(350, 10, 30, 2f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Bergmite, new CEnemy(450, 15, 30, 3f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Avalugg, new CEnemy(550, 20, 40, 2f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Vanillite, new CEnemy(650, 30, 35, 3f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Vanillish, new CEnemy(750, 35, 40, 3.5f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Vanilluxe, new CEnemy(850, 40, 45, 4f));
 
 
-        _enemyDatas.Add(eNORMALMOB_TYPE.Regice, new CEnemy(1000, 50, 50, 3f));
-        _enemyDatas.Add(eNORMALMOB_TYPE.Glalie, new CEnemy(2000, 80, 70, 3f));
-        _enemyDatas.Add(eNORMALMOB_TYPE.Froslass, new CEnemy(3000, 110, 90, 3f));
-        _enemyDatas.Add(eNORMALMOB_TYPE.Kyurem, new CEnemy(4000, 150, 110, 3f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Regice, new CEnemy(1500, 50, 50, 3f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Glalie, new CEnemy(2500, 80, 70, 3f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Froslass, new CEnemy(3500, 110, 90, 3f));
+        _enemyDatas.Add(eNORMALMOB_TYPE.Kyurem, new CEnemy(5000, 150, 110, 3f));
     }
 }
