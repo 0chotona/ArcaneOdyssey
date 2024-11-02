@@ -41,3 +41,9 @@ ID,Skill_Name,Enum_Name,Icon_Name,Level,Damage,AttRange,CoolTime,DurTime,CriRate
 1006,메아리치는 박쥐칼날,EchoBatBlade,skill_006,4,95,,2.25,,,6,ProjectileCount_Up
 1006,메아리치는 박쥐칼날,EchoBatBlade,skill_006,5,115,,1.5,,,6,ProjectileCount_Up
 1006,메아리치는 박쥐칼날,EchoBatBlade,skill_006,6,115,,1.5,,,6,ProjectileCount_Up
+1007,개틀링 토끼 건,GatlingRabbitGun,skill_007,1,20,1,4,8,,,Duration_Up
+1007,개틀링 토끼 건,GatlingRabbitGun,skill_007,2,45,1.07,4,8.5,,,Duration_Up
+1007,개틀링 토끼 건,GatlingRabbitGun,skill_007,3,70,1.14,4,9,,,Duration_Up
+1007,개틀링 토끼 건,GatlingRabbitGun,skill_007,4,95,1.21,4,9.5,,,Duration_Up
+1007,개틀링 토끼 건,GatlingRabbitGun,skill_007,5,120,1.28,4,10,,,Duration_Up
+1007,개틀링 토끼 건,GatlingRabbitGun,skill_007,6,120,1.35,4,10,,,Duration_Up

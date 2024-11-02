@@ -26,6 +26,7 @@ public class EnemyHealth : MonoBehaviour
 
     GameObject _explodeObj = null;
     float _explodeDamage = 0f;
+    float _damageIncreaseRate = 1f;
 
     private void Awake()
     {
@@ -57,7 +58,7 @@ public class EnemyHealth : MonoBehaviour
                 damage = damage + (damage * ((3f-dist) / 3f) * 0.15f);
             }
         }
-        _curHp -= damage;
+        _curHp -= (damage * _damageIncreaseRate);
         PassiveManager.Instance.EnemyDamage(damage);
         if (_hpSlider != null)
         {
@@ -78,6 +79,10 @@ public class EnemyHealth : MonoBehaviour
         }
 
         Debug.Log(damage);
+    }
+    public void SetDamageIncrease(float rate)
+    {
+        _damageIncreaseRate += rate;
     }
     public void GetBurn(int damage)
     {

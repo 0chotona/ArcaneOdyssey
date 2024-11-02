@@ -11,6 +11,10 @@ public class EnemyMove : MonoBehaviour
 
     float _moveSpeed;
     public bool _isFrozed = false;
+    bool _isSlow = false;
+    public bool _IsSlow => _isSlow;
+
+    Coroutine _resetCountCor;
     private void Awake()
     {
         _navMesh = GetComponent<NavMeshAgent>();
@@ -28,6 +32,10 @@ public class EnemyMove : MonoBehaviour
     {
         StartCoroutine(CRT_GetFroze(time));
     }
+    public void GetSlow(float time, float amount)
+    {
+        StartCoroutine(CRT_GetSlow(time, amount));
+    }
     public void GetAirborne(float time, float speed)
     {
         StartCoroutine(CRT_GetFroze(time));
@@ -38,6 +46,16 @@ public class EnemyMove : MonoBehaviour
         _isFrozed = true;
         yield return new WaitForSeconds(time);
         _isFrozed = false;
+    }
+    IEnumerator CRT_GetSlow(float time, float rate)
+    {
+        float slowSpeed = _moveSpeed * rate;
+        SetMoveSpeed(slowSpeed);
+        _isSlow = true;
+        yield return new WaitForSeconds(time);
+        _isSlow = false;
+        SetMoveSpeed(_moveSpeed);
+
     }
     IEnumerator CRT_GetAirborne(float time, float speed)
     {
@@ -72,7 +90,8 @@ public class EnemyMove : MonoBehaviour
     }
     public void SetMoveSpeed(float moveSpeed)
     {
-        _navMesh.speed = moveSpeed;
+        _moveSpeed = moveSpeed;
+        _navMesh.speed = _moveSpeed;
     }
 
     public void SetPlayerTrs(Transform playerTrs)
