@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 /*
  * ~ 1분 30초 몬스터0_0 Cryogonal 프리지오
 1분 30초 ~ 중간보스_0 죽을때까지 몬스터0_0 + 몬스터0_1 

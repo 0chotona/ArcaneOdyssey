@@ -15,7 +15,7 @@ public class Attack_GatlingRabbitGun : Attack
 
 
     [Header("회전 속도"), SerializeField] float _spinSpeed = 30f;
-    [Header("거리"), SerializeField] float _distance = 8f;
+    [Header("거리"), SerializeField] float _distance = 6f;
 
     [Header("데미지 간격"), SerializeField] float _gap = 0.3f;
 
@@ -24,6 +24,7 @@ public class Attack_GatlingRabbitGun : Attack
     [Header("추가 데미지 비율"), SerializeField] float _slowDamageRate = 0.5f;
 
     [Header("발사 위치"), SerializeField] Transform _shootTrs;
+    [Header("파티클"), SerializeField] ParticleSystem _particle;
 
     [SerializeField] Transform _playerTrs;
     private void Awake()
@@ -31,10 +32,12 @@ public class Attack_GatlingRabbitGun : Attack
 
         _damageBox = _damageBoxObj.GetComponent<DamageBox_GatlingRabbitGun>();
         _name = eSKILL.GatlingRabbitGun;
+        _particle.Stop(true);
     }
 
     public override void AttackInteract()
     {
+        _damageBox.SetIsMaxLevel(_isMaxLevel);
         float finalDamage = _damage + (_damage * _buffStat._Att);
         _damageBox.UpdateDamage(finalDamage);
         _damageBox.SetSlow(_slowRate, _slowDur);
@@ -48,6 +51,7 @@ public class Attack_GatlingRabbitGun : Attack
 
     public override IEnumerator CRT_Attack()
     {
+        _shootTrs.SetParent(null);
         while (true)
         {
             yield return new WaitForSeconds(_coolTime - _coolTime * _buffStat._CoolTime + _durTime + _durTime * _buffStat._Dur);
@@ -58,11 +62,12 @@ public class Attack_GatlingRabbitGun : Attack
     {
         float elapsedTime = 0f;
         float interactTimer = 0f;
-
+        _particle.Play(true);
         while (elapsedTime < _durTime + _durTime * _buffStat._Dur)
         {
             // y축 기준으로 회전
-            transform.Rotate(0, _spinSpeed * Time.deltaTime, 0);
+            _shootTrs.Rotate(0, _spinSpeed * Time.deltaTime, 0);
+            _shootTrs.position = _playerTrs.position;
             elapsedTime += Time.deltaTime;
             interactTimer += Time.deltaTime;
 
@@ -75,6 +80,7 @@ public class Attack_GatlingRabbitGun : Attack
 
             yield return null;
         }
+        _particle.Stop(true);
     }
 
     public override void SetSkill(CSkill skill)

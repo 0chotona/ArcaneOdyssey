@@ -18,6 +18,12 @@ public class Momoi_DamageBox_Attack : MonoBehaviour
 
     Vector3 _targetPos;
 
+    [SerializeField] ParticleSystem _particle;
+    private void Awake()
+    {
+        _particle.Simulate(0.45f, true, true, false); // 0.5초 시점까지 시뮬레이션하고 일시정지
+        _particle.Pause();
+    }
     public void UpdateDamage(float damage) { _damage = damage; }
     public void UpdatePierceDamage(float pierceDamage) { _piercedDamage = pierceDamage; }
     public void UpdateSpeed(float speed) { _speed = speed; }
