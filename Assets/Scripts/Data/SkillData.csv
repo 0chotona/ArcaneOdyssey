@@ -47,3 +47,9 @@ ID,Skill_Name,Enum_Name,Icon_Name,Level,Damage,AttRange,CoolTime,DurTime,CriRate
 1007,개틀링 토끼 건,GatlingRabbitGun,skill_007,4,95,1.21,4,9.5,,,Duration_Up
 1007,개틀링 토끼 건,GatlingRabbitGun,skill_007,5,120,1.28,4,10,,,Duration_Up
 1007,개틀링 토끼 건,GatlingRabbitGun,skill_007,6,120,1.35,4,10,,,Duration_Up
+1008,발자국 중독 장치,FootprintTrap,skill_008,1,15,1,,2.5,,,MoveSpeed_Up
+1008,발자국 중독 장치,FootprintTrap,skill_008,2,30,1.5,,3.5,,,MoveSpeed_Up
+1008,발자국 중독 장치,FootprintTrap,skill_008,3,45,2,,4.5,,,MoveSpeed_Up
+1008,발자국 중독 장치,FootprintTrap,skill_008,4,60,2,,5.5,,,MoveSpeed_Up
+1008,발자국 중독 장치,FootprintTrap,skill_008,5,75,2,,6.5,,,MoveSpeed_Up
+1008,발자국 중독 장치,FootprintTrap,skill_008,6,90,2,,7.5,,,MoveSpeed_Up

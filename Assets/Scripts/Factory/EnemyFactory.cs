@@ -61,7 +61,7 @@ public class EnemyFactory : MonoBehaviour
 
         _bossFactory.SetData(_enemyData._EnemyDatas);
         _bossFactory.SetTarget(_playerTrs);
-    }
+    }/*
     IEnumerator SpawnPatern_0()
     {
         yield return new WaitForSeconds(0.5f);
@@ -89,7 +89,7 @@ public class EnemyFactory : MonoBehaviour
         yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Vanilluxe, 1f, 30f));
         SpawnBoss(eNORMALMOB_TYPE.Kyurem);
         yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Vanilluxe, 1f, 1000f));
-    }
+    }*/
     IEnumerator TestPatern()
     {
         yield return new WaitForSeconds(0.5f);
