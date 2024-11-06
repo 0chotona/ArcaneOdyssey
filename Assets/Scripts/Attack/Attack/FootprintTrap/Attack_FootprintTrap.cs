@@ -10,6 +10,7 @@ public class Attack_FootprintTrap : Attack
     Queue<GameObject> _activeObjectsQueue = new Queue<GameObject>();
 
     [SerializeField] PlayerHealth _playerHealth;
+    [SerializeField] PlayerMove _playerMove;
     [Header("데미지 박스 오브젝트"), SerializeField] GameObject _damageBoxObj;
 
     [Header("데미지 간격"), SerializeField] float _damageGap = 0.5f;
@@ -24,6 +25,11 @@ public class Attack_FootprintTrap : Attack
 
     [Header("풀링 기본 소환 갯수"), SerializeField] int _defaultCapacity = 1;
     [Header("풀링 최대 소환 갯수"), SerializeField] int _maxPoolSize = 20;
+
+    [Header("쉴드 지속시간"), SerializeField] float _shieldDur = 1f;
+    [Header("쉴드 비율"), SerializeField] float _shieldRate = 0.2f;
+
+    [Header("이동속도 증가 비율"), SerializeField] float _moveSpeedRate = 0.2f;
 
     private void OnEnable()
     {
@@ -82,6 +88,7 @@ public class Attack_FootprintTrap : Attack
     public override void AttackInteract()
     {
         _damagedEnemies.RemoveAll(target => target == null);
+        float shieldAmount = 0f;
         if (_damagedEnemies.Count > 0)
         {
             foreach (Transform t in _damagedEnemies)
@@ -89,8 +96,20 @@ public class Attack_FootprintTrap : Attack
                 float finalDamage = _damage + _damage * _buffStat._Att;
                 EnemyHealth health = t.GetComponent<EnemyHealth>();
                 health.LoseDamage(finalDamage);
+                if(_isMaxLevel)
+                {
+                    shieldAmount += finalDamage * _shieldRate;
+                    
+                    _playerMove.UpdatePassiveSpeed(_moveSpeedRate);
+                }
             }
+            _playerHealth.SetShield(shieldAmount, _shieldDur + _shieldDur * _buffStat._Dur);
         }
+        else
+        {
+            _playerMove.UpdatePassiveSpeed(0f);
+        }
+        
     }
 
     public override void SetSkill(CSkill skill)
@@ -130,7 +149,7 @@ public class Attack_FootprintTrap : Attack
         poolGo.SetActive(true);
         DamageBox_FootprintTrap damageBox = poolGo.GetComponent<DamageBox_FootprintTrap>();
         //damageBox._pool = _damageBoxPool;
-        damageBox.SetDamageBox(_durTime);
+        damageBox.SetDamageBox(_durTime + _durTime * _buffStat._Dur);
         damageBox.UpdateScale(_baseScale * _attRange);
         
         damageBox.SetAttack(this);

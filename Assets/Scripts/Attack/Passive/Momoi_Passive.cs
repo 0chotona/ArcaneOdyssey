@@ -42,7 +42,7 @@ public class Momoi_Passive : MonoBehaviour, IPassive
         PlayerMove move = _playerTrs.GetComponent<PlayerMove>();
         // Increase _moveSpeedIncrease by 1
         move.UpdatePassiveSpeed(_moveSpeed);
-        BuffStat.Instance.UpdateBuffStat(eBUFF_TYPE.CoolTime_Down, _coolDown);
+        //BuffStat.Instance.UpdateBuffStat(eBUFF_TYPE.CoolTime_Down, _coolDown);
         float elapsedTime = 0;
 
         // Gradually decrease _moveSpeedIncrease over _durTime
@@ -51,13 +51,13 @@ public class Momoi_Passive : MonoBehaviour, IPassive
             elapsedTime += Time.deltaTime;
             //float newSpeed = Mathf.Lerp(_moveSpeed, 0, elapsedTime / _durTime);
             float newSpeed = 1f / _durTime * Time.deltaTime;
-            move.UpdatePassiveSpeed(_moveSpeed - (elapsedTime / _durTime));
+            move.UpdatePassiveSpeed(_moveSpeed - _moveSpeed * (elapsedTime / _durTime));
             //BuffStat.Instance.UpdateBuffStat(eBUFF_TYPE.MoveSpeed_Up, -newSpeed);
 
             yield return null;
         }
 
-        BuffStat.Instance.UpdateBuffStat(eBUFF_TYPE.CoolTime_Down, -_coolDown);
+        //BuffStat.Instance.UpdateBuffStat(eBUFF_TYPE.CoolTime_Down, -_coolDown);
         move.UpdatePassiveSpeed(0f);
         //BuffStat.Instance.UpdateBuffStat(eBUFF_TYPE.MoveSpeed_Up, -BuffStat.Instance._MoveSpeedBuff);
         _isActive = false;

@@ -15,8 +15,7 @@ public class PlayerHealth : MonoBehaviour
 
 
     public bool _isInvincible = false;
-    float _shieldHp = 0f;
-    float _tmpShieldHp = 0f;
+    public float _shieldHp = 0f;
     float _iceArmorHp = 0f;
 
 
@@ -31,6 +30,13 @@ public class PlayerHealth : MonoBehaviour
         _curHp = _maxHp + _maxHpBuff;
         UIManager.Instance.UpdateHpBar(_maxHp + (_maxHp * _maxHpBuff), _curHp);
         StartCoroutine(CRT_HpRegen());
+    }
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            Debug.Log(_temporaryShields.Values.Sum());
+        }
     }
     public void GetDamage(int dmg)
     {
@@ -116,7 +122,7 @@ public class PlayerHealth : MonoBehaviour
     public void SetIceArmor(float amount)
     {
         _iceArmorHp = amount;
-        _shieldHp = _iceArmorHp + _tmpShieldHp;
+        _shieldHp = _iceArmorHp;
         UIManager.Instance.UpdateShieldBar(_shieldHp);
     }
     IEnumerator CRT_SetShield(float amount, float durTime)
@@ -131,13 +137,7 @@ public class PlayerHealth : MonoBehaviour
         int index = _shieldIndex;
         _shieldIndex++;
         yield return new WaitForSeconds(durTime);
-        /*
-        if (_temporaryShields.Contains(finalAmount))
-        {
-            _temporaryShields.Remove(finalAmount);
-            UIManager.Instance.UpdateShieldBar(_shieldHp + _temporaryShields.Sum());
-        }
-        */
+
         _temporaryShields.Remove(index);
         UIManager.Instance.UpdateShieldBar(_shieldHp + _temporaryShields.Values.Sum());
     }
