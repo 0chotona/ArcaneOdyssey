@@ -19,23 +19,48 @@ public class GetAddressable : MonoBehaviour
             return _instance;
         }
     }
-
-    public void LoadIcons(string labelName, Action<Dictionary<string, AudioClip>> callback)
+    [Header("스킬 아이콘 라벨"), SerializeField] string _skillIconLabel = "SkillIcons";
+    [Header("스킬 아이콘 라벨"), SerializeField] string _buffIconLabel = "BuffIcons";
+    Dictionary<string, Sprite> _skillIconDic = new Dictionary<string, Sprite>();
+    Dictionary<string, Sprite> _buffIconDic = new Dictionary<string, Sprite>();
+    public Dictionary<string, Sprite> _SkillIconDic => _skillIconDic;
+    public Dictionary<string, Sprite> _BuffIconDic => _buffIconDic;
+    private void Awake()
     {
-        Dictionary<string, AudioClip> clips = new Dictionary<string, AudioClip>();
+        LoadIcons(_skillIconLabel, SetSkillIconDic);
+        LoadIcons(_buffIconLabel, SetBuffIconDic);
+    }
+    void SetSkillIconDic(Dictionary<string, Sprite> skillIconDic)
+    {
+        _skillIconDic = skillIconDic;
+    }
+    void SetBuffIconDic(Dictionary<string, Sprite> skillIconDic)
+    {
+        _buffIconDic = skillIconDic;
+    }
+    public void LoadIcons(string labelName, Action<Dictionary<string, Sprite>> callback)
+    {
+        Dictionary<string, Sprite> sprites = new Dictionary<string, Sprite>();
         AsyncOperationHandle<IList<IResourceLocation>> labelOperation = Addressables.LoadResourceLocationsAsync(labelName);
         labelOperation.Completed += (labelResponse) => {
             int totalCount = labelResponse.Result.Count;
             foreach (IResourceLocation item in labelResponse.Result)
             {
-                AsyncOperationHandle<AudioClip> resourceOperation = Addressables.LoadAssetAsync<AudioClip>(item.PrimaryKey);
+                AsyncOperationHandle<Sprite> resourceOperation = Addressables.LoadAssetAsync<Sprite>(item.PrimaryKey);
                 resourceOperation.Completed += (result) =>
                 {
                     totalCount--;
                     switch (labelResponse.Status)
                     {
                         case AsyncOperationStatus.Succeeded:
-                            clips.Add(result.Result.name, result.Result);
+                            if (!sprites.ContainsKey(result.Result.name))
+                            {
+                                sprites.Add(result.Result.name, result.Result);
+                            }
+                            else
+                            {
+                                Debug.LogWarning($"Duplicate key found: {result.Result.name}. Skipping this sprite.");
+                            }
                             Addressables.Release(resourceOperation);
                             break;
                         case AsyncOperationStatus.Failed:
@@ -47,10 +72,11 @@ public class GetAddressable : MonoBehaviour
                     // When we've finished loading all items in the directory, let's continue
                     if (totalCount == 0)
                     {
-                        callback(clips);
+                        callback(sprites);
                     }
                 };
             }
         };
     }
+
 }

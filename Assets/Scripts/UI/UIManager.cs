@@ -39,11 +39,9 @@ public class UIManager : MonoBehaviour
     [Header("R 스킬 쿨타임바"), SerializeField] Image _imgRCooltime;
 
     [Header("스킬 아이콘"), SerializeField] List<Image> _skillIcons;
-    [Header("스킬 아이콘 스프라이트"), SerializeField] List<Sprite> _skillIconSprites;
 
     [Header("버프 아이콘"), SerializeField] List<Image> _buffIcons;
     [Header("버프 아이콘 창"), SerializeField] List<GameObject> _buffIconsPanels;
-    [Header("버프 아이콘 스프라이트"), SerializeField] List<Sprite> _buffIconSprites;
 
     [Header("스킬 게이지"), SerializeField] SkillGage _skillGame;
     public SkillGage _SkillGage => _skillGame;
@@ -323,22 +321,38 @@ public class UIManager : MonoBehaviour
     }
     void SetSkillIcon(int index, string iconName)
     {
-        foreach(Sprite icon in _skillIconSprites)
+        if (GetAddressable.Instance._SkillIconDic.TryGetValue(iconName, out Sprite iconSprite))
         {
-            if(icon.name == iconName)
+            if (index >= 0 && index < _skillIcons.Count)
             {
-                _skillIcons[index].sprite = icon;
+                _skillIcons[index].sprite = iconSprite;
             }
+            else
+            {
+                Debug.LogWarning("Index out of range for _skillIcons array.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Icon with name '{iconName}' not found in _skillIconDic.");
         }
     }
     void SetBuffIcon(int index, string iconName)
     {
-        foreach (Sprite icon in _buffIconSprites)
+        if (GetAddressable.Instance._BuffIconDic.TryGetValue(iconName, out Sprite iconSprite))
         {
-            if (icon.name == iconName)
+            if (index >= 0 && index < _buffIcons.Count)
             {
-                _buffIcons[index].sprite = icon;
+                _buffIcons[index].sprite = iconSprite;
             }
+            else
+            {
+                Debug.LogWarning("Index out of range for _skillIcons array.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Icon with name '{iconName}' not found in _skillIconDic.");
         }
     }
 }
