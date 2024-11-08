@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    [SerializeField] int _att;
+    [SerializeField] float _att;
     [Header("ÄðÅ¸ÀÓ"), SerializeField] float _attCoolTime = 2f;
 
     Collider _collider;
@@ -14,7 +14,7 @@ public class EnemyAttack : MonoBehaviour
         _collider = GetComponent<Collider>();
         _collider.enabled = true;
     }
-    public void SetEnemyAtt(int att)
+    public void SetEnemyAtt(float att)
     {
         _att = att;
     }

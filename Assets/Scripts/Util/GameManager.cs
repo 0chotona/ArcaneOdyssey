@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     CChar _selectedChar = new CChar();
     public CChar _SelectedChar => _selectedChar;
 
+    [SerializeField] EnemyFactory _enemyFactory;
     public void UpgradeLevel()
     {
         _level++;
@@ -34,7 +35,13 @@ public class GameManager : MonoBehaviour
     {
         _selectedChar = cChar;
     }
-    
+    /*
+    public void SetMob(EnemyData data)
+    {
+        _enemyFactory.SetData(data);
+
+    }
+    */
     public void NextStage()
     {
         _curStage++;

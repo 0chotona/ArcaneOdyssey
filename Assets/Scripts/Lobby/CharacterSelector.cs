@@ -39,7 +39,9 @@ public class CharacterSelector : MonoBehaviour
     }
     List<CChar> _charList = new List<CChar>();
 
-    SkillData _data;
+    CharacterData _charData;
+    SkillData _skillData;
+    CharSkillData _charSkillData;
 
     CChar _selectedChar = new CChar();
     public CChar _SelectedChar => _selectedChar;
@@ -47,6 +49,8 @@ public class CharacterSelector : MonoBehaviour
     [SerializeField] string _selected;
 
     [Header("캐릭터 프리펩"), SerializeField] List<GameObject> _characterPrefs;
+    
+
     Transform _playerTrs;
     private void Awake()
     {
@@ -58,13 +62,27 @@ public class CharacterSelector : MonoBehaviour
     }
     public void SetData(SkillData data)
     {
-        _data = data;
-        _charList = _data._CharacterDatas;
+        _skillData = data;
+    }
+    public void SetData(CharSkillData data)
+    {
+        _charSkillData = data;
+    }
+    public void SetData(CharacterData data)
+    {
+        _charData = data;
+        _charList = _charData._CharacterDatas;
 
         _selectedChar = _charList[0];
         LobbyUIManager.Instance.SpawnModelObj(_selectedChar._modelName);
         LobbyUIManager.Instance.SetProductInfos(_charList);
     }
+    /*
+    public void SetData(EnemyData data)
+    {
+        _enemyData = data;
+    }
+    */
     public void SetSelectedChar(CChar selectedChar)
     {
         _selectedChar = selectedChar;
@@ -79,8 +97,10 @@ public class CharacterSelector : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f); //게임 씬 시작
         GameManager.Instance.SetCharacter(_selectedChar);
+        //GameManager.Instance.SetMob(_enemyData);
         _playerTrs = SkillManager.Instance._PlayerTrs;
-        SkillManager.Instance.SetData(_data);
+        SkillManager.Instance.SetData(_skillData);
+        SkillManager.Instance.SetData(_charSkillData);
         SetCharacter();
         SkillManager.Instance.SetSkillAwake();
         

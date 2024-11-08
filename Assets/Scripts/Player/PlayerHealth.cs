@@ -38,7 +38,7 @@ public class PlayerHealth : MonoBehaviour
             Debug.Log(_temporaryShields.Values.Sum());
         }
     }
-    public void GetDamage(int dmg)
+    public void GetDamage(float dmg)
     {
         if (!_isInvincible)
         {

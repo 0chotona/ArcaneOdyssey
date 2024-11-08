@@ -78,6 +78,7 @@ public class SkillManager : MonoBehaviour
     [Header("플레이어 트랜스폼"), SerializeField] Transform _playerTrs;
     public Transform _PlayerTrs => _playerTrs;
     SkillData _skillData;
+    CharSkillData _charSkillData;
 
 
     [Header("액티브 어택"), SerializeField] ActiveAttack _activeAttack;
@@ -123,6 +124,10 @@ public class SkillManager : MonoBehaviour
     public void SetData(SkillData skillData)
     {
         _skillData = skillData;
+    }
+    public void SetData(CharSkillData skillData)
+    {
+        _charSkillData = skillData;
     }
     public void SetSkillAwake()
     {
@@ -293,7 +298,7 @@ public class SkillManager : MonoBehaviour
     {
         _selectedChar = selectedChar;
         CSkill charSkill = null;
-        foreach(CSkill skill in _skillData._CharSkillDatas)
+        foreach(CSkill skill in _charSkillData._CharSkillDatas)
         {
             if(skill._char_Pref_Name == _selectedChar._prefName)
             {

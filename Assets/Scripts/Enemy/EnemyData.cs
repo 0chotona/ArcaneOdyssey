@@ -16,22 +16,38 @@ public enum eNORMALMOB_TYPE
     Froslass,
     Kyurem
 }
+public enum eMOB_COLUMN
+{
+    ID,
+    Mob_Name,
+    Enum_Name,
+    Pref_Name,
+    Hp,
+    Att,
+    Def,
+    MoveSpeed,
+    IsBoss
+}
 public class CEnemy
 {
-    int _stage;
-    public int _Stage => _stage;
+    int _id;
+    public int _Id => _id;
 
-    int _level;
-    public int _Level => _level;
+    string _mobName;
+    public string _MobName => _mobName;
 
-    int _hp;
-    public int _Hp => _hp;
+    eNORMALMOB_TYPE _enumName;
+    public eNORMALMOB_TYPE _EnumName => _enumName;
+    string _prefName;
+    public string _PrefName => _prefName;
+    float _hp;
+    public float _Hp => _hp;
 
-    int _att;
-    public int _Att => _att;
+    float _att;
+    public float _Att => _att;
 
-    int _def;
-    public int _Def => _def;
+    float _def;
+    public float _Def => _def;
 
     float _moveSpeed;
     public float _MoveSpeed => _moveSpeed;
@@ -41,23 +57,48 @@ public class CEnemy
     
     
 
-    public CEnemy(int hp, int att, int def, float moveSpeed)
+    public CEnemy(int id, string mobName, eNORMALMOB_TYPE enumName, string prefName, float hp, float att, float def, float moveSpeed, bool isBoss)
     {
+        _id = id;
+        _mobName = mobName;
+        _enumName = enumName;
+        _prefName = prefName;
         _hp = hp;
         _att = att;
         _def = def;
         _moveSpeed = moveSpeed;
-    }
-    public void SetIsBoss()
-    {
-        _isBoss = true;
+        _isBoss = isBoss;
     }
 }
-public class EnemyData : MonoBehaviour
+public class EnemyData : MonoBehaviour, ICSVDataConverter
 {
     Dictionary<eNORMALMOB_TYPE, CEnemy> _enemyDatas = new Dictionary<eNORMALMOB_TYPE, CEnemy>();
     public Dictionary<eNORMALMOB_TYPE, CEnemy> _EnemyDatas => _enemyDatas;
+    public void ConvertToDictionary(List<string> rows)
+    {
+        rows.RemoveAt(0); // 첫 줄(컬럼 헤더) 제거
+        rows.RemoveAt(rows.Count - 1);  // 마지막 공백 행 제거
 
+        foreach (string row in rows)
+        {
+            string[] values = row.Split(',');
+
+            int id = int.Parse(values[(int)eMOB_COLUMN.ID]);
+            string charName = values[(int)eMOB_COLUMN.Mob_Name];
+            eNORMALMOB_TYPE enumName = (eNORMALMOB_TYPE)System.Enum.Parse(typeof(eNORMALMOB_TYPE), values[(int)eMOB_COLUMN.Enum_Name]);
+            string prefName = values[(int)eMOB_COLUMN.Pref_Name];
+            float hp = float.Parse(values[(int)eMOB_COLUMN.Hp]);
+            float att = float.Parse(values[(int)eMOB_COLUMN.Att]);
+            float def = float.Parse(values[(int)eMOB_COLUMN.Def]);
+            float moveSpeed = float.Parse(values[(int)eMOB_COLUMN.MoveSpeed]);
+            bool isBoss = (int.Parse(values[(int)eMOB_COLUMN.IsBoss]) == 1);
+
+            CEnemy mob = new CEnemy(id, charName, enumName, prefName, hp, att, def, moveSpeed, isBoss);
+
+            _enemyDatas.Add(enumName, mob);
+        }
+    }
+    /*
     private void Awake()
     {
         SetEnemyData();
@@ -90,6 +131,6 @@ public class EnemyData : MonoBehaviour
         _enemyDatas.Add(eNORMALMOB_TYPE.Glalie, new CEnemy(2500, 80, 70, 3f));
         _enemyDatas.Add(eNORMALMOB_TYPE.Froslass, new CEnemy(3500, 110, 90, 3f));
         _enemyDatas.Add(eNORMALMOB_TYPE.Kyurem, new CEnemy(5000, 150, 110, 3f));
-        */
-    }
+        
+    }*/
 }

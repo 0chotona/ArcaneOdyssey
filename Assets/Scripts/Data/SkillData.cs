@@ -76,29 +76,25 @@ public enum eCHARACTER_COLUMN
     Price,
     IsPurchased
 }
-public class SkillData
+public interface ICSVDataConverter
+{
+    void ConvertToDictionary(List<string> rows);
+}
+public class SkillData : ICSVDataConverter
 {
     List<CSkill> _skillDatas = new List<CSkill>();
     public List<CSkill> _SkillDatas => _skillDatas;
 
-    List<CSkill> _charSkillDatas = new List<CSkill>();
-    public List<CSkill> _CharSkillDatas => _charSkillDatas;
-
-    List<CChar> _characterDatas = new List<CChar>();
-    public List<CChar> _CharacterDatas => _characterDatas;
-    public void ConvertSkillCSVToDictionary(List<string> skillData)
+    public void ConvertToDictionary(List<string> rows)
     {
-        // 마지막 공백 행 제거
-        skillData.RemoveAt(skillData.Count - 1);
+        rows.RemoveAt(0); // 첫 줄(컬럼 헤더) 제거
+        rows.RemoveAt(rows.Count - 1);  // 마지막 공백 행 제거
 
         Dictionary<int, CSkill> skillDictionary = new Dictionary<int, CSkill>();
 
-        for (int i = 0; i < skillData.Count; i++)
+        foreach (string row in rows)
         {
-            string[] values = skillData[i].Split(',');
-            for (int j = 0; j < values.Length; j++)
-                values[j] = values[j].Replace("\r", "");
-
+            string[] values = row.Split(',');
             int id = int.Parse(values[(int)eSKILL_COLUMN.ID]);
             int level = int.Parse(values[(int)eSKILL_COLUMN.Level]);
 
@@ -135,16 +131,22 @@ public class SkillData
 
         _skillDatas = new List<CSkill>(skillDictionary.Values);
     }
-    public void ConvertCharSkillCSVToDictionary(List<string> skillData)
+}
+public class CharSkillData : ICSVDataConverter
+{
+    List<CSkill> _charSkillDatas = new List<CSkill>();
+    public List<CSkill> _CharSkillDatas => _charSkillDatas;
+    public void ConvertToDictionary(List<string> rows)
     {
+        rows.RemoveAt(0); // 첫 줄(컬럼 헤더) 제거
         // 마지막 공백 행 제거
-        skillData.RemoveAt(skillData.Count - 1);
+        rows.RemoveAt(rows.Count - 1);
 
         Dictionary<int, CSkill> skillDictionary = new Dictionary<int, CSkill>();
 
-        for (int i = 0; i < skillData.Count; i++)
+        for (int i = 0; i < rows.Count; i++)
         {
-            string[] values = skillData[i].Split(',');
+            string[] values = rows[i].Split(',');
             for (int j = 0; j < values.Length; j++)
                 values[j] = values[j].Replace("\r", "");
 
@@ -185,20 +187,20 @@ public class SkillData
 
         _charSkillDatas = new List<CSkill>(skillDictionary.Values);
     }
+}
+public class CharacterData : ICSVDataConverter
+{
+    List<CChar> _characterDatas = new List<CChar>();
+    public List<CChar> _CharacterDatas => _characterDatas;
 
-    public void ConvertCharacterCSVToDictionary(List<string> charData)
+    public void ConvertToDictionary(List<string> rows)
     {
-        // 마지막 공백 행 제거
-        charData.RemoveAt(charData.Count - 1);
+        rows.RemoveAt(0); // 첫 줄(컬럼 헤더) 제거
+        rows.RemoveAt(rows.Count - 1);  // 마지막 공백 행 제거
 
-        Dictionary<int, CChar> charDictionary = new Dictionary<int, CChar>();
-
-        for (int i = 0; i < charData.Count; i++)
+        foreach (string row in rows)
         {
-            string[] values = charData[i].Split(',');
-            for (int j = 0; j < values.Length; j++)
-                values[j] = values[j].Replace("\r", "");
-
+            string[] values = row.Split(',');
 
             CChar character = new CChar
             {
@@ -213,10 +215,8 @@ public class SkillData
                 _price = int.Parse(values[(int)eCHARACTER_COLUMN.Price]),
                 _isPurchased = (int.Parse(values[(int)eCHARACTER_COLUMN.IsPurchased]) == 1)
             };
-            
-            _characterDatas.Add(character);
-            
-        }
 
+            _characterDatas.Add(character);
+        }
     }
 }

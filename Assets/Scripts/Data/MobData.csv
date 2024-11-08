@@ -1,0 +1,11 @@
+ID,Mob_Name,Enum_Name,Pref_Name,Hp,Att,Def,MoveSpeed,IsBoss
+10000,프리지오,Cryogonal,Mob0_0,150,10,30,2,0
+10001,꽁어름,Bergmite,Mob1_0,300,15,30,3,0
+10002,크레베이스,Avalugg,Mob1_1,450,20,40,2,0
+10003,바닐프티,Vanillite,Mob2_0,600,30,35,3,0
+10004,바닐리치,Vanillish,Mob3_0,750,35,40,3.5,0
+10005,배바닐라,Vanilluxe,Mob3_1,900,40,45,4,0
+10006,레지아이스,Regice,Boss_0,2000,50,50,3,0
+10007,얼음귀신,Glalie,Boss_1,4000,80,70,3,0
+10008,눈여아,Froslass,Boss_2,6000,110,90,3,0
+10009,큐레무,Kyurem,Boss_3,10000,200,130,3,1

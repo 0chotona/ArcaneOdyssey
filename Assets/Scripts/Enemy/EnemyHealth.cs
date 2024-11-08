@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [Header("최대 체력"), SerializeField] int _maxHp = 10;
+    [Header("최대 체력"), SerializeField] float _maxHp = 10;
     [Header("현재 체력"), SerializeField] float _curHp;
 
-    [Header("방어력"),SerializeField] int _def;
+    [Header("방어력"),SerializeField] float _def;
 
     [Header("Hp 바"), SerializeField] Slider _hpSlider;
 
@@ -100,7 +100,7 @@ public class EnemyHealth : MonoBehaviour
     {
         _spawnerTrs = spawnerTrs;
     }
-    public void SetEnemyStat(int hp, int def)
+    public void SetEnemyStat(float hp, float def)
     {
         _maxHp = hp;
         _curHp = _maxHp;

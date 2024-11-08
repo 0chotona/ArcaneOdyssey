@@ -12,11 +12,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
   m_Name: BuffIcons
   m_EditorClassIdentifier: 
-  m_GroupName: Packed Assets
+  m_GroupName: BuffIcons
   m_Data:
     m_SerializedData: []
   m_GUID: 30a7f47896a1fa34d8834c8bcb2c044e
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 8b67de8701798dc48b4512c7e71517b7
+    m_Address: Assets/Images/Buffs/Buff_00.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BuffIcons
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 96330c217b3ebb24d8ed76547e77cf98
+    m_Address: Assets/Images/Buffs/Buff_01.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BuffIcons
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: adbdea13c94bf4848b29c41d497072c1
+    m_Address: Assets/Images/Buffs/Buff_02.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BuffIcons
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1ba3ca2f458e014b8cec4d5579c6c8a
+    m_Address: Assets/Images/Buffs/Buff_03.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BuffIcons
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5d225dc6a20bf0545bc6f60048c13e3f
+    m_Address: Assets/Images/Buffs/Buff_04.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BuffIcons
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 174a8e5521d8fdd45b70b750d450d2bf
+    m_Address: Assets/Images/Buffs/Buff_05.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BuffIcons
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0285274f15f3653418e328827b3f19ff
+    m_Address: Assets/Images/Buffs/Buff_06.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BuffIcons
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f5c6b3e624238db4d84b78bebae69040
+    m_Address: Assets/Images/Buffs/Buff_07.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BuffIcons
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5a681e6cf71866b429d093de6e6b3b08
+    m_Address: Assets/Images/Buffs/Buff_08.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BuffIcons
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2fb8d490c94a9ab4c903ec4e03b6d1d3
+    m_Address: Assets/Images/Buffs/Buff_09.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BuffIcons
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7ee0e3753466b114abe9e2f19aedcd9c
+    m_Address: Assets/Images/Buffs/Buff_11.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BuffIcons
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 744b761d29a61ab4ea7bc57cf0232a7b
+    m_Address: Assets/Images/Buffs/Buff_10.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BuffIcons
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 31b3740c97f6c1a44afd38ecffff009f, type: 2}
   m_SchemaSet:

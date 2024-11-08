@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 8bee52b7930b9c84cb4c97b3325d84e4
   m_currentHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: d13add93b6cca98fd05bb84b58d4d0a1
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 1
   m_BundleLocalCatalog: 0
@@ -90,6 +90,7 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - SkillIcons
+    - BuffIcons
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 48f8a574d35ba82478e27a9f22a4eada, type: 2}

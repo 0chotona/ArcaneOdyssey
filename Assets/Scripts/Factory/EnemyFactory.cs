@@ -28,10 +28,8 @@ public class PaternMaker
     
 }
 public class EnemyFactory : MonoBehaviour
-{
-
-
-    [Header("몬스터 데이터"), SerializeField] EnemyData _enemyData;
+{   
+    EnemyData _enemyData = new EnemyData();
 
     [Header("플레이어 트랜스폼"), SerializeField] Transform _playerTrs;
 
@@ -49,17 +47,18 @@ public class EnemyFactory : MonoBehaviour
     [Header("최종 보스 스폰 위치"), SerializeField] Transform _finalBossSpawnPos;
 
     [Header("테스트용 시간 간격"), SerializeField] float _timeGap = 30f;
-    private void Awake()
+    private void Start()
     {
-        SetData();
+        //StartCoroutine(CRT_Test());
         StartCoroutine(TestPatern());
+        SetData();
     }
-    void SetData()
+    public void SetData()
     {
-        _normalFactory.SetData(_enemyData._EnemyDatas);
+        _normalFactory.SetData(DataHandler.Instance._EnemyDic);
         _normalFactory.SetTarget(_playerTrs);
 
-        _bossFactory.SetData(_enemyData._EnemyDatas);
+        _bossFactory.SetData(DataHandler.Instance._EnemyDic);
         _bossFactory.SetTarget(_playerTrs);
     }/*
     IEnumerator SpawnPatern_0()
@@ -93,30 +92,30 @@ public class EnemyFactory : MonoBehaviour
     IEnumerator TestPatern()
     {
         yield return new WaitForSeconds(0.5f);
-        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Cryogonal, 1f, _timeGap * 4));
+        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Cryogonal, _spawnCoolTime, _timeGap * 4));
         SpawnBoss(eNORMALMOB_TYPE.Regice);
-        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Cryogonal, 1f, _timeGap * 2));
+        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Cryogonal, _spawnCoolTime, _timeGap * 2));
 
-        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Bergmite, 1f, _timeGap * 2));
+        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Bergmite, _spawnCoolTime, _timeGap * 2));
         yield return StartCoroutine(CRT_Patern_Circle(eNORMALMOB_TYPE.Bergmite));
-        yield return StartCoroutine(CRT_Patern_1(eNORMALMOB_TYPE.Bergmite, eNORMALMOB_TYPE.Avalugg, 1f, _timeGap * 2));
-        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Avalugg, 1f, _timeGap));
+        yield return StartCoroutine(CRT_Patern_1(eNORMALMOB_TYPE.Bergmite, eNORMALMOB_TYPE.Avalugg, _spawnCoolTime, _timeGap * 2));
+        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Avalugg, _spawnCoolTime, _timeGap));
         SpawnBoss(eNORMALMOB_TYPE.Glalie);
-        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Avalugg, 1f, _timeGap * 2));
+        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Avalugg, _spawnCoolTime, _timeGap * 2));
 
 
-        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Vanillite, 1f, _timeGap * 2));
+        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Vanillite, _spawnCoolTime, _timeGap * 2));
         yield return StartCoroutine(CRT_Patern_Circle(eNORMALMOB_TYPE.Vanillite));
-        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Vanillite, 1f, _timeGap * 3));
+        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Vanillite, _spawnCoolTime, _timeGap * 3));
         SpawnBoss(eNORMALMOB_TYPE.Froslass);
-        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Vanillite, 1f, _timeGap * 2));
+        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Vanillite, _spawnCoolTime, _timeGap * 2));
 
-        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Vanillish, 1f, _timeGap * 2));
+        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Vanillish, _spawnCoolTime, _timeGap * 2));
         yield return StartCoroutine(CRT_Patern_Circle(eNORMALMOB_TYPE.Vanillish));
-        yield return StartCoroutine(CRT_Patern_1(eNORMALMOB_TYPE.Vanillish, eNORMALMOB_TYPE.Vanilluxe, 1f, _timeGap * 2));
-        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Vanilluxe, 1f, _timeGap));
+        yield return StartCoroutine(CRT_Patern_1(eNORMALMOB_TYPE.Vanillish, eNORMALMOB_TYPE.Vanilluxe, _spawnCoolTime, _timeGap * 2));
+        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Vanilluxe, _spawnCoolTime, _timeGap));
         SpawnBoss(eNORMALMOB_TYPE.Kyurem);
-        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Vanilluxe, 1f, 1000f));
+        yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Vanilluxe, _spawnCoolTime, 1000f));
     }
     IEnumerator CRT_Patern_0(eNORMALMOB_TYPE type, float gap, float time) //time동안 gap초마다 생성
     {

@@ -8,7 +8,7 @@ public class Factory_BossMob : MobFactory
     Dictionary<eNORMALMOB_TYPE, CEnemy> _enemyDatas = new Dictionary<eNORMALMOB_TYPE, CEnemy>();
     public override void Spawn(eNORMALMOB_TYPE type, Vector3 pos)
     {
-        GameObject mob = GetMobByType(type);
+        GameObject mob = GetMobByPrefName(_enemyDatas[type]._PrefName);
         GameObject spawnedMob = Instantiate(mob, pos, Quaternion.identity);
         EnemyInfo info = spawnedMob.GetComponent<EnemyInfo>();
         info.SetStat(_enemyDatas[type]);
@@ -16,13 +16,12 @@ public class Factory_BossMob : MobFactory
         EnemyMove move = spawnedMob.GetComponent<EnemyMove>();
         move.SetPlayerTrs(_playerTrs);
     }
-    public GameObject GetMobByType(eNORMALMOB_TYPE type)
+    public GameObject GetMobByPrefName(string prefName)
     {
         GameObject mob = null;
         foreach (GameObject obj in _bossPrefs)
         {
-            EnemyInfo info = obj.GetComponent<EnemyInfo>();
-            if (info._EnemyType == type)
+            if (obj.name == prefName)
             {
                 mob = obj;
             }
