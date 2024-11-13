@@ -12905,21 +12905,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8184eeff49be4489d951d1bca95cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _effect: {fileID: 0}
-  _finalEffect: {fileID: 0}
   _canAttack: 0
   _level: 0
   _name: 0
   _isMaxLevel: 0
   _damage: 0
-  _attCount: 0
   _attRange: 0
   _coolTime: 0
   _durTime: 0
-  _shotSpeed: 0
+  _criRate: 0
+  _projectileCount: 0
   _damageBoxObj: {fileID: 31713433418016641, guid: 8d44458d9f42f704b88f5b240dfed840, type: 3}
   _shootTrs: {fileID: 7677856903526453839}
-  _shootLineTrs: {fileID: 2374498051751099179}
   _shootGap: 0.1
   _shootEffect: {fileID: 1137684092954737173}
   _thickness: 1
