@@ -7,6 +7,7 @@ Shader "Custom/ToonShader"
         _BumpRate("Normal Rate", Range(0,10)) = 0.5
 
         _BrightRate("Bright", Range(-1,1)) = 0.5
+        _OutLineColor("Outline Color", Color) = (1,1,1,1)
 
     }
     SubShader
@@ -17,7 +18,7 @@ Shader "Custom/ToonShader"
 
         CGPROGRAM
 
-        #pragma surface surf NoLight vertex:vert noshadow noambient
+        #pragma surface surf NoLight vertex:vert noshadow noambient 
 
         
         sampler2D _MainTex;

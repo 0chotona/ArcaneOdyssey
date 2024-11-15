@@ -1,0 +1,504 @@
+fileFormatVersion: 2
+guid: 01e35ffecd259bc40bd794a117ae7fcf
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01
+    second: {fileID: 2100000, guid: 1e34f5794c23bec4485cd53f888b46ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_1
+    second: {fileID: 2100000, guid: c30653e0f57ebd14b85508fbab6a2b38, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_10
+    second: {fileID: 2100000, guid: a6de7aa44c7ca764da6404727f09fe04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_11
+    second: {fileID: 2100000, guid: 837d50b68d11745469a09d63da36eafe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_12
+    second: {fileID: 2100000, guid: 6f03c472957304e4eaaa934bb68c7f8d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_13
+    second: {fileID: 2100000, guid: 685af1b4b8347a54ba627d9a9c1cfdde, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_14
+    second: {fileID: 2100000, guid: f184f1b5d45e7484eb0f42ce84efe651, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_15
+    second: {fileID: 2100000, guid: 96a409d761a69554f9cc98f66d45ba7b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_16
+    second: {fileID: 2100000, guid: f3a6b8fe357a49e4587a5395a7ae27aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_17
+    second: {fileID: 2100000, guid: 56b6f740c53a57344934475ac838c0b6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_18
+    second: {fileID: 2100000, guid: 4d577341a1b7c0b40af3c59247c89698, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_19
+    second: {fileID: 2100000, guid: d63444ee77b253343aecf39e406ea1f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_2
+    second: {fileID: 2100000, guid: a53ecb8fb7473444a91da6013233e538, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_20
+    second: {fileID: 2100000, guid: 75252fb01952ebf45b28e1f6996077b3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_21
+    second: {fileID: 2100000, guid: d9414cdacb3ac2e4189d108494b27585, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_22
+    second: {fileID: 2100000, guid: d4b22f7bf94cfdb4eb9b73b08b091623, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_23
+    second: {fileID: 2100000, guid: 0bfa460cd3eb2cc4db438f1bc38526a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_24
+    second: {fileID: 2100000, guid: b1aca8bbe6b5ecf45b5ba8d48bdd9991, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_25
+    second: {fileID: 2100000, guid: 5bbd7070de2f7c947b978e33a849fb47, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_3
+    second: {fileID: 2100000, guid: 1262b9917487bff40adecea2b0fae99a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_4
+    second: {fileID: 2100000, guid: 58425dee15c9b3340a84c181ef701300, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_5
+    second: {fileID: 2100000, guid: 68eae111eb01a6f44b0b134e29a3cc4b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_6
+    second: {fileID: 2100000, guid: af3cd047f83c37a438d1c0d1924367bc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_7
+    second: {fileID: 2100000, guid: 1ed10cc7b31999849a88d26243d89914, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_8
+    second: {fileID: 2100000, guid: 6168be2066143aa428a0dbda7aae047f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_Reflect_d_01_9
+    second: {fileID: 2100000, guid: 915d51cac3deb2a46ab3052f6f929a9e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01
+    second: {fileID: 2100000, guid: 2cb1aecbd201cbb4c80093825177f6a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_1
+    second: {fileID: 2100000, guid: 73e866982f0aa7146a5e485dcfb8ab43, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_10
+    second: {fileID: 2100000, guid: ffa555afdc569354ca26226a79d31b00, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_11
+    second: {fileID: 2100000, guid: cea6e089b9023664781f2af149c16f66, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_12
+    second: {fileID: 2100000, guid: 5112b14debacb8b428bc2586ec342715, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_13
+    second: {fileID: 2100000, guid: 896869c460fe8434ababe47d3af06940, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_14
+    second: {fileID: 2100000, guid: 0e716ea1ad62c934680f5ebdb288f5ae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_15
+    second: {fileID: 2100000, guid: 856eb873f2593f44b84de136f85552e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_16
+    second: {fileID: 2100000, guid: ade8f22ec85dc674c8c7d0e1050a5288, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_17
+    second: {fileID: 2100000, guid: 6e395f5df586dcb448a5db1384ba339e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_18
+    second: {fileID: 2100000, guid: ea4eb021be3a7d94494a58f297a453c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_19
+    second: {fileID: 2100000, guid: b6ed6fe22d6b48f4cbd2660513f07003, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_2
+    second: {fileID: 2100000, guid: a33480d702887e6408aab9e12dd3d531, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_20
+    second: {fileID: 2100000, guid: a49f6749b59028445ae02c5997c20748, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_21
+    second: {fileID: 2100000, guid: aba617727201c3449a0e9ca282f6c58c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_22
+    second: {fileID: 2100000, guid: bfc04470b0ba3ec4885d2e86d9fad213, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_23
+    second: {fileID: 2100000, guid: 669db95b65eabbe4f946fad166038f5b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_24
+    second: {fileID: 2100000, guid: ced14f60be85f3342bc0e4e716e2c212, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_25
+    second: {fileID: 2100000, guid: b580c9e5de92f454badddddc763659a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_26
+    second: {fileID: 2100000, guid: 19b2a3f423a835c49ad83a5625aff3ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_27
+    second: {fileID: 2100000, guid: 3022b51075c899246a4cdac0b26c9b93, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_28
+    second: {fileID: 2100000, guid: 39f6da2f6eef16c41ae8c91d27fdb18b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_29
+    second: {fileID: 2100000, guid: 2c89251a397e51f4cbb7c0f0f376d837, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_3
+    second: {fileID: 2100000, guid: 942c54b9e3a4d864abd0b9ad6acbb6fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_30
+    second: {fileID: 2100000, guid: 3118eafe0bd63aa47b8b4ba5f68a6289, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_31
+    second: {fileID: 2100000, guid: b7a8846203f779948a0c207fbc0e922f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_32
+    second: {fileID: 2100000, guid: b794f1d805943eb47a7d49489a9803db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_4
+    second: {fileID: 2100000, guid: 7c9c4f5668325594abd5ceb2a4461083, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_5
+    second: {fileID: 2100000, guid: 99d6fb85307999f47ae8ed3d93b7d3eb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_6
+    second: {fileID: 2100000, guid: 4e6867ec2498e6845b75e38f1bddd512, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_7
+    second: {fileID: 2100000, guid: 9d833b5887aaaea48a27c04354aea3aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_8
+    second: {fileID: 2100000, guid: e70fdb0a1d290eb479e81e33702f9df2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_atlas_none_01_9
+    second: {fileID: 2100000, guid: 2ffe98f76776cd2409530776d874899c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_crack_01
+    second: {fileID: 2100000, guid: 290312910788f46499ca6390ca7933e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_crack_01_1
+    second: {fileID: 2100000, guid: cfe9db1cf3ca37349b4d72633ebf8d4a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_crack_01_2
+    second: {fileID: 2100000, guid: 02a71f53cf69597418202ff6a34de8b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_crack_01_3
+    second: {fileID: 2100000, guid: e15a414cb062ef14a96ac5023ca5c152, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_crack_01_4
+    second: {fileID: 2100000, guid: c203e082bd23940459af8f8280119954, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_crack_01_5
+    second: {fileID: 2100000, guid: 7e1293316f164b44ca9bf97c458aa5cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_crack_01_6
+    second: {fileID: 2100000, guid: b8acbc8bf6546b646bc115bc8065f90f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_crack_01_7
+    second: {fileID: 2100000, guid: aea93d691d3c76e47bebfca162d9c4fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_crack_01_8
+    second: {fileID: 2100000, guid: 2b4e14c517beeee4587234a622b24e1b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: db_city_01_crack_01_9
+    second: {fileID: 2100000, guid: fcea03a34ca6fb64caea8e1466d02fe2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sb_city_01_atlas_none_01
+    second: {fileID: 2100000, guid: b3322c1fdb35d064baf37f93fc59d8f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sb_city_01_atlas_snow_Reflect_d_01
+    second: {fileID: 2100000, guid: 55069a657b6c82e4d94a6ff70fe4c9b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sb_city_01_atlas_snow_Reflect_d_01_1
+    second: {fileID: 2100000, guid: 5698ccefec979a74c8de2d294e08992b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sb_city_01_atlas_snow_Reflect_d_01_2
+    second: {fileID: 2100000, guid: c9683475597de064b94833e3d7ada961, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sb_city_01_atlas_snow_Reflect_d_01_3
+    second: {fileID: 2100000, guid: 10aba58490de1774584a4955a06a3cc3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sb_city_01_atlas_snow_Reflect_d_01_4
+    second: {fileID: 2100000, guid: 2c996390929b3f245b38ca36b715e5aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sb_city_01_atlas_snow_Reflect_d_01_5
+    second: {fileID: 2100000, guid: 2a8a418bd44a13041a0a5012e38c707e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sb_city_01_atlas_snow_Reflect_d_01_6
+    second: {fileID: 2100000, guid: bad1f17d7fec7dc4b88d02ad6e657e36, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sb_city_01_atlas_snow_Reflect_d_01_7
+    second: {fileID: 2100000, guid: 66f8fb6562dc396439769ffd65bf4d4b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sb_city_01_atlas_snow_Reflect_d_01_8
+    second: {fileID: 2100000, guid: 1960eb9fa8cf65a4ebd7189418b194b0, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 200
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 200
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -108,7 +108,7 @@ Material:
     - _BUILTIN_ZWriteControl: 1
     - _Boolean: 0
     - _Bright: 1
-    - _BrightRate: 0
+    - _BrightRate: -0.2
     - _BumpRate: 0
     - _BumpScale: 1
     - _Crush: 1
@@ -138,7 +138,7 @@ Material:
     - _SrcBlend: 1
     - _SrcFactor: 5
     - _TOGGLEEMISSION: 0
-    - _Thickness: 0.8
+    - _Thickness: 0.9
     - _ToggleEmission: 1
     - _UVSec: 0
     - _ZWrite: 1
@@ -148,6 +148,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 1, g: 0, b: 0.020209312, a: 1}
     - _OutColor: {r: 0, g: 1, b: 1, a: 1}
+    - _OutLineColor: {r: 1, g: 1, b: 1, a: 1}
     - _PanningSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _RimColor: {r: 1, g: 0, b: 0.06326771, a: 1}
   m_BuildTextureStacks: []
