@@ -131,8 +131,8 @@ public class Chise_Attack : Attack
         
         
         _particle.Play();
-        yield return new WaitForSeconds(0.2f);
         AttackInteract(); //콜라이더 On
+        yield return new WaitForSeconds(0.2f);
         if (_skillCombo == 1)
         {
             StartCoroutine(CRT_PlayAirborneParticle());

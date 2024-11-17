@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LobbyUIManager : MonoBehaviour
@@ -24,13 +25,23 @@ public class LobbyUIManager : MonoBehaviour
     [SerializeField] Transform _contentTrs;
 
     GameObject _spawnedObj = null;
+    public int _selectedStage = 0;
     [Header("모델링"), SerializeField] List<GameObject> _charModels;
     [SerializeField] Transform _modelSpawnPos;
     [Header("게임 시작 버튼"), SerializeField] Button _gameStartButton;
 
+    [Header("스테이지 버튼"), SerializeField] List<Button> _stageButtons;
     private void Awake()
     {
         _gameStartButton.onClick.AddListener(() => Click_StartGame());
+        int count = 1;
+
+        foreach (Button btn in _stageButtons)
+        {
+            int capturedCount = count; // count를 캡처하여 각 버튼에 고유한 값 전달
+            btn.onClick.AddListener(() => Click_Stage(capturedCount));
+            count++;
+        }
     }
     public void SetProductInfos(List<CChar> charList)
     {
@@ -73,7 +84,14 @@ public class LobbyUIManager : MonoBehaviour
 
     void Click_StartGame()
     {
+        SceneManager.LoadScene(_selectedStage);
         CharacterSelector.Instance.StartGame();
+
+        DataHandler.Instance.SetCurStage(_selectedStage);
+    }
+    void Click_Stage(int stage)
+    {
+        _selectedStage = stage;
     }
     GameObject GetModelObjByName(string modelName)
     {

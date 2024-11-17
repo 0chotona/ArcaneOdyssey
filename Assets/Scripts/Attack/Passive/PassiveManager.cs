@@ -45,20 +45,22 @@ public class PassiveManager : MonoBehaviour
     [SerializeField] EnemySensor _enemySensor;
     int _deathCount = 0;
     public int _DeathCount => _deathCount;
+    int _passiveDeathCount = 0;
     CChar _selectedChar;
 
     [Header("플레이어 체력"), SerializeField] PlayerHealth _playerHealth;
     public void UpdateDeathCount()
     {
         _enemySensor.RemoveDestroyEnemy();
-        _deathCount++;
+        _passiveDeathCount++;
         if (_selectedChar._charType == eCHARACTER.Momoi)
         {
             if(!_controller._PassiveMethod.IsActive())
             {
-                if (_deathCount >= _controller._PassiveMethod.GetKillCount())
+                if (_passiveDeathCount >= _controller._PassiveMethod.GetKillCount())
                 {
-                    _deathCount = 0;
+                    _deathCount += _passiveDeathCount;
+                    _passiveDeathCount = 0;
                     _controller.PerformPassive();
                 }
             }

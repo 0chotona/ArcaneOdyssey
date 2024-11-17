@@ -90,7 +90,6 @@ public class CharacterSelector : MonoBehaviour
     }
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
         StartCoroutine(CRT_SetSkillAwake());
     }
     IEnumerator CRT_SetSkillAwake()

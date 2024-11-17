@@ -15,6 +15,8 @@ public class InGameButton : MonoBehaviour
     [Header("메인메뉴 버튼"), SerializeField] Button _mainmenuButton;
     [Header("플레이 버튼"), SerializeField] Button _playButton;
     [Header("다시하기 버튼"), SerializeField] Button _replaybutton;
+
+    [Header("다음 스테이지 버튼"), SerializeField] Button _nextStageButton;
     private void Awake()
     {
         //_skillButton.onClick.AddListener(() => Click_Skill());
@@ -24,6 +26,7 @@ public class InGameButton : MonoBehaviour
         _playButton.onClick.AddListener(() => Click_Play());
         _replaybutton.onClick.AddListener(() => Click_Replay());
 
+        _nextStageButton.onClick.AddListener(() => Click_NextStage());
         //_skillPanel.SetActive(false);
         _pausePanel.SetActive(false);
     }
@@ -53,5 +56,10 @@ public class InGameButton : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         CharacterSelector.Instance.StartGame();
     }
-    
+    void Click_NextStage()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
+         
+    }
 }

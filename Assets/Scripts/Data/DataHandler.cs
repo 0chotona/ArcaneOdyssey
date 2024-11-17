@@ -19,6 +19,8 @@ public class DataHandler : MonoBehaviour
     EnemyData _enemyData;
     Dictionary<eNORMALMOB_TYPE, CEnemy> _enemyDic = new Dictionary<eNORMALMOB_TYPE, CEnemy>();
     public Dictionary<eNORMALMOB_TYPE, CEnemy> _EnemyDic => _enemyDic;
+    int _curStage = 0;
+    public int _CurStage => _curStage;
     private void Awake()
     {
         var obj = FindObjectsOfType<DataHandler>();
@@ -31,5 +33,9 @@ public class DataHandler : MonoBehaviour
     {
         _enemyData = data;
         _enemyDic = data._EnemyDatas;
+    }
+    public void SetCurStage(int stage)
+    {
+        _curStage = stage;
     }
 }

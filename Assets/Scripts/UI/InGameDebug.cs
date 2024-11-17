@@ -35,7 +35,7 @@ public class InGameDebug : MonoBehaviour
 
 
 
-
+        _debugPanel.SetActive(false);
         /*
         _buffUpgradeButtons[0].onClick.AddListener(() => UpgradeBuff(_buffManager._Passives.ElementAt(0).Value._name));
         _buffUpgradeButtons[1].onClick.AddListener(() => UpgradeBuff("방어력 증가"));

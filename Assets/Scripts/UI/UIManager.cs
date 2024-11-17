@@ -44,6 +44,12 @@ public class UIManager : MonoBehaviour
     [Header("버프 아이콘 창"), SerializeField] List<GameObject> _buffIconsPanels;
 
     [Header("스킬 게이지"), SerializeField] SkillGage _skillGame;
+
+    [Header("결과 창"), SerializeField] GameObject _resultPanel;
+    [Header("스테이지 번호 텍스트"), SerializeField] TextMeshProUGUI _resultStage;
+    //[Header("테스카운트 텍스트"), SerializeField] TextMeshProUGUI _resultDeathCount;
+    [Header("결과 스킬 아이콘"), SerializeField] List<Image> _resultSkillIcons;
+    [Header("결과 버프 아이콘"), SerializeField] List<Image> _resultBuffIcons;
     public SkillGage _SkillGage => _skillGame;
 
     float _curTime = 0;
@@ -77,6 +83,7 @@ public class UIManager : MonoBehaviour
         {
             panel.SetActive(false);
         }
+        _resultPanel.SetActive(false);
     }
     private void Update()
     {
@@ -353,6 +360,26 @@ public class UIManager : MonoBehaviour
         else
         {
             Debug.LogWarning($"Icon with name '{iconName}' not found in _skillIconDic.");
+        }
+    }
+    public void ShowResult(int stageNum, int deathCount)
+    {
+        _resultPanel.SetActive(true);
+        _resultStage.text = "STAGE " + stageNum.ToString();
+        //_resultDeathCount.text = deathCount.ToString();
+        for(int i = 0; i < _skillIcons.Count; i++)
+        {
+            if (_skillIcons[i].sprite != null)
+            {
+                _resultSkillIcons[i].sprite = _skillIcons[i].sprite;
+            }
+        }
+        for (int i = 0; i < _buffIcons.Count; i++)
+        {
+            if (_buffIcons[i].sprite != null)
+            {
+                _resultBuffIcons[i].sprite = _buffIcons[i].sprite;
+            }
         }
     }
 }

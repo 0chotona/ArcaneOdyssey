@@ -28,6 +28,8 @@ public class EnemyHealth : MonoBehaviour
     float _explodeDamage = 0f;
     float _damageIncreaseRate = 1f;
 
+    bool _isBoss = false;
+
     private void Awake()
     {
         _isDead = false;
@@ -100,12 +102,14 @@ public class EnemyHealth : MonoBehaviour
     {
         _spawnerTrs = spawnerTrs;
     }
-    public void SetEnemyStat(float hp, float def)
+    public void SetEnemyStat(float hp, float def, bool isBoss)
     {
         _maxHp = hp;
         _curHp = _maxHp;
 
         _def = def;
+
+        _isBoss = isBoss;
     }
     public void SetPlant(bool isPlanted)
     {
@@ -133,7 +137,12 @@ public class EnemyHealth : MonoBehaviour
         _isDead = true;
 
         PassiveManager.Instance.UpdateDeathCount();
+        if (_isBoss)
+        {
+            GameManager.Instance.ClearStage();
+        }
         Destroy(_tmpObj);
+        
     }
     public float GetHpPercent()
     {
