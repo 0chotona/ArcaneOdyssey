@@ -156,6 +156,18 @@ public class BuffManager : MonoBehaviour
         }
         return type;
     }
+    public string GetIconNameByBuffName(string buffName)
+    {
+        string iconName = null;
+        foreach (CBuff buff in _passives.Values)
+        {
+            if (buff._name == buffName)
+            {
+                iconName = buff._IconName;
+            }
+        }
+        return iconName;
+    }
     bool CanAddBuff()
     {
         if (_possedBuffs.Count < _buffSlotLimit)

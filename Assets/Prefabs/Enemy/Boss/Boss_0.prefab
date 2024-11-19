@@ -88,7 +88,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8781648431916071986, guid: 94503094f892dfb48a2ff3288df44195, type: 3}
+  - {fileID: 2100000, guid: b3f62f64e0ec7024489d05f0592c523a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1005,7 +1005,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1306010087051964556, guid: 94503094f892dfb48a2ff3288df44195, type: 3}
+  - {fileID: 2100000, guid: 95c5992a564040646a7ed00f865784e0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1349,6 +1349,7 @@ MonoBehaviour:
   _curHp: 0
   _def: 0
   _hpSlider: {fileID: 0}
+  _enemyMove: {fileID: 0}
   _jewelObj: {fileID: 3576365188950404258, guid: ff1466d4468cfc448a10d6e895a8f8fb, type: 3}
 --- !u!114 &8093043812394936450
 MonoBehaviour:
@@ -1543,7 +1544,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4822245088256558025, guid: 94503094f892dfb48a2ff3288df44195, type: 3}
+  - {fileID: 2100000, guid: 79157c0f36f20d745bfdf67e155fe32b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -266,6 +266,18 @@ public class SkillManager : MonoBehaviour
         }
         return eSkill;
     }
+    public string GetIconNameByName(string skillName)
+    {
+        string iconName = null;
+        foreach(CSkill skill in _skillDic.Values)
+        {
+            if(skill._skillText == skillName)
+            {
+                iconName = skill._iconName;
+            }
+        }
+        return iconName;
+    }
     public bool IsMaxLevel(eSKILL name)
     {
         if (FindSkillByName(name)._level >= 5)

@@ -3,7 +3,22 @@ guid: 94503094f892dfb48a2ff3288df44195
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BodyABaivanilla_Ice_mat
+    second: {fileID: 2100000, guid: 79157c0f36f20d745bfdf67e155fe32b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BodyBBaivanilla_Ice_mat
+    second: {fileID: 2100000, guid: b3f62f64e0ec7024489d05f0592c523a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BodyCInc_mat
+    second: {fileID: 2100000, guid: 95c5992a564040646a7ed00f865784e0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

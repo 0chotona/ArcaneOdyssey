@@ -83754,7 +83754,7 @@ MonoBehaviour:
   - {fileID: 909642390}
   _normalBossSpawnPos: {fileID: 336866123}
   _finalBossSpawnPos: {fileID: 336866123}
-  _timeGap: 2
+  _timeGap: 30
 --- !u!4 &1973337872
 Transform:
   m_ObjectHideFlags: 0

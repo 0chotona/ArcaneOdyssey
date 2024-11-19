@@ -84,6 +84,7 @@ public class UIManager : MonoBehaviour
             panel.SetActive(false);
         }
         _resultPanel.SetActive(false);
+        _upgradePanel.SetActive(false);
     }
     private void Update()
     {
@@ -151,7 +152,21 @@ public class UIManager : MonoBehaviour
         {
             string giftName = _giftNames[rndList[i]];
             int giftLevel = IsSkill(giftName) ? SkillManager.Instance.GetLevel(giftName) + 1 : _passiveManager.GetLevel(giftName) + 1;
-            _giftInfos[i].SetText(giftName, giftLevel);
+            string iconName = IsSkill(giftName) ? SkillManager.Instance.GetIconNameByName(giftName) : _passiveManager.GetIconNameByBuffName(giftName);
+
+
+            
+            if (GetAddressable.Instance._SkillIconDic.TryGetValue(iconName, out Sprite skillSprite))
+            {
+                _giftInfos[i].SetGiftImage(skillSprite);
+            }
+            else if (GetAddressable.Instance._BuffIconDic.TryGetValue(iconName, out Sprite buffSprite))
+            {
+                _giftInfos[i].SetGiftImage(buffSprite);
+            }
+
+
+            _giftInfos[i].SetInfoText(giftName, giftLevel);
         }
         Time.timeScale = 0;
 
