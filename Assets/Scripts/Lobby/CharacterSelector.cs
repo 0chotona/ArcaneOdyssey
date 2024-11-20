@@ -102,7 +102,7 @@ public class CharacterSelector : MonoBehaviour
         SkillManager.Instance.SetData(_charSkillData);
         SetCharacter();
         SkillManager.Instance.SetSkillAwake();
-        
+        UIManager.Instance.SetCharIcon(_selectedChar._modelName);
     }
     void SetCharacter()
     {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -30,6 +31,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI _timerText;
 
+    [Header("캐릭터 초상화"), SerializeField] Image _charImage;
+
     [Header("Hp 바"), SerializeField] Slider _hpSlider;
     //[Header("Hp 바 필 이미지"),SerializeField] Image _fillImage;
 
@@ -38,11 +41,16 @@ public class UIManager : MonoBehaviour
     [Header("E 스킬 쿨타임바"), SerializeField] Image _imgECooltime;
     [Header("R 스킬 쿨타임바"), SerializeField] Image _imgRCooltime;
 
+    [Header("보유 스킬"), SerializeField] List<GameObject> _skillInfoesObj;
+    [Header("보유 버프"), SerializeField] List<GameObject> _buffInfoesObj;
+    List<PossesdItemInfo> _itemInfoes = new List<PossesdItemInfo>();
+    /*
     [Header("스킬 아이콘"), SerializeField] List<Image> _skillIcons;
+    [Header("스킬 아이콘 창"), SerializeField] List<GameObject> _skillIconsPanels;
 
     [Header("버프 아이콘"), SerializeField] List<Image> _buffIcons;
     [Header("버프 아이콘 창"), SerializeField] List<GameObject> _buffIconsPanels;
-
+    */
     [Header("스킬 게이지"), SerializeField] SkillGage _skillGame;
 
     [Header("결과 창"), SerializeField] GameObject _resultPanel;
@@ -78,10 +86,25 @@ public class UIManager : MonoBehaviour
 
         _imgECooltime.fillAmount = 0;
         _imgRCooltime.fillAmount = 0;
-
-        foreach(GameObject panel in _buffIconsPanels)
+        /*
+        foreach (GameObject panel in _skillIconsPanels)
         {
             panel.SetActive(false);
+        }
+        foreach (GameObject panel in _buffIconsPanels)
+        {
+            panel.SetActive(false);
+        }
+        */
+        foreach (GameObject obj in _skillInfoesObj)
+        {
+            PossesdItemInfo itemInfo = obj.GetComponent<PossesdItemInfo>();
+            obj.SetActive(false);
+        }
+        foreach (GameObject obj in _buffInfoesObj)
+        {
+            PossesdItemInfo itemInfo = obj.GetComponent<PossesdItemInfo>();
+            obj.SetActive(false);
         }
         _resultPanel.SetActive(false);
         _upgradePanel.SetActive(false);
@@ -111,6 +134,13 @@ public class UIManager : MonoBehaviour
         {
             _giftNames.Add(passive._name);
             _passiveNames.Add(passive._name);
+        }
+    }
+    public void SetCharIcon(string iconName)
+    {
+        if(GetAddressable.Instance._CharIconDic.TryGetValue(iconName, out Sprite charSprite))
+        {
+            _charImage.sprite = charSprite;
         }
     }
     public void ShowUpgradePanel()
@@ -184,7 +214,10 @@ public class UIManager : MonoBehaviour
         {
             _passiveManager.UpgradeLevel(upgradeGiftName);
         }
-
+        foreach(PossesdItemInfo itemInfo in _itemInfoes)
+        {
+            itemInfo.SetLevel();
+        }
         RemoveGiftName(upgradeGiftName);
             
         _upgradePanel.SetActive(false);
@@ -332,15 +365,34 @@ public class UIManager : MonoBehaviour
     }
     public void UpdatePossesedIcon(CSkill cSkill)
     {
-        SetSkillIcon(_skillCount, cSkill._iconName);
+        _skillInfoesObj[_skillCount].SetActive(true);
+        PossesdItemInfo itemInfo = _skillInfoesObj[_skillCount].GetComponent<PossesdItemInfo>();
+        if (GetAddressable.Instance._SkillIconDic.TryGetValue(cSkill._iconName, out Sprite iconSprite))
+        {
+            itemInfo.SetIcon(iconSprite);
+
+        }
+        itemInfo.SetLevel(cSkill._level);
+        itemInfo.SetName(cSkill._skillText);
+        //SetSkillIcon(_skillCount, cSkill._iconName);
         _skillCount++;
+        _itemInfoes.Add(itemInfo);
     }
     public void UpdatePossesedIcon(CBuff cBuff)
     {
-        _buffIconsPanels[_buffCount].SetActive(true);
-        SetBuffIcon(_buffCount, cBuff._IconName);
+        _buffInfoesObj[_buffCount].SetActive(true);
+        PossesdItemInfo itemInfo = _buffInfoesObj[_buffCount].GetComponent<PossesdItemInfo>();
+        if (GetAddressable.Instance._BuffIconDic.TryGetValue(cBuff._IconName, out Sprite iconSprite))
+        {
+            itemInfo.SetIcon(iconSprite);
+
+        }
+        itemInfo.SetLevel(cBuff._level);
+        itemInfo.SetName(cBuff._name);
         _buffCount++;
+        _itemInfoes.Add(itemInfo);
     }
+    /*
     void SetSkillIcon(int index, string iconName)
     {
         if (GetAddressable.Instance._SkillIconDic.TryGetValue(iconName, out Sprite iconSprite))
@@ -359,6 +411,7 @@ public class UIManager : MonoBehaviour
             Debug.LogWarning($"Icon with name '{iconName}' not found in _skillIconDic.");
         }
     }
+    
     void SetBuffIcon(int index, string iconName)
     {
         if (GetAddressable.Instance._BuffIconDic.TryGetValue(iconName, out Sprite iconSprite))
@@ -377,23 +430,25 @@ public class UIManager : MonoBehaviour
             Debug.LogWarning($"Icon with name '{iconName}' not found in _skillIconDic.");
         }
     }
+    */
     public void ShowResult(int stageNum, int deathCount)
     {
         _resultPanel.SetActive(true);
         _resultStage.text = "STAGE " + stageNum.ToString();
-        //_resultDeathCount.text = deathCount.ToString();
-        for(int i = 0; i < _skillIcons.Count; i++)
+        for(int i = 0; i < _skillInfoesObj.Count; i++)
         {
-            if (_skillIcons[i].sprite != null)
+            PossesdItemInfo itemInfo = _skillInfoesObj[i].GetComponent<PossesdItemInfo>();
+            if(itemInfo._ItemIcon.sprite != null)
             {
-                _resultSkillIcons[i].sprite = _skillIcons[i].sprite;
+                _resultSkillIcons[i].sprite = itemInfo._ItemIcon.sprite;
             }
         }
-        for (int i = 0; i < _buffIcons.Count; i++)
+        for (int i = 0; i < _buffInfoesObj.Count; i++)
         {
-            if (_buffIcons[i].sprite != null)
+            PossesdItemInfo itemInfo = _buffInfoesObj[i].GetComponent<PossesdItemInfo>();
+            if (itemInfo._ItemIcon.sprite != null)
             {
-                _resultBuffIcons[i].sprite = _buffIcons[i].sprite;
+                _resultBuffIcons[i].sprite = itemInfo._ItemIcon.sprite;
             }
         }
     }

@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 8bee52b7930b9c84cb4c97b3325d84e4
   m_currentHash:
     serializedVersion: 2
-    Hash: d13add93b6cca98fd05bb84b58d4d0a1
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 1
   m_BundleLocalCatalog: 0
@@ -48,6 +48,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 391c74f8074dbf641adc5b2418a542e8, type: 2}
   - {fileID: 11400000, guid: 0cbd74fc24156d744a6b6502af85a889, type: 2}
   - {fileID: 11400000, guid: fed6ba2033472694b847afef96ed07fa, type: 2}
+  - {fileID: 11400000, guid: 357bc58c748bd4e42abd503c6e0c31a3, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -91,6 +92,7 @@ MonoBehaviour:
     - default
     - SkillIcons
     - BuffIcons
+    - CharIcons
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 48f8a574d35ba82478e27a9f22a4eada, type: 2}

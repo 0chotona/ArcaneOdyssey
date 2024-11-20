@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -20,6 +21,11 @@ public class LobbyUIManager : MonoBehaviour
     }
 
     List<CChar> _charList = new List<CChar>();
+
+    [Header("캐릭터 선택 창"), SerializeField] GameObject _selectPanel;
+    [Header("스테이지 텍스트"), SerializeField] TextMeshProUGUI _stageText;
+
+
     [Header("상품 창"),SerializeField] GameObject _productPanel;
     [Header("초상화 리스트"), SerializeField] List<Sprite> _productImgList;
     [SerializeField] Transform _contentTrs;
@@ -38,10 +44,11 @@ public class LobbyUIManager : MonoBehaviour
 
         foreach (Button btn in _stageButtons)
         {
-            int capturedCount = count; // count를 캡처하여 각 버튼에 고유한 값 전달
+            int capturedCount = count;
             btn.onClick.AddListener(() => Click_Stage(capturedCount));
             count++;
         }
+        _selectPanel.SetActive(false);
     }
     public void SetProductInfos(List<CChar> charList)
     {
@@ -92,6 +99,7 @@ public class LobbyUIManager : MonoBehaviour
     void Click_Stage(int stage)
     {
         _selectedStage = stage;
+        _stageText.text = "STAGE " + _selectedStage;
     }
     GameObject GetModelObjByName(string modelName)
     {

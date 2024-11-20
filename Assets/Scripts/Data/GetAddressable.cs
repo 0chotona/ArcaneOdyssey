@@ -21,22 +21,30 @@ public class GetAddressable : MonoBehaviour
     }
     [Header("스킬 아이콘 라벨"), SerializeField] string _skillIconLabel = "SkillIcons";
     [Header("스킬 아이콘 라벨"), SerializeField] string _buffIconLabel = "BuffIcons";
+    [Header("캐릭터 아이콘 라벨"), SerializeField] string _charIconLabel = "CharIcons";
     Dictionary<string, Sprite> _skillIconDic = new Dictionary<string, Sprite>();
     Dictionary<string, Sprite> _buffIconDic = new Dictionary<string, Sprite>();
+    Dictionary<string, Sprite> _charIconDic = new Dictionary<string, Sprite>();
     public Dictionary<string, Sprite> _SkillIconDic => _skillIconDic;
     public Dictionary<string, Sprite> _BuffIconDic => _buffIconDic;
+    public Dictionary <string, Sprite> _CharIconDic => _charIconDic;
     private void Awake()
     {
         LoadIcons(_skillIconLabel, SetSkillIconDic);
         LoadIcons(_buffIconLabel, SetBuffIconDic);
+        LoadIcons(_charIconLabel, SetCharIconDic);
     }
     void SetSkillIconDic(Dictionary<string, Sprite> skillIconDic)
     {
         _skillIconDic = skillIconDic;
     }
-    void SetBuffIconDic(Dictionary<string, Sprite> skillIconDic)
+    void SetBuffIconDic(Dictionary<string, Sprite> buffIconDic)
     {
-        _buffIconDic = skillIconDic;
+        _buffIconDic = buffIconDic;
+    }
+    void SetCharIconDic(Dictionary<string, Sprite> charIconDic)
+    {
+        _charIconDic = charIconDic;
     }
     public void LoadIcons(string labelName, Action<Dictionary<string, Sprite>> callback)
     {
