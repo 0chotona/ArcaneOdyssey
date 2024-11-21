@@ -5,6 +5,7 @@ using UnityEngine;
 public class CBuff
 {
     public string _name { get; set; }
+    public eBUFF_TYPE _buffType { get; set; }
 
     public int _level { get; set; }
 
@@ -13,9 +14,10 @@ public class CBuff
     public bool _isGot { get; set; }
     string _iconName;
     public string _IconName => _iconName;
-    public CBuff(string name, int level, float rate, string iconName, bool isGot)
+    public CBuff(string name, eBUFF_TYPE buffType, int level, float rate, string iconName, bool isGot)
     {
         _name = name;
+        _buffType = buffType;
         _level = level;
         _rate = rate;
         _iconName = iconName;
@@ -39,6 +41,18 @@ public enum eBUFF_TYPE
 }
 public class BuffManager : MonoBehaviour
 {
+    static BuffManager _instance;
+
+    public static BuffManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+                _instance = FindObjectOfType<BuffManager>();
+            return _instance;
+        }
+
+    }
     Dictionary<eBUFF_TYPE, CBuff> _passives;
     public Dictionary<eBUFF_TYPE, CBuff> _Passives => _passives;
 
@@ -54,18 +68,18 @@ public class BuffManager : MonoBehaviour
     {
         _passives = new Dictionary<eBUFF_TYPE, CBuff>();
 
-        _passives.Add(eBUFF_TYPE.Attack_Up, new CBuff("공격력 증가", 0, 0.1f, "Buff_00", false));
-        _passives.Add(eBUFF_TYPE.Def_Up, new CBuff("방어력 증가", 0, 8f, "Buff_01", false));
-        _passives.Add(eBUFF_TYPE.MaxHP_Up, new CBuff("최대체력 증가", 0, 0.1f, "Buff_02", false));
-        _passives.Add(eBUFF_TYPE.HPRegen_Up, new CBuff("체력재생 증가", 0, 4f, "Buff_03", false));
-        _passives.Add(eBUFF_TYPE.MoveSpeed_Up, new CBuff("이동속도 증가", 0, 0.08f, "Buff_04", false));
-        _passives.Add(eBUFF_TYPE.ItemPickupRange_Up, new CBuff("획득범위 증가", 0, 0.35f, "Buff_05", false));
-        _passives.Add(eBUFF_TYPE.Range_Up, new CBuff("공격 범위 증가", 0, 0.11f, "Buff_06", false));
-        _passives.Add(eBUFF_TYPE.Duration_Up, new CBuff("지속시간 증가", 0, 0.12f, "Buff_07", false));
-        _passives.Add(eBUFF_TYPE.CriRate_Up, new CBuff("치명타 확률 증가", 0, 0.08f, "Buff_08", false));
-        _passives.Add(eBUFF_TYPE.CoolTime_Down, new CBuff("쿨타임 감소", 0, 0.05f, "Buff_09", false));
-        _passives.Add(eBUFF_TYPE.ExpGain_Up, new CBuff("경험치 획득량 증가", 0, 0.1f, "Buff_10", false));
-        _passives.Add(eBUFF_TYPE.ProjectileCount_Up, new CBuff("투사체 증가", 0, 0.5f, "Buff_11", false));
+        _passives.Add(eBUFF_TYPE.Attack_Up, new CBuff("공격력 증가", eBUFF_TYPE.Attack_Up, 0, 0.1f, "Buff_00", false));
+        _passives.Add(eBUFF_TYPE.Def_Up, new CBuff("방어력 증가", eBUFF_TYPE.Def_Up, 0, 8f, "Buff_01", false));
+        _passives.Add(eBUFF_TYPE.MaxHP_Up, new CBuff("최대체력 증가", eBUFF_TYPE.MaxHP_Up, 0, 0.1f, "Buff_02", false));
+        _passives.Add(eBUFF_TYPE.HPRegen_Up, new CBuff("체력재생 증가", eBUFF_TYPE.HPRegen_Up, 0, 4f, "Buff_03", false));
+        _passives.Add(eBUFF_TYPE.MoveSpeed_Up, new CBuff("이동속도 증가", eBUFF_TYPE.MoveSpeed_Up, 0, 0.08f, "Buff_04", false));
+        _passives.Add(eBUFF_TYPE.ItemPickupRange_Up, new CBuff("획득범위 증가", eBUFF_TYPE.ItemPickupRange_Up, 0, 0.35f, "Buff_05", false));
+        _passives.Add(eBUFF_TYPE.Range_Up, new CBuff("공격 범위 증가", eBUFF_TYPE.Range_Up, 0, 0.11f, "Buff_06", false));
+        _passives.Add(eBUFF_TYPE.Duration_Up, new CBuff("지속시간 증가", eBUFF_TYPE.Duration_Up, 0, 0.12f, "Buff_07", false));
+        _passives.Add(eBUFF_TYPE.CriRate_Up, new CBuff("치명타 확률 증가", eBUFF_TYPE.CriRate_Up, 0, 0.08f, "Buff_08", false));
+        _passives.Add(eBUFF_TYPE.CoolTime_Down, new CBuff("쿨타임 감소", eBUFF_TYPE.CoolTime_Down, 0, 0.05f, "Buff_09", false));
+        _passives.Add(eBUFF_TYPE.ExpGain_Up, new CBuff("경험치 획득량 증가", eBUFF_TYPE.ExpGain_Up, 0, 0.1f, "Buff_10", false));
+        _passives.Add(eBUFF_TYPE.ProjectileCount_Up, new CBuff("투사체 증가", eBUFF_TYPE.ProjectileCount_Up, 0, 0.5f, "Buff_11", false));
 
         foreach (var passive in _passives.Values)
         {

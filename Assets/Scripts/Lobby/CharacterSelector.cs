@@ -22,6 +22,16 @@ public class CChar
     public string _skill2 { get; set; }
     public int _price { get; set; }
     public bool _isPurchased = false;
+
+    string _iconEName;
+    public string _IconEName => _iconEName;
+    string _iconRName;
+    public string _IconRName => _iconRName;
+    public void SetActiveIconName(string iconE, string iconR)
+    {
+        _iconEName = iconE;
+        _iconRName = iconR;
+    }
 }
 public class CharacterSelector : MonoBehaviour
 {
@@ -103,6 +113,7 @@ public class CharacterSelector : MonoBehaviour
         SetCharacter();
         SkillManager.Instance.SetSkillAwake();
         UIManager.Instance.SetCharIcon(_selectedChar._modelName);
+        UIManager.Instance.SetSkillIcon(_selectedChar._IconEName, _selectedChar._IconRName);
     }
     void SetCharacter()
     {

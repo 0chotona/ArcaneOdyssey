@@ -10,21 +10,42 @@ public class PossesdItemInfo : MonoBehaviour
     [Header("·¹º§"), SerializeField] TextMeshProUGUI _levelText;
 
     public Image _ItemIcon => _itemIcon;
-    public string _Level => _levelText.text;
 
-    string _name;
-    public string _Name => _name;
+    [SerializeField] string _name;
+    int _level;
+    public int _Level => _level;
+
+    eSKILL _skill;
+    eBUFF_TYPE _buff;
     public void SetIcon(Sprite sprite)
     {
         _itemIcon.sprite = sprite;
     }
-    public void SetLevel(int level)
+    public void SetLevel(bool isSkill)
     {
-        _levelText.text = level.ToString();
-    }
-    public void SetLevel()
-    {
+        if(isSkill)
+        {
+            CSkill cSkill = SkillManager.Instance._SkillDic[_skill];
+            _name = cSkill._skillText;
+            _level = cSkill._level;
+        }
+        else
+        {
+            CBuff cBuff = BuffManager.Instance._Passives[_buff];
+            _name = cBuff._name;
+            _level = cBuff._level;
+        }
+        
 
+        _levelText.text = _level.ToString();
+    }
+    public void SetItem(eSKILL skill)
+    {
+        _skill = skill;
+    }
+    public void SetItem(eBUFF_TYPE buff)
+    {
+        _buff = buff;
     }
     public void SetName(string name)
     {

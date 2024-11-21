@@ -74,7 +74,6 @@ public class SkillManager : MonoBehaviour
     List<Attack> _attacks = new List<Attack>();
     [Header("스킬 트랜스폼"), SerializeField] Transform _attackTrs;
 
-    [SerializeField] BuffManager _passiveManager;
     [Header("플레이어 트랜스폼"), SerializeField] Transform _playerTrs;
     public Transform _PlayerTrs => _playerTrs;
     SkillData _skillData;
@@ -148,9 +147,9 @@ public class SkillManager : MonoBehaviour
         UIManager.Instance.SetGiftNames(new List<CSkill>(_skillDic.Values)); //UI 아이템 선택창 이름 리스트 세팅
 
         AddAttacks();
-        
-        AddSkill(_selectedCharAttack._name);
+
         UpgradeLevel(_selectedCharAttack._name);
+        //AddSkill(_selectedCharAttack._name);
         SetBuffStat(_buffStat);
     }
     public void AddSkill(eSKILL name) //스킬 첫획득
@@ -192,7 +191,7 @@ public class SkillManager : MonoBehaviour
             }
             else if (FindSkillByName(name)._level == 5)
             {
-                if (_passiveManager._Passives[FindSkillByName(name)._synergyType]._level > 0)
+                if (BuffManager.Instance._Passives[FindSkillByName(name)._synergyType]._level > 0)
                 {
                     _skillDic[name].UpgradeLevel();
                 }
@@ -214,7 +213,7 @@ public class SkillManager : MonoBehaviour
                 }
                 else if (FindSkillByName(name)._level == 5)
                 {
-                    if (_passiveManager._Passives[FindSkillByName(name)._synergyType]._level > 0)
+                    if (BuffManager.Instance._Passives[FindSkillByName(name)._synergyType]._level > 0)
                     {
                         _skillDic[name].UpgradeLevel();
                     }
@@ -323,6 +322,7 @@ public class SkillManager : MonoBehaviour
     public void SetSkillMethod(IActiveAttackable method1, IActiveAttackable method2)
     {
         _activeAttack.SetSkillMethod(method1, method2);
+
     }
     public void SetBuffStat(CBuffStat buffStat)
     {

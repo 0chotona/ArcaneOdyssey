@@ -74,6 +74,8 @@ public enum eCHARACTER_COLUMN
     Skill1_Name,
     Skill2_Name,
     Price,
+    IconE_Name, 
+    IconR_Name,
     IsPurchased
 }
 public interface ICSVDataConverter
@@ -215,7 +217,9 @@ public class CharacterData : ICSVDataConverter
                 _price = int.Parse(values[(int)eCHARACTER_COLUMN.Price]),
                 _isPurchased = (int.Parse(values[(int)eCHARACTER_COLUMN.IsPurchased]) == 1)
             };
-
+            string iconE = values[(int)eCHARACTER_COLUMN.IconE_Name];
+            string iconR = values[(int)eCHARACTER_COLUMN.IconR_Name];
+            character.SetActiveIconName(iconE, iconR);
             _characterDatas.Add(character);
         }
     }

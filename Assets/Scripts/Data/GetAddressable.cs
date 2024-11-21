@@ -20,7 +20,7 @@ public class GetAddressable : MonoBehaviour
         }
     }
     [Header("스킬 아이콘 라벨"), SerializeField] string _skillIconLabel = "SkillIcons";
-    [Header("스킬 아이콘 라벨"), SerializeField] string _buffIconLabel = "BuffIcons";
+    [Header("버프 아이콘 라벨"), SerializeField] string _buffIconLabel = "BuffIcons";
     [Header("캐릭터 아이콘 라벨"), SerializeField] string _charIconLabel = "CharIcons";
     Dictionary<string, Sprite> _skillIconDic = new Dictionary<string, Sprite>();
     Dictionary<string, Sprite> _buffIconDic = new Dictionary<string, Sprite>();

@@ -25,7 +25,6 @@ public class InGameDebug : MonoBehaviour
     [Header("x 간격"), SerializeField] float _xGap = 20f;
     [Header("y 간격"), SerializeField] float _yGap = 10f;
 
-    [SerializeField] BuffManager _buffManager;
    
     private void Start()
     {
@@ -57,7 +56,7 @@ public class InGameDebug : MonoBehaviour
     }
     void UpgradeBuff(string name)
     {
-        _buffManager.UpgradeLevel(name);
+        BuffManager.Instance.UpgradeLevel(name);
     }
     void UpgradeLevelText(TextMeshProUGUI textMesh, int level)
     {
@@ -71,8 +70,9 @@ public class InGameDebug : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
+        Dictionary<eBUFF_TYPE, CBuff> passives = BuffManager.Instance._Passives;
         RectTransform panelTrs = _debugPanel.GetComponent<RectTransform>();
-        panelTrs.sizeDelta = new Vector2(_xGap * 3 + _xDist * 2, (_buffManager._Passives.Count + 1) * _yGap + (_buffManager._Passives.Count) * _yDist);
+        panelTrs.sizeDelta = new Vector2(_xGap * 3 + _xDist * 2, (passives.Count + 1) * _yGap + (passives.Count) * _yDist);
 
         for (int i = 0; i < SkillManager.Instance._SkillDic.Count; i++)
         {
@@ -95,11 +95,11 @@ public class InGameDebug : MonoBehaviour
             _skillUpgradeButtons[index].onClick.AddListener(() =>
             UpgradeLevelText(button.transform.GetChild(0).GetComponent<TextMeshProUGUI>(), SkillManager.Instance._SkillDic.ElementAt(index).Value._level));
         }
-        for (int i = 0; i < _buffManager._Passives.Count; i++)
+        for (int i = 0; i < passives.Count; i++)
         {
             GameObject button = Instantiate(_upgradeButtons, _buffTrs);
-            button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _buffManager._Passives.ElementAt(i).Value._level.ToString();
-            button.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _buffManager._Passives.ElementAt(i).Value._name;
+            button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = passives.ElementAt(i).Value._level.ToString();
+            button.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = passives.ElementAt(i).Value._name;
 
             _buffUpgradeButtons.Add(button.GetComponent<Button>());
 
@@ -112,9 +112,9 @@ public class InGameDebug : MonoBehaviour
 
             int index = i;
             _buffUpgradeButtons[index].onClick.AddListener(() =>
-                UpgradeBuff(_buffManager._Passives.ElementAt(index).Value._name));
+                UpgradeBuff(passives.ElementAt(index).Value._name));
             _buffUpgradeButtons[index].onClick.AddListener(() => 
-            UpgradeLevelText(button.transform.GetChild(0).GetComponent<TextMeshProUGUI>(), _buffManager._Passives.ElementAt(index).Value._level));
+            UpgradeLevelText(button.transform.GetChild(0).GetComponent<TextMeshProUGUI>(), passives.ElementAt(index).Value._level));
         }
         _debugButton.onClick.AddListener(() => Click_Debug());
         /*

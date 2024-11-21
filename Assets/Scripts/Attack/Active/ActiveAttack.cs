@@ -13,6 +13,9 @@ public class ActiveController
 {
     IActiveAttackable _skill1Method;
     IActiveAttackable _skill2Method;
+
+    string _iconEName;
+    string _iconRName;
     public void SetAttack1Method(IActiveAttackable attackMethod)
     {
         _skill1Method = attackMethod;
@@ -44,6 +47,11 @@ public class ActiveController
         else
             Debug.Log("어택 메소드 없음");
     }
+    public void SetIconName(string skillE, string skillR)
+    {
+        _iconEName = skillE;
+        _iconRName = skillR;
+    }
 }
 public class ActiveAttack : MonoBehaviour
 {
@@ -51,6 +59,7 @@ public class ActiveAttack : MonoBehaviour
 
     [Header("스킬 1 버튼"), SerializeField] Button _skill1Button;
     [Header("스킬 2 버튼"), SerializeField] Button _skill2Button;
+
 
     CBuffStat _buffStat = new CBuffStat();
     private void Awake()
@@ -65,6 +74,7 @@ public class ActiveAttack : MonoBehaviour
 
         if(method2 != null)
             _controller.SetAttack2Method(method2);
+
     }
     public void SetBuffStat(CBuffStat buffStat)
     {

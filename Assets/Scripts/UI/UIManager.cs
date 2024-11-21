@@ -21,7 +21,6 @@ public class UIManager : MonoBehaviour
 
     }
 
-    [SerializeField] BuffManager _passiveManager;
 
     [SerializeField] GameObject _upgradePanel;
     [Header("물품"), SerializeField]
@@ -43,7 +42,8 @@ public class UIManager : MonoBehaviour
 
     [Header("보유 스킬"), SerializeField] List<GameObject> _skillInfoesObj;
     [Header("보유 버프"), SerializeField] List<GameObject> _buffInfoesObj;
-    List<PossesdItemInfo> _itemInfoes = new List<PossesdItemInfo>();
+    List<PossesdItemInfo> _skillInfoes = new List<PossesdItemInfo>();
+    List<PossesdItemInfo> _buffInfoes = new List<PossesdItemInfo>();
     /*
     [Header("스킬 아이콘"), SerializeField] List<Image> _skillIcons;
     [Header("스킬 아이콘 창"), SerializeField] List<GameObject> _skillIconsPanels;
@@ -58,6 +58,9 @@ public class UIManager : MonoBehaviour
     //[Header("테스카운트 텍스트"), SerializeField] TextMeshProUGUI _resultDeathCount;
     [Header("결과 스킬 아이콘"), SerializeField] List<Image> _resultSkillIcons;
     [Header("결과 버프 아이콘"), SerializeField] List<Image> _resultBuffIcons;
+
+    [Header("스킬 E 아이콘"), SerializeField] Image _skill1Icon;
+    [Header("스킬 R 아이콘"), SerializeField] Image _skill2Icon;
     public SkillGage _SkillGage => _skillGame;
 
     float _curTime = 0;
@@ -123,7 +126,7 @@ public class UIManager : MonoBehaviour
     public void SetGiftNames(List<CSkill> skills) //시작하자마자 상품 이름 세팅
     {
         _skills = skills;
-        _passives = _passiveManager._PassiveNames;
+        _passives = BuffManager.Instance._PassiveNames;
         foreach (CSkill skill in _skills)
         {
             _giftNames.Add(skill._skillText);
@@ -181,8 +184,8 @@ public class UIManager : MonoBehaviour
         for(int i = 0; i < _giftInfos.Length; i++)
         {
             string giftName = _giftNames[rndList[i]];
-            int giftLevel = IsSkill(giftName) ? SkillManager.Instance.GetLevel(giftName) + 1 : _passiveManager.GetLevel(giftName) + 1;
-            string iconName = IsSkill(giftName) ? SkillManager.Instance.GetIconNameByName(giftName) : _passiveManager.GetIconNameByBuffName(giftName);
+            int giftLevel = IsSkill(giftName) ? SkillManager.Instance.GetLevel(giftName) + 1 : BuffManager.Instance.GetLevel(giftName) + 1;
+            string iconName = IsSkill(giftName) ? SkillManager.Instance.GetIconNameByName(giftName) : BuffManager.Instance.GetIconNameByBuffName(giftName);
 
 
             
@@ -212,11 +215,15 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            _passiveManager.UpgradeLevel(upgradeGiftName);
+            BuffManager.Instance.UpgradeLevel(upgradeGiftName);
         }
-        foreach(PossesdItemInfo itemInfo in _itemInfoes)
+        foreach(PossesdItemInfo itemInfo in _skillInfoes)
         {
-            itemInfo.SetLevel();
+            itemInfo.SetLevel(true);
+        }
+        foreach (PossesdItemInfo itemInfo in _buffInfoes)
+        {
+            itemInfo.SetLevel(false);
         }
         RemoveGiftName(upgradeGiftName);
             
@@ -231,7 +238,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            if (_passiveManager.IsMaxLevel(upgradeGiftName))
+            if (BuffManager.Instance.IsMaxLevel(upgradeGiftName))
                 _giftNames.Remove(upgradeGiftName);
         }
     }
@@ -336,7 +343,7 @@ public class UIManager : MonoBehaviour
     IEnumerator CRT_ECoolTime(float coolTime)
     {
         float curTime = coolTime;
-        float fill = 0;
+        float fill = 0f;
         while (curTime > 0)
         {
             curTime -= Time.deltaTime;
@@ -353,7 +360,7 @@ public class UIManager : MonoBehaviour
     IEnumerator CRT_RCoolTime(float coolTime)
     {
         float curTime = coolTime;
-        float fill = 0;
+        float fill = 0f;
         while (curTime > 0)
         {
             curTime -= Time.deltaTime;
@@ -372,11 +379,12 @@ public class UIManager : MonoBehaviour
             itemInfo.SetIcon(iconSprite);
 
         }
-        itemInfo.SetLevel(cSkill._level);
-        itemInfo.SetName(cSkill._skillText);
+        itemInfo.SetItem(cSkill._skillName);
+        //itemInfo.SetLevel(cSkill._level);
+        //itemInfo.SetName(cSkill._skillText);
         //SetSkillIcon(_skillCount, cSkill._iconName);
         _skillCount++;
-        _itemInfoes.Add(itemInfo);
+        _skillInfoes.Add(itemInfo);
     }
     public void UpdatePossesedIcon(CBuff cBuff)
     {
@@ -387,10 +395,11 @@ public class UIManager : MonoBehaviour
             itemInfo.SetIcon(iconSprite);
 
         }
-        itemInfo.SetLevel(cBuff._level);
-        itemInfo.SetName(cBuff._name);
+        itemInfo.SetItem(cBuff._buffType);
+        //itemInfo.SetLevel(cBuff._level);
+        //itemInfo.SetName(cBuff._name);
         _buffCount++;
-        _itemInfoes.Add(itemInfo);
+        _buffInfoes.Add(itemInfo);
     }
     /*
     void SetSkillIcon(int index, string iconName)
@@ -450,6 +459,17 @@ public class UIManager : MonoBehaviour
             {
                 _resultBuffIcons[i].sprite = itemInfo._ItemIcon.sprite;
             }
+        }
+    }
+    public void SetSkillIcon(string iconE, string iconR)
+    {
+        if (GetAddressable.Instance._SkillIconDic.TryGetValue(iconE, out Sprite skillESprite))
+        {
+            _skill1Icon.sprite = skillESprite;
+        }
+        if (GetAddressable.Instance._SkillIconDic.TryGetValue(iconR, out Sprite skillRSprite))
+        {
+            _skill2Icon.sprite = skillRSprite;
         }
     }
 }

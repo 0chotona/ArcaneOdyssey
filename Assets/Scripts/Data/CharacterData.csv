@@ -1,3 +1,3 @@
-ID,Char_Name,Char_Type,Pref_Name,Model_Name,BaseSkill_Name,Skill1_Name,Skill2_Name,Price,IsPurchased
-100,모모이,Momoi,Char_100,Model_100,마감 사수,폭발적 영감,창작의 고통,0,1
-101,치세,Chise,Char_101,Model_101,참격,질풍 수호,일섬,100,0
+ID,Char_Name,Char_Type,Pref_Name,Model_Name,BaseSkill_Name,Skill1_Name,Skill2_Name,Price,IconE_Name,IconR_Name,IsPurchased
+100,모모이,Momoi,Char_100,Model_100,마감 사수,폭발적 영감,창작의 고통,0,IconE_000,IconR_000,1
+101,치세,Chise,Char_101,Model_101,참격,질풍 수호,일섬,100,IconE_001,IconR_001,0
