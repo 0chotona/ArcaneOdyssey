@@ -95,6 +95,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - SkillIcons
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c8c1d45ca24d4e4ca85850f66bbf32c
+    m_Address: Assets/Images/SKills/IconE_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcons
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9459b2e38962dec4abbb3f52a4f12055
+    m_Address: Assets/Images/SKills/IconR_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SkillIcons
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 31b3740c97f6c1a44afd38ecffff009f, type: 2}
   m_SchemaSet:

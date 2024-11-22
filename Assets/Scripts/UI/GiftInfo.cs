@@ -11,6 +11,8 @@ public class GiftInfo : MonoBehaviour
     [Header("레벨 텍스트"),SerializeField] TextMeshProUGUI _levelText;
     [Header("설명 텍스트"), SerializeField] TextMeshProUGUI _descText;
 
+    [Header("패널 배경"), SerializeField] Image _panelBack;
+    [Header("패널 배경 이미지"), SerializeField] List<Sprite> _panelBackImgs;
     CSkill _skill;
     CBuff _passive;
 
@@ -34,5 +36,11 @@ public class GiftInfo : MonoBehaviour
     public void SetDescText(string desc)
     {
         _descText.text = desc;
+    }
+
+    public void SetPanelBack(bool isSkill)
+    {
+        Sprite panel = isSkill ? _panelBackImgs[0] : _panelBackImgs[1];
+        _panelBack.sprite = panel;
     }
 }

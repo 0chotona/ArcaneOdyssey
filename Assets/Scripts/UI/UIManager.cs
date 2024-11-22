@@ -200,6 +200,14 @@ public class UIManager : MonoBehaviour
 
 
             _giftInfos[i].SetInfoText(giftName, giftLevel);
+            if (IsSkill(giftName))
+            {
+                _giftInfos[i].SetPanelBack(true);
+            }
+            else
+            {
+                _giftInfos[i].SetPanelBack(false);
+            }
         }
         Time.timeScale = 0;
 
