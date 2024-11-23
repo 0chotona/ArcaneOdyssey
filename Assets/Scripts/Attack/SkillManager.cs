@@ -65,6 +65,7 @@ public class SkillManager : MonoBehaviour
 
     [Header("소유 가능 스킬 수"), SerializeField] int _skillSlotLimit = 5;
     Dictionary<eSKILL, CSkill> _possedSkills = new Dictionary<eSKILL, CSkill>();
+    public Dictionary<eSKILL, CSkill> _PossedSkills => _possedSkills;
     List<string> _skillNames = new List<string>();
 
     
@@ -110,6 +111,8 @@ public class SkillManager : MonoBehaviour
             UpgradeLevel(_skillDic.ElementAt(3).Value._skillName);
         if (Input.GetKeyDown(KeyCode.Alpha5))
             UpgradeLevel(_skillDic.ElementAt(4).Value._skillName);
+
+       
 
     }
     public void SetCharSkillAwake(Attack charAttack, CChar selectedChar)
@@ -179,7 +182,7 @@ public class SkillManager : MonoBehaviour
     }
     public void UpgradeLevel(eSKILL name)
     {
-        if(CanAddSkill())
+        if(CanAddSkill()) //최대 갯수가 찼는지 아닌지
         {
             if (!IsMaxLevel(name))
             {

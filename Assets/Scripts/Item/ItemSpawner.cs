@@ -20,7 +20,7 @@ public class ItemSpawner : MonoBehaviour
             if (itemType != null)
             {
                 itemType.SetPlayerTransform(_playerTrs);
-                itemType._isGotByMagnet = true;
+                itemType.MoveItemByMagnet();
             }
             else
                 continue;

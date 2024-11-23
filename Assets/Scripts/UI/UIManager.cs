@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,10 +24,12 @@ public class UIManager : MonoBehaviour
 
 
     [SerializeField] GameObject _upgradePanel;
-    [Header("물품"), SerializeField]
-    GiftInfo[] _giftInfos;
-
+    [Header("물품"), SerializeField] GiftInfo[] _giftInfos;
     [SerializeField] Button[] _skillButtons;
+
+    [Header("솔로 물품 패널"), SerializeField] GameObject _soloUpgradePanel;
+    [Header("솔로 물품"), SerializeField] GiftInfo _soloGiftInfo;
+    [Header("솔로 물품 버튼"), SerializeField] Button _soloSkillButton;
 
     [SerializeField] TextMeshProUGUI _timerText;
 
@@ -87,6 +90,8 @@ public class UIManager : MonoBehaviour
         _skillButtons[1].onClick.AddListener(() => OnSelectSkill(1));
         _skillButtons[2].onClick.AddListener(() => OnSelectSkill(2));
 
+        _soloSkillButton.onClick.AddListener(() => Click_CloseSoloPanel());
+
         _imgECooltime.fillAmount = 0;
         _imgRCooltime.fillAmount = 0;
         /*
@@ -111,6 +116,7 @@ public class UIManager : MonoBehaviour
         }
         _resultPanel.SetActive(false);
         _upgradePanel.SetActive(false);
+        _soloUpgradePanel.SetActive(false);
     }
     private void Update()
     {
@@ -121,6 +127,10 @@ public class UIManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.L))
         {
             GameManager.Instance.UpgradeLevel();
+        }
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            UpgradeLevel5();
         }
     }
     public void SetGiftNames(List<CSkill> skills) //시작하자마자 상품 이름 세팅
@@ -212,6 +222,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0;
 
     }
+    
     void OnSelectSkill(int index)
     {
         Time.timeScale = 1;
@@ -409,45 +420,121 @@ public class UIManager : MonoBehaviour
         _buffCount++;
         _buffInfoes.Add(itemInfo);
     }
-    /*
-    void SetSkillIcon(int index, string iconName)
+
+    public void UpgradeLevel5()
     {
-        if (GetAddressable.Instance._SkillIconDic.TryGetValue(iconName, out Sprite iconSprite))
+        List<CSkill> level5Skills = new List<CSkill>();
+        foreach (CSkill skill in SkillManager.Instance._SkillDic.Values)
         {
-            if (index >= 0 && index < _skillIcons.Count)
+            if (skill._level == 5)
             {
-                _skillIcons[index].sprite = iconSprite;
+                if (BuffManager.Instance._Passives[skill._synergyType]._level > 0)
+                {
+                    level5Skills.Add(skill);
+                }
+                
             }
-            else
-            {
-                Debug.LogWarning("Index out of range for _skillIcons array.");
-            }
+        }
+
+        int rnd = 0;
+        if (level5Skills.Count > 0) //레벨 5인 스킬을 가지고 있을때
+        {
+            rnd = Random.Range(0, level5Skills.Count);
+            eSKILL eSkill = level5Skills[rnd]._skillName;
+            SkillManager.Instance.UpgradeLevel(eSkill);
+            ShowSoloUpgradePanel(eSkill);
         }
         else
         {
-            Debug.LogWarning($"Icon with name '{iconName}' not found in _skillIconDic.");
+            float possesSkillCount = SkillManager.Instance._PossedSkills.Count;
+            float possesBuffCount = BuffManager.Instance._PossedBuffs.Count;
+            float rate = possesSkillCount / (possesSkillCount + possesBuffCount);
+            float rndValue = Random.value;
+            if(rndValue < rate) //스킬
+            {
+                rnd = 0; 
+                List<CSkill> upgradSkills = new List<CSkill>();
+                foreach (CSkill skill in SkillManager.Instance._PossedSkills.Values)
+                {
+                    
+                    upgradSkills.Add(skill);
+                }
+                rnd = Random.Range(0, upgradSkills.Count);
+                SkillManager.Instance.UpgradeLevel(upgradSkills[rnd]._skillName);
+                ShowSoloUpgradePanel(upgradSkills[rnd]._skillName);
+            }
+            else //버프
+            {
+                List<eBUFF_TYPE> upgradBuffs = new List<eBUFF_TYPE>();
+                foreach (eBUFF_TYPE buff in BuffManager.Instance._PossedBuffs)
+                {
+                    
+                    upgradBuffs.Add(buff);
+                    
+                }
+                rnd = Random.Range(0, upgradBuffs.Count);
+                string buffName = BuffManager.Instance.GetNameByType(upgradBuffs[rnd]);
+                BuffManager.Instance.UpgradeLevel(buffName);
+                ShowSoloUpgradePanel(upgradBuffs[rnd]);
+            }
+            
+            
         }
     }
-    
-    void SetBuffIcon(int index, string iconName)
+    void ShowSoloUpgradePanel(eSKILL skillType)
     {
-        if (GetAddressable.Instance._BuffIconDic.TryGetValue(iconName, out Sprite iconSprite))
+        _soloUpgradePanel.SetActive(true);
+
+        CSkill skill = SkillManager.Instance._SkillDic[skillType];
+
+        string giftName = skill._skillText;
+        int giftLevel = skill._level;
+        string iconName = skill._iconName;
+
+
+        if (GetAddressable.Instance._SkillIconDic.TryGetValue(iconName, out Sprite skillSprite))
         {
-            if (index >= 0 && index < _buffIcons.Count)
-            {
-                _buffIcons[index].sprite = iconSprite;
-            }
-            else
-            {
-                Debug.LogWarning("Index out of range for _skillIcons array.");
-            }
+            _soloGiftInfo.SetGiftImage(skillSprite);
         }
-        else
-        {
-            Debug.LogWarning($"Icon with name '{iconName}' not found in _skillIconDic.");
-        }
+        _soloGiftInfo.SetInfoText(giftName, giftLevel);
+        _soloGiftInfo.SetPanelSoloBack();
+        Time.timeScale = 0;
+
     }
-    */
+    void ShowSoloUpgradePanel(eBUFF_TYPE buffType)
+    {
+        _soloUpgradePanel.SetActive(true);
+
+        CBuff buff = BuffManager.Instance._Passives[buffType];
+
+        string giftName = buff._name;
+        int giftLevel = buff._level;
+        string iconName = buff._IconName;
+
+
+        if (GetAddressable.Instance._BuffIconDic.TryGetValue(iconName, out Sprite buffSprite))
+        {
+            _soloGiftInfo.SetGiftImage(buffSprite);
+        }
+        _soloGiftInfo.SetInfoText(giftName, giftLevel);
+        _soloGiftInfo.SetPanelSoloBack();
+        Time.timeScale = 0;
+
+    }
+    void Click_CloseSoloPanel()
+    {
+        Time.timeScale = 1f;
+        foreach (PossesdItemInfo itemInfo in _skillInfoes)
+        {
+            itemInfo.SetLevel(true);
+        }
+        foreach (PossesdItemInfo itemInfo in _buffInfoes)
+        {
+            itemInfo.SetLevel(false);
+        }
+        _soloUpgradePanel.SetActive(false);
+
+    }
     public void ShowResult(int stageNum, int deathCount)
     {
         _resultPanel.SetActive(true);

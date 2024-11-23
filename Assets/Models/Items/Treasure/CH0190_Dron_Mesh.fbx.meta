@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 91ac0d630bfcbae43b5e450756f462c3
+guid: 4110688f8625df440854cab708aeb9a1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CH0190_Healdrone01
+    second: {fileID: 2100000, guid: c7af8f8ea12c9c642bd393e9dceaec71, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CH0190_Healdrone02
+    second: {fileID: 2100000, guid: 1f85e536d604132488773d9344b3d8db, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -35,7 +45,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 100
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1

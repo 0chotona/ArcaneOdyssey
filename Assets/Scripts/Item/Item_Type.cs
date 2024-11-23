@@ -28,22 +28,38 @@ public class Item_Type : MonoBehaviour
     {
         _point = 1;
     }
+    /*
     private void Update()
     {
+
         if (_isGotByPlayer)
-            MoveItem(_moveSpeed);
+            CRT_MoveItem(_moveSpeed);
 
         if (_isGotByMagnet)
-            MoveItem(_magnetSpeed);
+            CRT_MoveItem(_magnetSpeed);
     }
+    */
     public void SetPlayerTransform(Transform playerTrs)
     {
         _playerTrs = playerTrs;
     }
-    void MoveItem(float speed)
+    public void MoveItem()
     {
-        GameObject obj = gameObject;
-        transform.position = Vector3.MoveTowards(obj.transform.position, _playerTrs.position, speed * Time.deltaTime);
+        StartCoroutine(CRT_MoveItem(_moveSpeed));
+    }
+    public void MoveItemByMagnet()
+    {
+        StartCoroutine(CRT_MoveItem(_magnetSpeed));
+    }
+    IEnumerator CRT_MoveItem(float speed)
+    {
+        while(true)
+        {
+            GameObject obj = gameObject;
+            transform.position = Vector3.MoveTowards(obj.transform.position, _playerTrs.position, speed * Time.deltaTime);
+            yield return null;
+        }
+        
         
     }
 }

@@ -63,6 +63,7 @@ public class BuffManager : MonoBehaviour
 
     [Header("소유 가능 버프 수"), SerializeField] int _buffSlotLimit = 6;
     List<eBUFF_TYPE> _possedBuffs = new List<eBUFF_TYPE>();
+    public List<eBUFF_TYPE> _PossedBuffs => _possedBuffs;
 
     private void Awake()
     {
@@ -95,6 +96,11 @@ public class BuffManager : MonoBehaviour
                 level = obj._level;
         }
         return level;
+    }
+    public string GetNameByType(eBUFF_TYPE buffType)
+    {
+        string name = _passives[buffType]._name;
+        return name;
     }
     public void UpgradeLevel(string name)
     {

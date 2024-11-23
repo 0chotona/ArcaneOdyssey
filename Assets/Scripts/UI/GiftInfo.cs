@@ -43,4 +43,9 @@ public class GiftInfo : MonoBehaviour
         Sprite panel = isSkill ? _panelBackImgs[0] : _panelBackImgs[1];
         _panelBack.sprite = panel;
     }
+    public void SetPanelSoloBack()
+    {
+        Sprite panel = _panelBackImgs[2];
+        _panelBack.sprite = panel;
+    }
 }

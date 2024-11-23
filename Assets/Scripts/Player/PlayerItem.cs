@@ -38,11 +38,11 @@ public class PlayerItem : MonoBehaviour
         {
             Item_Type itemType = other.GetComponent<Item_Type>();
             itemType.SetPlayerTransform(transform);
-            itemType._isGotByPlayer = true;
+            itemType.MoveItem();
             switch (itemType._itemType)
             {
                 case Item_Type.ITEMTYPE.Upgrade:
-                    UIManager.Instance.ShowUpgradePanel();
+                    UIManager.Instance.UpgradeLevel5();
                     break;
                 case Item_Type.ITEMTYPE.HpPlus:
                     _playerHealth.GetHeal(_healAmount);
