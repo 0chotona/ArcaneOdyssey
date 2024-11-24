@@ -15,7 +15,7 @@ public class EnemyInfo : MonoBehaviour
 
     public void SetStat(CEnemy enemy)
     {
-        _enemyHealth.SetEnemyStat(enemy._Hp, enemy._Def, enemy._IsBoss);
+        _enemyHealth.SetEnemyStat(enemy._Hp, enemy._Def, enemy._IsBoss, enemy._IsFinalBoss);
         _enemyMove.SetMoveSpeed(enemy._MoveSpeed);
         _enemyAttack.SetEnemyAtt(enemy._Att);
     }

@@ -40,6 +40,7 @@ public class EnemySpawner : MonoBehaviour
     int _spawnNum;
 
     [Header("소환 쿨타임"),SerializeField]float _spawnCoolTime = 0.5f;
+    [Header("아이템 스포너"), SerializeField] ItemSpawner _itemSpawner;
     float _spawnDist = 20;
 
 
@@ -152,7 +153,7 @@ public class EnemySpawner : MonoBehaviour
         CEnemy cEnemy = _enemyData._EnemyDatas[enemyInfo._EnemyType];
         //enemyInfo.SetStat(cEnemy._Hp, cEnemy._Att + _curLevel, cEnemy._Def + _curLevel, cEnemy._MoveSpeed);
 
-        obj.GetComponent<EnemyHealth>().SetSpawner(transform);
+        //obj.GetComponent<EnemyHealth>().SetSpawner(transform, _itemSpawner);
         obj.GetComponent<EnemyMove>().SetPlayerTrs(_playerTrs);
 
     }

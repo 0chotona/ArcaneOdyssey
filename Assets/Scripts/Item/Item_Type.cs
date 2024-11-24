@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum eITEMTYPE
+{
+    Upgrade,
+    HpPlus,
+    Magnet,
+    Bomb,
+    Jewel
+}
 public class Item_Type : MonoBehaviour
 {
-    public enum ITEMTYPE
-    {
-        Upgrade,
-        HpPlus,
-        Magnet,
-        Bomb,
-        Jewel
-    }
-    public ITEMTYPE _itemType;
+    
+    public eITEMTYPE _itemType;
     public float _point;
 
     public bool _isGotByPlayer = false;

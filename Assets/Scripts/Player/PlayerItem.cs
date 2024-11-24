@@ -41,19 +41,19 @@ public class PlayerItem : MonoBehaviour
             itemType.MoveItem();
             switch (itemType._itemType)
             {
-                case Item_Type.ITEMTYPE.Upgrade:
+                case eITEMTYPE.Upgrade:
                     UIManager.Instance.UpgradeLevel5();
                     break;
-                case Item_Type.ITEMTYPE.HpPlus:
+                case eITEMTYPE.HpPlus:
                     _playerHealth.GetHeal(_healAmount);
                     break;
-                case Item_Type.ITEMTYPE.Magnet:
+                case eITEMTYPE.Magnet:
                     _itemSpawner.SetMagnet();
                     break;
-                case Item_Type.ITEMTYPE.Bomb:
+                case eITEMTYPE.Bomb:
                     StartCoroutine(CRT_Bomb());
                     break;
-                case Item_Type.ITEMTYPE.Jewel:
+                case eITEMTYPE.Jewel:
                     _curPoint += itemType._point + (itemType._point * _expGainBuff);
                     if(_curPoint >= _maxPoint)
                     {

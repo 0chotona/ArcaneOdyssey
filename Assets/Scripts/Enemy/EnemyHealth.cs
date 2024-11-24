@@ -16,8 +16,6 @@ public class EnemyHealth : MonoBehaviour
     bool _isDead;
     public bool _IsDead => _isDead;
 
-    [SerializeField] GameObject _jewelObj;
-    Color[] _jewelColor = new Color[3] { Color.green, Color.cyan, Color.yellow };
 
     Transform _spawnerTrs;
     GameObject _tmpObj;
@@ -29,6 +27,9 @@ public class EnemyHealth : MonoBehaviour
     float _damageIncreaseRate = 1f;
 
     bool _isBoss = false;
+    bool _isFinalBoss = false;
+
+    ItemSpawner _itemSpawner;
 
     private void Awake()
     {
@@ -98,11 +99,12 @@ public class EnemyHealth : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
-    public void SetSpawner(Transform spawnerTrs)
+    public void SetSpawner(Transform spawnerTrs, ItemSpawner itemSpawner)
     {
         _spawnerTrs = spawnerTrs;
+        _itemSpawner = itemSpawner;
     }
-    public void SetEnemyStat(float hp, float def, bool isBoss)
+    public void SetEnemyStat(float hp, float def, bool isBoss, bool isFinalBoss)
     {
         _maxHp = hp;
         _curHp = _maxHp;
@@ -110,6 +112,7 @@ public class EnemyHealth : MonoBehaviour
         _def = def;
 
         _isBoss = isBoss;
+        _isFinalBoss = isFinalBoss;
     }
     public void SetPlant(bool isPlanted)
     {
@@ -120,27 +123,25 @@ public class EnemyHealth : MonoBehaviour
         _explodeObj = explodeObj;
         _explodeDamage = damage;
     }
-    void SpawnJewel()
-    {
-        float rnd = Random.value;
-        if(rnd > 0.3f)
-        {
-            GameObject jewel = Instantiate(_jewelObj, transform.position, Quaternion.identity, _spawnerTrs);
-            Renderer renderer = jewel.GetComponent<Renderer>();
-            renderer.material.color = _jewelColor[(int)(GameManager.Instance._Level * 0.1f)];
-            
-        }
-    }
+    
     void Dead()
     {
-        SpawnJewel();
-        _isDead = true;
-
-        PassiveManager.Instance.UpdateDeathCount();
-        if (_isBoss)
+        _isDead = true; 
+        if (_isFinalBoss)
         {
             GameManager.Instance.ClearStage();
         }
+        Vector3 spawnPos = transform.position;
+        PassiveManager.Instance.UpdateDeathCount();
+        if(_isBoss)
+        {
+            _itemSpawner.SpawnItem(eITEMTYPE.Upgrade, spawnPos);
+        }
+        else
+        {
+            _itemSpawner.SpawnItem(eITEMTYPE.Jewel, spawnPos);
+        }
+        
         Destroy(_tmpObj);
         
     }

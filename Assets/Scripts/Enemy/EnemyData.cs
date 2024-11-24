@@ -26,7 +26,8 @@ public enum eMOB_COLUMN
     Att,
     Def,
     MoveSpeed,
-    IsBoss
+    IsBoss,
+    IsFinalBoss
 }
 public class CEnemy
 {
@@ -52,12 +53,13 @@ public class CEnemy
     float _moveSpeed;
     public float _MoveSpeed => _moveSpeed;
     bool _isBoss = false;
-    public bool _IsBoss => _isBoss; 
+    public bool _IsBoss => _isBoss;
 
-    
-    
+    bool _isFinalBoss = false;
+    public bool _IsFinalBoss => _isFinalBoss;
 
-    public CEnemy(int id, string mobName, eNORMALMOB_TYPE enumName, string prefName, float hp, float att, float def, float moveSpeed, bool isBoss)
+
+    public CEnemy(int id, string mobName, eNORMALMOB_TYPE enumName, string prefName, float hp, float att, float def, float moveSpeed, bool isBoss, bool isFinalBoss)
     {
         _id = id;
         _mobName = mobName;
@@ -68,6 +70,7 @@ public class CEnemy
         _def = def;
         _moveSpeed = moveSpeed;
         _isBoss = isBoss;
+        _isFinalBoss = isFinalBoss;
     }
 }
 public class EnemyData : MonoBehaviour, ICSVDataConverter
@@ -92,8 +95,9 @@ public class EnemyData : MonoBehaviour, ICSVDataConverter
             float def = float.Parse(values[(int)eMOB_COLUMN.Def]);
             float moveSpeed = float.Parse(values[(int)eMOB_COLUMN.MoveSpeed]);
             bool isBoss = (int.Parse(values[(int)eMOB_COLUMN.IsBoss]) == 1);
+            bool isFinalBoss = (int.Parse(values[(int)eMOB_COLUMN.IsFinalBoss]) == 1);
 
-            CEnemy mob = new CEnemy(id, charName, enumName, prefName, hp, att, def, moveSpeed, isBoss);
+            CEnemy mob = new CEnemy(id, charName, enumName, prefName, hp, att, def, moveSpeed, isBoss, isFinalBoss);
 
             _enemyDatas.Add(enumName, mob);
         }

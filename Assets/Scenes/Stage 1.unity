@@ -17510,6 +17510,7 @@ MonoBehaviour:
   - {fileID: 4050804552321059037, guid: 94b72277aee336145984029947657c3e, type: 3}
   - {fileID: 5943642707857249143, guid: 59d9b080324ce9e40836b38301203dce, type: 3}
   - {fileID: 2452728788749868160, guid: 1691d11d60d69e64d86378412c1b635e, type: 3}
+  _itemSpawner: {fileID: 881876896}
 --- !u!4 &525285823
 Transform:
   m_ObjectHideFlags: 0
@@ -27847,7 +27848,7 @@ GameObject:
   - component: {fileID: 881876899}
   - component: {fileID: 881876896}
   m_Layer: 0
-  m_Name: SpawnController
+  m_Name: ItemSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27866,6 +27867,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemObjs: []
+  _jewelObj: {fileID: 3576365188950404258, guid: ff1466d4468cfc448a10d6e895a8f8fb, type: 3}
+  _jewelRate: 0.7
+  _jewelColor:
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  - {r: 1, g: 0, b: 1, a: 1}
+  _upgradeObj: {fileID: 1897452667176448544, guid: d6bdc2217775c5c469cf7dcb31f6a549, type: 3}
 --- !u!4 &881876899
 Transform:
   m_ObjectHideFlags: 0
@@ -34759,63 +34768,6 @@ MonoBehaviour:
   _normalBossSpawnPos: {fileID: 1190855634}
   _finalBossSpawnPos: {fileID: 1190855634}
   _timeGap: 30
---- !u!1001 &1310385591
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 4110688f8625df440854cab708aeb9a1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4110688f8625df440854cab708aeb9a1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4110688f8625df440854cab708aeb9a1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4110688f8625df440854cab708aeb9a1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4110688f8625df440854cab708aeb9a1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4110688f8625df440854cab708aeb9a1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4110688f8625df440854cab708aeb9a1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4110688f8625df440854cab708aeb9a1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4110688f8625df440854cab708aeb9a1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4110688f8625df440854cab708aeb9a1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 4110688f8625df440854cab708aeb9a1, type: 3}
-      propertyPath: m_Name
-      value: CH0190_Dron_Mesh
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4110688f8625df440854cab708aeb9a1, type: 3}
 --- !u!1 &1314211464
 GameObject:
   m_ObjectHideFlags: 0
@@ -39895,6 +39847,7 @@ MonoBehaviour:
   - {fileID: 2540604631436006529, guid: d9488de74d51b4b4ab133d61329a8933, type: 3}
   - {fileID: 620393094061939117, guid: cdb012e1e25d10548927df2afee3447f, type: 3}
   - {fileID: 5724227720614925090, guid: 70d318917d15de6459b8b04bf6c1fc19, type: 3}
+  _itemSpawner: {fileID: 881876896}
 --- !u!4 &1696060739
 Transform:
   m_ObjectHideFlags: 0
@@ -87904,7 +87857,6 @@ MonoBehaviour:
   _def: 0
   _hpSlider: {fileID: 1182294548}
   _enemyMove: {fileID: 0}
-  _jewelObj: {fileID: 3576365188950404258, guid: ff1466d4468cfc448a10d6e895a8f8fb, type: 3}
 --- !u!4 &8044669280375597489
 Transform:
   m_ObjectHideFlags: 0
@@ -88457,7 +88409,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 963194228}
   - {fileID: 705507995}
-  - {fileID: 881876899}
   - {fileID: 872744802}
   - {fileID: 1901268774}
   - {fileID: 1959492445}
@@ -88473,6 +88424,6 @@ SceneRoots:
   - {fileID: 9141298894895027440}
   - {fileID: 656104497}
   - {fileID: 1302691803}
+  - {fileID: 881876899}
   - {fileID: 1283097927}
   - {fileID: 1479337261}
-  - {fileID: 1310385591}
