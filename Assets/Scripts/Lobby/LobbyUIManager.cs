@@ -37,6 +37,7 @@ public class LobbyUIManager : MonoBehaviour
     [Header("게임 시작 버튼"), SerializeField] Button _gameStartButton;
 
     [Header("스테이지 버튼"), SerializeField] List<Button> _stageButtons;
+    [Header("로딩 씬"), SerializeField] LoadingScene _loadingScene;
     private void Awake()
     {
         _gameStartButton.onClick.AddListener(() => Click_StartGame());
@@ -91,8 +92,9 @@ public class LobbyUIManager : MonoBehaviour
 
     void Click_StartGame()
     {
-        SceneManager.LoadScene(_selectedStage);
-        CharacterSelector.Instance.StartGame();
+        //SceneManager.LoadScene(_selectedStage);
+        LoadingScene.LoadScene(_selectedStage);
+        //CharacterSelector.Instance.StartGame();
 
         DataHandler.Instance.SetCurStage(_selectedStage);
     }

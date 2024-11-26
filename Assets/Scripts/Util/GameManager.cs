@@ -27,6 +27,10 @@ public class GameManager : MonoBehaviour
     public CChar _SelectedChar => _selectedChar;
 
     [SerializeField] EnemyFactory _enemyFactory;
+    private void OnEnable()
+    {
+        CharacterSelector.Instance.StartGame();
+    }
     public void UpgradeLevel()
     {
         _level++;

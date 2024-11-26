@@ -53,8 +53,8 @@ public class InGameButton : MonoBehaviour
     void Click_Replay()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        CharacterSelector.Instance.StartGame();
+        LoadingScene.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //CharacterSelector.Instance.StartGame();
     }
     void Click_NextStage()
     {
