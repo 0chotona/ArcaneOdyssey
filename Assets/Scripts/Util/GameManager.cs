@@ -27,9 +27,16 @@ public class GameManager : MonoBehaviour
     public CChar _SelectedChar => _selectedChar;
 
     [SerializeField] EnemyFactory _enemyFactory;
+    [Header("시작 딜레이"), SerializeField] float _startDelay = 3f;
+    [Header("카메라 이동"), SerializeField] MoveCamera _moveCam;
+
+    [Header("플레이어 이동"), SerializeField] PlayerMove _playerMove;
     private void OnEnable()
     {
         CharacterSelector.Instance.StartGame();
+        StartCoroutine(CRT_SetDelay(_startDelay));
+        _moveCam.MoveStartAction(_startDelay);
+        _enemyFactory.StartTestPatern(_startDelay);
     }
     public void UpgradeLevel()
     {
@@ -39,6 +46,14 @@ public class GameManager : MonoBehaviour
     public void SetCharacter(CChar cChar)
     {
         _selectedChar = cChar;
+    }
+    IEnumerator CRT_SetDelay(float delay)
+    {
+        //_playerMove.SetCanMove(false);
+        UIManager.Instance.SetUIActive(false);
+        yield return new WaitForSeconds(delay);
+        UIManager.Instance.SetUIActive(true);
+        //_playerMove.SetCanMove(true);
     }
     /*
     public void SetMob(EnemyData data)

@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
     [Header("솔로 물품"), SerializeField] GiftInfo _soloGiftInfo;
     [Header("솔로 물품 버튼"), SerializeField] Button _soloSkillButton;
 
-    [SerializeField] TextMeshProUGUI _timerText;
+    [Header("타이머 텍스트"), SerializeField] TextMeshProUGUI _timerText;
 
     [Header("캐릭터 초상화"), SerializeField] Image _charImage;
 
@@ -64,9 +64,10 @@ public class UIManager : MonoBehaviour
 
     [Header("스킬 E 아이콘"), SerializeField] Image _skill1Icon;
     [Header("스킬 R 아이콘"), SerializeField] Image _skill2Icon;
+
+    [Header("On/Off할 UI"), SerializeField] List<GameObject> _toggleableUIList;
     public SkillGage _SkillGage => _skillGame;
 
-    float _curTime = 0;
 
     public bool _isPause = false;
 
@@ -120,9 +121,7 @@ public class UIManager : MonoBehaviour
     }
     private void Update()
     {
-        _curTime += Time.deltaTime;
 
-        _timerText.text = ((int)_curTime).ToString();
 
         if(Input.GetKeyDown(KeyCode.L))
         {
@@ -131,6 +130,30 @@ public class UIManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.K))
         {
             UpgradeLevel5();
+        }
+    }
+    public void StartTimer()
+    {
+        StartCoroutine(CRT_SetTimer());
+    }
+    IEnumerator CRT_SetTimer()
+    {
+        int min = 0;
+        int sec = 0;
+        string timerText = min.ToString("D2") + ":" + sec.ToString("D2");
+        _timerText.text = timerText;
+
+        while(true)
+        {
+            yield return new WaitForSeconds(1f);
+            sec++;
+            if(sec >= 60)
+            {
+                min++;
+                sec = 0;
+            }
+            timerText = min.ToString("D2") + ":" + sec.ToString("D2");
+            _timerText.text = timerText;
         }
     }
     public void SetGiftNames(List<CSkill> skills) //시작하자마자 상품 이름 세팅
@@ -308,10 +331,6 @@ public class UIManager : MonoBehaviour
 
         // 기존 리스트를 새로운 리스트로 교체
         _giftNames = giftNamesToKeep;
-    }
-    public void SetTimerString(int timer)
-    {
-        _curTime = timer;
     }
     public IEnumerator CRT_BossCountDown()
     {
@@ -565,6 +584,13 @@ public class UIManager : MonoBehaviour
         if (GetAddressable.Instance._SkillIconDic.TryGetValue(iconR, out Sprite skillRSprite))
         {
             _skill2Icon.sprite = skillRSprite;
+        }
+    }
+    public void SetUIActive(bool isActive)
+    {
+        foreach(GameObject go in _toggleableUIList)
+        {
+            go.SetActive(isActive);
         }
     }
 }

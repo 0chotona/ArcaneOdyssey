@@ -50,7 +50,7 @@ public class EnemyFactory : MonoBehaviour
     private void Start()
     {
         //StartCoroutine(CRT_Test());
-        StartCoroutine(TestPatern());
+        //StartTestPatern();
         SetData();
     }
     public void SetData()
@@ -89,9 +89,13 @@ public class EnemyFactory : MonoBehaviour
         SpawnBoss(eNORMALMOB_TYPE.Kyurem);
         yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Vanilluxe, 1f, 1000f));
     }*/
-    IEnumerator TestPatern()
+    public void StartTestPatern(float delay)
     {
-        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(CRT_TestPatern(delay));
+    }
+    IEnumerator CRT_TestPatern(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Cryogonal, _spawnCoolTime, _timeGap * 4));
         SpawnBoss(eNORMALMOB_TYPE.Regice);
         yield return StartCoroutine(CRT_Patern_0(eNORMALMOB_TYPE.Cryogonal, _spawnCoolTime, _timeGap * 2));
