@@ -66,7 +66,7 @@ public class PlayerItem : MonoBehaviour
                     UIManager.Instance.UpdateExpBar(_maxPoint, _curPoint);
                     break;
             }
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
             
         }
     }

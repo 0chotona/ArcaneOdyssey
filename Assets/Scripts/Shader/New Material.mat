@@ -8,11 +8,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: New Material
-  m_Shader: {fileID: -6465566751694194690, guid: 4d54ebf401d32054a914136908cb8533, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 4424e03cbbe682343b3aa9ec9194b0fb, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _SRCFACTOR_A
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -77,6 +76,8 @@ Material:
     - _Alpha: 1
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
+    - _BlinkSpeed: 5
+    - _BrightRate: 0
     - _BumpScale: 1
     - _Cut: 0
     - _Cutoff: 0.5
@@ -91,11 +92,14 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _OutThickness: 1.15
+    - _PanningSpeedX: 1
+    - _PanningSpeedY: 1
     - _PanningToggle: 0
     - _Parallax: 0.02
     - _RimLightToggle: 0
     - _RimRate: 3
     - _SRCFACTOR: 0
+    - _SinAbsToggle: 1
     - _Smoothless: 0.447
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -106,9 +110,23 @@ Material:
     - _ZWrite: 1
     - _ZWriteToggle: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutColor: {r: 1, g: 1, b: 1, a: 1}
     - _PanningSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &2832980201239165732
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
