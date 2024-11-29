@@ -37,6 +37,7 @@ public class Attack_GatlingRabbitGun : Attack
 
     public override void AttackInteract()
     {
+        _damageBox.ClearNearEnemies();
         _damageBox.SetIsMaxLevel(_isMaxLevel);
         float finalDamage = _damage + (_damage * _buffStat._Att);
         _damageBox.UpdateDamage(finalDamage);
@@ -56,31 +57,45 @@ public class Attack_GatlingRabbitGun : Attack
         {
             yield return new WaitForSeconds(_coolTime - _coolTime * _buffStat._CoolTime + _durTime + _durTime * _buffStat._Dur);
             AttackInteract();
+            //yield return StartCoroutine(CRT_Spin()); 
         }
     }
     IEnumerator CRT_Spin()
     {
+        float duration = _durTime + _durTime * _buffStat._Dur;
         float elapsedTime = 0f;
         float interactTimer = 0f;
+
         _particle.Play(true);
-        while (elapsedTime < _durTime + _durTime * _buffStat._Dur)
+
+        while (elapsedTime < duration)
         {
-            // y축 기준으로 회전
+            // 매 프레임마다 y축 기준으로 회전
             _shootTrs.Rotate(0, _spinSpeed * Time.deltaTime, 0);
             _shootTrs.position = _playerTrs.position;
+
             elapsedTime += Time.deltaTime;
             interactTimer += Time.deltaTime;
 
-            // _gap 초가 지났다면 _damageBox.GiveInteract() 실행
+            // _gap 간격으로 상호작용 트리거
             if (interactTimer >= _gap)
             {
                 _damageBox.GiveInteract();
-                interactTimer = 0f; // 타이머 초기화
+                interactTimer -= _gap; // 남은 시간을 유지하며 초기화
             }
 
             yield return null;
         }
+
         _particle.Stop(true);
+    }
+    IEnumerator CRT_GiveDamage()
+    {
+        while(true)
+        {
+            _damageBox.GiveInteract();
+            yield return new WaitForSeconds(_gap);
+        }
     }
 
     public override void SetSkill(CSkill skill)

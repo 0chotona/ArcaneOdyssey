@@ -31,7 +31,8 @@ public class DamageBox_GatlingRabbitGun : MonoBehaviour
     
     public void GiveInteract()
     {
-        _nearEnemies.RemoveAll(target => target == null);
+        ClearNearEnemies();
+        
         GetEnemiesInFanShape();
         foreach (Transform t in _nearEnemies)
         {
@@ -41,6 +42,11 @@ public class DamageBox_GatlingRabbitGun : MonoBehaviour
             }
             GiveDamage(t, _damage);
         }
+    }
+    public void ClearNearEnemies()
+    {
+        _nearEnemies.Clear();
+        //_nearEnemies.RemoveAll(target => target == null);
     }
     void GiveDamage(Transform trs, float damage)
     {
@@ -74,25 +80,19 @@ public class DamageBox_GatlingRabbitGun : MonoBehaviour
     }
     void GetEnemiesInFanShape()
     {
-        List<GameObject> enemiesInRange = new List<GameObject>();
+        ClearNearEnemies();
 
-        // 지정된 거리만큼 구체 범위 내의 적 탐지
         Collider[] hits = Physics.OverlapSphere(_shootTrs.position, _distance, _enemyLayer);
 
         foreach (Collider hit in hits)
         {
-            // 적 오브젝트가 Enemy 태그를 가지고 있는지 확인
-            if (hit.CompareTag("Enemy"))
+            if (hit.CompareTag("Enemy") && !_nearEnemies.Contains(hit.transform))
             {
                 Vector3 directionToEnemy = (hit.transform.position - _shootTrs.position).normalized;
-
-                // 플레이어가 바라보는 방향과 적의 위치가 부채꼴 안에 있는지 확인
                 float angleToEnemy = Vector3.Angle(_shootTrs.forward, directionToEnemy);
 
-                // 적이 지정된 부채꼴 각도 안에 있을 경우 리스트에 추가
                 if (angleToEnemy <= _angle)
                 {
-                    enemiesInRange.Add(hit.gameObject);
                     _nearEnemies.Add(hit.transform);
                 }
             }

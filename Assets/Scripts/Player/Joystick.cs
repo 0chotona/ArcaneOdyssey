@@ -12,11 +12,7 @@ public class JoyStick : InputController, IBeginDragHandler, IDragHandler, IEndDr
 
     public override void Update()
     {
-        _inputDir = (_lever.anchoredPosition / _leverRange).normalized;
         
-        float angle = Mathf.Atan2(_inputDir.y, _inputDir.x) * Mathf.Rad2Deg;
-        Quaternion rotation = Quaternion.Euler(0, 0, angle);
-        _arrowTrs.rotation = rotation;
     }
     void Awake()
     {
@@ -36,11 +32,18 @@ public class JoyStick : InputController, IBeginDragHandler, IDragHandler, IEndDr
     }
     public void OnDrag(PointerEventData eventData)
     {
+        _inputDir = (_lever.anchoredPosition / _leverRange).normalized;
+
+        float angle = Mathf.Atan2(_inputDir.y, _inputDir.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.Euler(0, 0, angle);
+        _arrowTrs.rotation = rotation;
+
         ControlLever(eventData);
 
     }
     public void OnEndDrag(PointerEventData eventData)
     {
         _lever.anchoredPosition = Vector2.zero;
+        _inputDir = Vector2.zero;
     }
 }
