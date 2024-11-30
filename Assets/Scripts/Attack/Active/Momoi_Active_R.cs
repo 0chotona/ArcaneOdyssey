@@ -30,6 +30,7 @@ public class Momoi_Active_R : MonoBehaviour, IActiveAttackable
     {
         if (_canActive)
         {
+            UIManager.Instance.SetCanDragJoy(false);
             _checkMouseObj.SetActive(true);
             Time.timeScale = 0.1f;
             _checkMouseObj.transform.position = _playerTrs.position;
@@ -49,6 +50,7 @@ public class Momoi_Active_R : MonoBehaviour, IActiveAttackable
         damageBox.UpdateHpPercent(_hpPercent);
         damageBox.Shot(targetPos);
         UIManager.Instance.StartRCooltime(_coolTime - _coolTime * BuffStat.Instance._CoolTimeBuff);
+        UIManager.Instance.SetCanDragJoy(true);
     }
     public void SetPlayerTrs(Transform playerTrs)
     {

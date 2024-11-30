@@ -7,6 +7,7 @@ public class Momoi_GetDrag : MonoBehaviour
     [Header("범위 오브젝트"), SerializeField] GameObject _cursorObj;
     [Header("액티브 R"), SerializeField] Momoi_Active_R _activeR;
 
+
     private void Awake()
     {
         _cursorObj.transform.SetParent(null);

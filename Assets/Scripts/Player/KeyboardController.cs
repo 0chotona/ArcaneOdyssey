@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KeyboardController : InputController
 {
-    public override void Update()
+    public void Update()
     {
         _inputDir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
     }

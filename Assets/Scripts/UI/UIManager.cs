@@ -63,6 +63,9 @@ public class UIManager : MonoBehaviour
     [Header("스킬 R 아이콘"), SerializeField] Image _skill2Icon;
 
     [Header("On/Off할 UI"), SerializeField] List<GameObject> _toggleableUIList;
+
+
+    [Header("조이스틱 터치"), SerializeField] MoveJoystick _moveJoy;
     public SkillGage _SkillGage => _skillGame;
 
 
@@ -590,4 +593,9 @@ public class UIManager : MonoBehaviour
             go.SetActive(isActive);
         }
     }
+    public void SetCanDragJoy(bool canDrag)
+    {
+        _moveJoy.SetCanDrag(canDrag);
+    }
+
 }
