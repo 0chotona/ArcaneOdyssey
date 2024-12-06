@@ -28,11 +28,34 @@ public class GetAddressable : MonoBehaviour
     public Dictionary<string, Sprite> _SkillIconDic => _skillIconDic;
     public Dictionary<string, Sprite> _BuffIconDic => _buffIconDic;
     public Dictionary <string, Sprite> _CharIconDic => _charIconDic;
+
+    [Header("스킬 아이콘 리스트"), SerializeField] List<Sprite> _skillIconList;
+    [Header("버프 아이콘 리스트"), SerializeField] List<Sprite> _buffIconList;
+    [Header("캐릭터 아이콘 리스트"), SerializeField] List<Sprite> _charIconList;
     private void Awake()
     {
+        /*
         LoadIcons(_skillIconLabel, SetSkillIconDic);
         LoadIcons(_buffIconLabel, SetBuffIconDic);
         LoadIcons(_charIconLabel, SetCharIconDic);
+        */
+        SetIconLists();
+        UIManager.Instance.SetCharIcon();
+    }
+    void SetIconLists()
+    {
+        foreach(Sprite icon in _skillIconList)
+        {
+            _skillIconDic.Add(icon.name, icon);
+        }
+        foreach (Sprite icon in _buffIconList)
+        {
+            _buffIconDic.Add(icon.name, icon);
+        }
+        foreach (Sprite icon in _charIconList)
+        {
+            _charIconDic.Add(icon.name, icon);
+        }
     }
     void SetSkillIconDic(Dictionary<string, Sprite> skillIconDic)
     {
@@ -45,6 +68,9 @@ public class GetAddressable : MonoBehaviour
     void SetCharIconDic(Dictionary<string, Sprite> charIconDic)
     {
         _charIconDic = charIconDic;
+        //Debug.Log("SetCharIconDic : " + _charIconDic["Model_100"].name);
+
+        UIManager.Instance.SetCharIcon();
     }
     public void LoadIcons(string labelName, Action<Dictionary<string, Sprite>> callback)
     {
@@ -67,7 +93,7 @@ public class GetAddressable : MonoBehaviour
                             }
                             else
                             {
-                                Debug.LogWarning($"Duplicate key found: {result.Result.name}. Skipping this sprite.");
+                                //Debug.LogWarning($"Duplicate key found: {result.Result.name}. Skipping this sprite.");
                             }
                             Addressables.Release(resourceOperation);
                             break;

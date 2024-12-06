@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         CharacterSelector.Instance.StartGame();
-        StartCoroutine(CRT_SetDelay(_startDelay));
+        //StartCoroutine(CRT_SetDelay(_startDelay));
         _moveCam.MoveStartAction(_startDelay);
         _enemyFactory.StartTestPatern(_startDelay);
     }
@@ -49,8 +49,8 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator CRT_SetDelay(float delay)
     {
-        //_playerMove.SetCanMove(false);
-        UIManager.Instance.SetUIActive(false);
+        _playerMove.SetCanMove(false);
+        //UIManager.Instance.SetUIActive(false);
         yield return new WaitForSeconds(delay);
         UIManager.Instance.SetUIActive(true);
         //_playerMove.SetCanMove(true);

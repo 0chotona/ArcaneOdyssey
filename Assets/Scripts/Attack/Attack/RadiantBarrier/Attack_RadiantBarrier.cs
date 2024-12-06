@@ -64,6 +64,7 @@ public class Attack_RadiantBarrier : Attack
 
     public override void StartAttack()
     {
+        SoundManager.Instance.PlaySound(eSKILLSOUNDTYPE.RadiantBarrier);
         StartCoroutine(CRT_PlayParticle());
         StartCoroutine(CRT_Attack());
         _collider.enabled = true;

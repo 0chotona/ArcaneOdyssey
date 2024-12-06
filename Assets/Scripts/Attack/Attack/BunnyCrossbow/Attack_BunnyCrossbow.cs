@@ -13,6 +13,7 @@ public class Attack_BunnyCrossbow : Attack
     [Header("거리"), SerializeField] float _distance = 8f;
     [Header("속도"), SerializeField] float _speed = 20f;
 
+    [Header("사운드 딜레이"), SerializeField] float _soundDelay = 0.3f;
 
     [Header("발사 위치"), SerializeField] Transform _shootTrs;
 
@@ -31,6 +32,7 @@ public class Attack_BunnyCrossbow : Attack
         float startAngle = -((_projectileCount + _buffStat._ProjectileCount) * _angle * 0.5f) + rndAngle;
         //Quaternion startAngle = Quaternion.Euler(0, startAngle, 0);
 
+        
 
         for (int i = 0; i < (_projectileCount + _buffStat._ProjectileCount); i++)
         {
@@ -58,7 +60,9 @@ public class Attack_BunnyCrossbow : Attack
     {
         while (true)
         {
-            yield return new WaitForSeconds(_coolTime - _coolTime * _buffStat._CoolTime);
+            yield return new WaitForSeconds(_coolTime - _coolTime * _buffStat._CoolTime - _soundDelay);
+            SoundManager.Instance.PlaySound(eSKILLSOUNDTYPE.BunnyCrossbow);
+            yield return new WaitForSeconds(_soundDelay);
             AttackInteract();
         }
     }

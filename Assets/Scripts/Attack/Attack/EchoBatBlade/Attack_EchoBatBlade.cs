@@ -59,7 +59,8 @@ public class Attack_EchoBatBlade : Attack
         while (true)
         {
             yield return new WaitForSeconds(_coolTime - _coolTime * _buffStat._CoolTime);
-            
+
+            SoundManager.Instance.PlaySound(eSKILLSOUNDTYPE.EchoBatBlade);
             for (int i = 0; i < (_projectileCount + _buffStat._ProjectileCount); i++)
             {
                 AttackInteract();

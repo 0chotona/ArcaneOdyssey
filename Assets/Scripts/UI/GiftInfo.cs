@@ -23,6 +23,7 @@ public class GiftInfo : MonoBehaviour
     public void SetGiftImage(Sprite sprite)
     {
         _skillImage.sprite = sprite;
+        //Debug.Log(_skillImage.sprite.name);
     }
     public void SetInfoText(string name, int level)
     {

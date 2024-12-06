@@ -2789,7 +2789,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9eb507f77300ac84cb0fc90359ff7c64, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -24334,7 +24334,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644892961}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.49269882, y: -0.000000029945966, z: 0.000000016955122, w: 0.8701999}
+  m_LocalRotation: {x: 0.49269885, y: 0.000000029945994, z: -0.000000016955134, w: 0.8701999}
   m_LocalPosition: {x: 5.2, y: 12, z: 4.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -29311,7 +29311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.49269882, y: -0.000000029945966, z: 0.000000016955122, w: 0.8701999}
+  m_LocalRotation: {x: 0.49269885, y: 0.000000029945994, z: -0.000000016955134, w: 0.8701999}
   m_LocalPosition: {x: 5.2, y: 12, z: 4.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -35030,6 +35030,38 @@ MonoBehaviour:
   _skillIconLabel: SkillIcons
   _buffIconLabel: BuffIcons
   _charIconLabel: CharIcons
+  _skillIconList:
+  - {fileID: 21300000, guid: 63b9ea45f19a19f409880cff6d4cfdc7, type: 3}
+  - {fileID: 21300000, guid: 3c8c1d45ca24d4e4ca85850f66bbf32c, type: 3}
+  - {fileID: 21300000, guid: 2dec8c03ae434d849a7b2e58729c7795, type: 3}
+  - {fileID: 21300000, guid: 9459b2e38962dec4abbb3f52a4f12055, type: 3}
+  - {fileID: 21300000, guid: 1242fff1846e78941b8c10bb46ab06fb, type: 3}
+  - {fileID: 21300000, guid: 33ba116e826de7a4da3140de5bd9bf2d, type: 3}
+  - {fileID: 21300000, guid: 562bb78ea92639947852a9c88e2fcfbc, type: 3}
+  - {fileID: 21300000, guid: 00a3adef50716ee4ca1c1c24c75c3950, type: 3}
+  - {fileID: 21300000, guid: 178947b7720bdfb4dbc592ddbe11b58f, type: 3}
+  - {fileID: 21300000, guid: b3e201f00a8a64d4c9ec11d9b22ab303, type: 3}
+  - {fileID: 21300000, guid: fa9ecaeb90a41694c948268a74f0d5ec, type: 3}
+  - {fileID: 21300000, guid: 9d960e8b9c153fc4296053026d2a2773, type: 3}
+  - {fileID: 21300000, guid: 314f7581b90c716478d1dd3457b5af80, type: 3}
+  - {fileID: 21300000, guid: 902ad559d49c1a04286c2eaf556dbc39, type: 3}
+  - {fileID: 21300000, guid: 6bfb55aa71a914b47a3bc46b7fc87120, type: 3}
+  _buffIconList:
+  - {fileID: 21300000, guid: 8b67de8701798dc48b4512c7e71517b7, type: 3}
+  - {fileID: 21300000, guid: 96330c217b3ebb24d8ed76547e77cf98, type: 3}
+  - {fileID: 21300000, guid: adbdea13c94bf4848b29c41d497072c1, type: 3}
+  - {fileID: 21300000, guid: d1ba3ca2f458e014b8cec4d5579c6c8a, type: 3}
+  - {fileID: 21300000, guid: 5d225dc6a20bf0545bc6f60048c13e3f, type: 3}
+  - {fileID: 21300000, guid: 174a8e5521d8fdd45b70b750d450d2bf, type: 3}
+  - {fileID: 21300000, guid: 0285274f15f3653418e328827b3f19ff, type: 3}
+  - {fileID: 21300000, guid: f5c6b3e624238db4d84b78bebae69040, type: 3}
+  - {fileID: 21300000, guid: 5a681e6cf71866b429d093de6e6b3b08, type: 3}
+  - {fileID: 21300000, guid: 2fb8d490c94a9ab4c903ec4e03b6d1d3, type: 3}
+  - {fileID: 21300000, guid: 744b761d29a61ab4ea7bc57cf0232a7b, type: 3}
+  - {fileID: 21300000, guid: 7ee0e3753466b114abe9e2f19aedcd9c, type: 3}
+  _charIconList:
+  - {fileID: 21300000, guid: a240950b30152034ebbafd741387f190, type: 3}
+  - {fileID: 21300000, guid: 9eb507f77300ac84cb0fc90359ff7c64, type: 3}
 --- !u!4 &1283097927
 Transform:
   m_ObjectHideFlags: 0

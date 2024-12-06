@@ -38,10 +38,12 @@ public class Attack_CuteLauncher : Attack
         while (true)
         {
             yield return new WaitForSeconds(_coolTime - _coolTime * _buffStat._CoolTime);
+            
             if (_level > 0)
             {
                 for (int i = 0; i < _projectileCount + _buffStat._ProjectileCount; i++)
                 {
+                    SoundManager.Instance.PlaySound(eSKILLSOUNDTYPE.CuteLauncher);
                     AttackInteract();
                     yield return new WaitForSeconds(_gap);
                 }

@@ -172,12 +172,56 @@ public class UIManager : MonoBehaviour
             _passiveNames.Add(passive._name);
         }
     }
+    /*
     public void SetCharIcon(string iconName)
     {
         if(GetAddressable.Instance._CharIconDic.TryGetValue(iconName, out Sprite charSprite))
         {
             _charImage.sprite = charSprite;
+            if(iconName == null)
+                Debug.Log("iconName null");
+            if (charSprite == null)
+                Debug.Log("charSpr null");
+            //Debug.Log("SetCharIcon Load / " + iconName + " / " + charSprite.name);
         }
+        else
+        {
+            Debug.Log("SetCharIcon Can't Load / "  + iconName);
+        }
+    }
+    */
+    public void SetCharIcon()
+    {
+        Sprite tmpSprite = null;
+
+        Dictionary<string, Sprite> charSpriteDic = GetAddressable.Instance._CharIconDic;
+        string charIconName = CharacterSelector.Instance._SelectedChar._modelName;
+        tmpSprite = charSpriteDic[charIconName];
+        _charImage.sprite = tmpSprite;
+        /*
+        if (GetAddressable.Instance._CharIconDic.TryGetValue(CharacterSelector.Instance._SelectedChar._modelName, out Sprite charSprite))
+        {
+            Debug.Log(CharacterSelector.Instance._SelectedChar._modelName);
+            
+            if (charSprite == null)
+                Debug.Log("charSpr null");
+            else
+                Debug.Log(charSprite.name);
+            
+            _charImage.sprite = charSprite;
+            
+            if(_charImage.sprite == null)
+            {
+                Debug.Log("_charImage is null");
+            }
+            else
+            {
+                Debug.Log("_charImage.sprite = " +_charImage.sprite.name);
+            }
+            
+            Debug.Log("SetCharIcon Load / " + iconName + " / " + charSprite.name);
+        }
+        */
     }
     public void ShowUpgradePanel()
     {
@@ -249,6 +293,8 @@ public class UIManager : MonoBehaviour
     void OnSelectSkill(int index)
     {
         Time.timeScale = 1;
+
+        SoundManager.Instance.PlaySound(eUISOUNDTYPE.GetItem);
 
         string upgradeGiftName = _giftInfos[index]._Name;
         if (IsSkill(upgradeGiftName))
@@ -543,6 +589,9 @@ public class UIManager : MonoBehaviour
     void Click_CloseSoloPanel()
     {
         Time.timeScale = 1f;
+
+        SoundManager.Instance.PlaySound(eUISOUNDTYPE.GetItem);
+
         foreach (PossesdItemInfo itemInfo in _skillInfoes)
         {
             itemInfo.SetLevel(true);

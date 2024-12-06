@@ -23,6 +23,7 @@ public class ProductInfo : MonoBehaviour
     }
     void Click_Select()
     {
+        SoundManager.Instance.PlaySound(eUISOUNDTYPE.Button);
         LobbyUIManager.Instance.Click_Select(_productChar);
     }
     public void SetInfo(Sprite img, CChar charInfo)

@@ -54,6 +54,7 @@ public class Attack_Boomerang : Attack
                 for (int i = 0; i < _projectileCount + _buffStat._ProjectileCount; i++)
                 {
                     AttackInteract();
+                    SoundManager.Instance.PlaySound(eSKILLSOUNDTYPE.Boomerang);
                     yield return new WaitForSeconds(_gap);
                 }
             }

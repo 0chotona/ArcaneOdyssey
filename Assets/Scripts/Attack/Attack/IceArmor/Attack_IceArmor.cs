@@ -52,7 +52,7 @@ public class Attack_IceArmor : Attack
 
         GameObject explodeObj = Instantiate(_explodeObj, _shootTrs.position, Quaternion.identity);
         Explosion_IceArmor explosion = explodeObj.GetComponent<Explosion_IceArmor>();
-
+        SoundManager.Instance.PlaySound(eSKILLSOUNDTYPE.IceArmor);
         float finalDamage = _damage + _damage * _buffStat._Att + _buffStat._Def + _buffStat._MaxHp * _dmgPerMaxHp;
         explosion.UpdateDamage(finalDamage);
         explosion.UpdateDur(_durTime + _durTime * _buffStat._Dur);
@@ -156,6 +156,7 @@ public class Attack_IceArmor : Attack
         {
             particle.Play();
         }
+        
     }
     void PauseParticles()
     {

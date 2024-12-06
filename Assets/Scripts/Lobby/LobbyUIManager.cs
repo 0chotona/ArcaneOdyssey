@@ -92,6 +92,7 @@ public class LobbyUIManager : MonoBehaviour
 
     void Click_StartGame()
     {
+        SoundManager.Instance.PlaySound(eUISOUNDTYPE.GameStart);
         //SceneManager.LoadScene(_selectedStage);
         LoadingScene.LoadScene(_selectedStage);
         //CharacterSelector.Instance.StartGame();
