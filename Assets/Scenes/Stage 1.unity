@@ -15832,11 +15832,11 @@ MonoBehaviour:
   _projectileCount: 0
   _damageBoxObj: {fileID: 8239679655125981049, guid: 5169b38805be6154a93aa816a52a1a54, type: 3}
   _skillManager: {fileID: 0}
-  _distance: 8
+  _distance: 10
   _backDistance: 16
   _angle: 20
   _smallDistance: 8
-  _speed: 20
+  _speed: 17
   _enemySensor: {fileID: 1513273706}
   _gap: 0.1
   _shootTrs: {fileID: 1891586418}
@@ -30119,6 +30119,7 @@ MonoBehaviour:
   _angle: 7
   _distance: 25
   _speed: 20
+  _soundDelay: 0.3
   _shootTrs: {fileID: 1802382006}
 --- !u!1 &1017349289
 GameObject:
@@ -35713,6 +35714,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341858560}
   m_CullTransparentMesh: 1
+--- !u!1 &1351370727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1351370729}
+  - component: {fileID: 1351370728}
+  m_Layer: 0
+  m_Name: BGMSetter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1351370728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351370727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c13765e28577c5a42b3f71264ab89569, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bgmType: 1
+--- !u!4 &1351370729
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351370727}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1353283510
 GameObject:
   m_ObjectHideFlags: 0
@@ -41747,6 +41793,8 @@ MonoBehaviour:
   _damageBoxObj: {fileID: 4831477468172666916, guid: 9532171a18dbb2246a2410e187e334e2, type: 3}
   _skillManager: {fileID: 0}
   _shootTrs: {fileID: 1789394633}
+  _radius: 4
+  _scale: {x: 2, y: 2, z: 2}
 --- !u!1 &1796549805
 GameObject:
   m_ObjectHideFlags: 0
@@ -88840,3 +88888,4 @@ SceneRoots:
   - {fileID: 1283097927}
   - {fileID: 1479337261}
   - {fileID: 644892963}
+  - {fileID: 1351370729}

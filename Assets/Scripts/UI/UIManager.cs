@@ -80,7 +80,8 @@ public class UIManager : MonoBehaviour
     List<string> _passiveNames = new List<string>();
 
     int _skillCount = 0;
-    int _buffCount = 0;
+    int _buffCount = 0; 
+    
     private void Start()
     {
 

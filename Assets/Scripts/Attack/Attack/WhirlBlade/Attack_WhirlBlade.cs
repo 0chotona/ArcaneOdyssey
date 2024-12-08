@@ -24,6 +24,9 @@ public class Attack_WhirlBlade : Attack
     float _curCount = 0;
     public bool _IsMaxLevel => _isMaxLevel;
     [Header("발사 위치"), SerializeField] Transform _shootTrs;
+    [Header("반지름"), SerializeField] float _radius = 4f;
+
+    [Header("기본 크기"), SerializeField] Vector3 _scale = new Vector3(2f, 2f, 2f);
     private void Awake()
     {
         _isMaxLevel = false;
@@ -59,11 +62,12 @@ public class Attack_WhirlBlade : Attack
         {
             DamageBox_WhirlBlade damageBox = damageBoxObj.GetComponent<DamageBox_WhirlBlade>();
 
+            damageBox.UpdateRadius(_radius);
             float finalDamage = _damage + (_damage * _buffStat._Att);
             damageBox.UpdateDamage(finalDamage);
 
             float finalRange = 1 + _buffStat._Range;
-            damageBox.UpdateScale(finalRange);
+            damageBox.UpdateScale(_scale * finalRange);
 
             damageBox.SetTarget(_shootTrs);
 
@@ -97,7 +101,7 @@ public class Attack_WhirlBlade : Attack
                 damageBox.UpdateDamage(finalDamage);
 
                 float finalRange = 1 + _buffStat._Range;
-                damageBox.UpdateScale(finalRange);
+                damageBox.UpdateScale(_scale * finalRange);
                 damageBox.SetTarget(transform);
 
                 damageBox.SetStartAngle(_angle * i);

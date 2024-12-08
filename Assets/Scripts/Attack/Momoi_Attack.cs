@@ -48,6 +48,7 @@ public class Momoi_Attack : Attack
         damageBox.UpdateSpeed(_speed);
         damageBox.UpdateIsMaxLevel(_isMaxLevel);
         damageBox.Shot(targetPos);
+        SoundManager.Instance.PlaySound(eCHARSOUNDTYPE.Momoi_Attack);
 
     }
     public override void SetSkill(CSkill skill)

@@ -48,6 +48,8 @@ public class Momoi_DamageBox_R : MonoBehaviour
         explosion.UpdateHpPercent(_hpPercent);
         explosion.ShowParticle();
         explosion.Explode();
+
+        SoundManager.Instance.PlaySound(eCHARSOUNDTYPE.Momoi_R_Explosion);
         explosion.DestroyObj(1f);
     }
 }

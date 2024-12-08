@@ -51,6 +51,8 @@ public class Momoi_Active_R : MonoBehaviour, IActiveAttackable
         damageBox.Shot(targetPos);
         UIManager.Instance.StartRCooltime(_coolTime - _coolTime * BuffStat.Instance._CoolTimeBuff);
         UIManager.Instance.SetCanDragJoy(true);
+
+        SoundManager.Instance.PlaySound(eCHARSOUNDTYPE.Momoi_R);
     }
     public void SetPlayerTrs(Transform playerTrs)
     {

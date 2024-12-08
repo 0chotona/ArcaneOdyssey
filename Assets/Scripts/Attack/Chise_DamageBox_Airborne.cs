@@ -40,7 +40,9 @@ public class Chise_DamageBox_Airborne : MonoBehaviour
     IEnumerator CRT_Airborne()
     {
         _particle.Play();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.8f);
+        SoundManager.Instance.PlaySound(eCHARSOUNDTYPE.Chise_Airbone);
+        yield return new WaitForSeconds(0.2f);
         _collider.enabled = true;
         yield return new WaitForSeconds(0.05f);
         _collider.enabled = false;

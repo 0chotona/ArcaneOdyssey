@@ -16,7 +16,7 @@ public class Attack_Boomerang : Attack
 
     [SerializeField] SkillManager _skillManager;
 
-    [Header("거리"), SerializeField] float _distance = 8f;
+    [Header("거리"), SerializeField] float _distance = 10f;
     [Header("돌아가는 거리"), SerializeField] float _backDistance = 16f;
     [Header("작은 투사체 각도"), SerializeField] float _angle = 30f;
     [Header("작은 투사체 거리"), SerializeField] float _smallDistance = 8f;

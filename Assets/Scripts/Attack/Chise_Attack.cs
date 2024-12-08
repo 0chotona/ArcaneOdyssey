@@ -128,28 +128,38 @@ public class Chise_Attack : Attack
         Vector3 targetPos = _playerTrs.position + _playerTrs.forward * _dashDistance;
         _playerMove.Dash(targetPos, _dashSpeed, _skillCombo);
         _playerMove.SetCanMove(false);
-        
-        
-        _particle.Play();
-        AttackInteract(); //콜라이더 On
-        yield return new WaitForSeconds(0.2f);
+
         if (_skillCombo == 1)
         {
             StartCoroutine(CRT_PlayAirborneParticle());
+            //_airborneParticle.Play();
+        }
+        else
+        {
+            _particle.Play();
+            SoundManager.Instance.PlaySound(eCHARSOUNDTYPE.Chise_Attack);
+        }
+        //AttackInteract(); //콜라이더 On
+        yield return new WaitForSeconds(0.2f);
+        if (_skillCombo == 1)
+        {
+            //StartCoroutine(CRT_PlayAirborneParticle());
+            //_airborneParticle.Play();
         }
         if (_activeR._IsActive)
         {
             _activeR.ShootAttack();
         }
+        AttackInteract(); //콜라이더 On
         yield return new WaitForSeconds(0.05f);
         _damageBox.UpdateCollider(false);
         yield return new WaitForSeconds(0.1f);
         
         
-        _playerMove.SetCanMove(true);
+        //_playerMove.SetCanMove(true);
         yield return new WaitForSeconds(0.2f);
 
-        
+        _playerMove.SetCanMove(true);
         _skillGage.UpdateSkillGage(0f);
 
 
@@ -184,16 +194,20 @@ public class Chise_Attack : Attack
     {
         _airborneParticle.Stop();
         _airborneParticle.Play();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         _airborneParticle.Pause();
     }
     IEnumerator CRT_PlayAirborneParticle()
     {
+        SoundManager.Instance.PlaySound(eCHARSOUNDTYPE.Chise_Airbone);
+
+        yield return new WaitForSeconds(0.1f);
         _airborneParticle.Play();
-        yield return new WaitForSeconds(0.6f);
+        
+        yield return new WaitForSeconds(0.5f);
         _airborneParticle.Stop();
         _airborneParticle.Play();   
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.3f);
         _airborneParticle.Pause();
     }
     void MaxLevelAirborne()

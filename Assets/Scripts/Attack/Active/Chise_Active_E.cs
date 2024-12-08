@@ -34,6 +34,8 @@ public class Chise_Active_E : MonoBehaviour, IActiveAttackable
             StartCoroutine(CRT_DashAttack(targetPos, _dashSpeed));
             StartCoroutine(CRT_CoolTime());
             UIManager.Instance.StartECooltime(_coolTime - _coolTime * BuffStat.Instance._CoolTimeBuff);
+
+            SoundManager.Instance.PlaySound(eCHARSOUNDTYPE.Chise_E);
         }
 
     }

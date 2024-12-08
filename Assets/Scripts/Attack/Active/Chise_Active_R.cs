@@ -20,6 +20,8 @@ public class Chise_Active_R : MonoBehaviour, IActiveAttackable
     [Header("쿨타임"), SerializeField] float _coolTime = 60f;
 
     [Header("데미지 박스"), SerializeField] GameObject _damageBox;
+
+    [Header("R 파티클"), SerializeField] ParticleSystem _particle;
     Transform _playerTrs;
     PlayerMove _playerMove;
 
@@ -30,12 +32,17 @@ public class Chise_Active_R : MonoBehaviour, IActiveAttackable
 
 
     ParticleSystem[] _particles;
+
+    private void Awake()
+    {
+        _particle.Stop(true);
+    }
     public void ActiveInteract()
     {
         if (_canActive)
         {
             StartCoroutine(CRT_DurTime());
-            
+            SoundManager.Instance.PlaySound(eCHARSOUNDTYPE.Chise_R);
         }
 
     }
@@ -54,6 +61,7 @@ public class Chise_Active_R : MonoBehaviour, IActiveAttackable
             damageBox.UpdateDamage(_damage + _damage * _buffStat._Att);
             damageBox.UpdateSpeed(_speed);
             damageBox.Shot(targetPos);
+            SoundManager.Instance.PlaySound(eCHARSOUNDTYPE.Chise_RAttack);
         }
         Debug.Log("슛");
     }
@@ -76,7 +84,9 @@ public class Chise_Active_R : MonoBehaviour, IActiveAttackable
         _isActive = true;
         float durTime = _durTime + _durTime * _buffStat._Dur;
         _playerMove.UpdatePassiveSpeed(_moveSpeedIncrease);
+        _particle.Play(true);
         yield return new WaitForSeconds(durTime);
+        _particle.Stop(true);
         _isActive = false;
         _playerMove.UpdatePassiveSpeed(0f);
         StartCoroutine(CRT_CoolTime());

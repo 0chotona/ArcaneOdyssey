@@ -6,7 +6,7 @@ public class DamageBox_WhirlBlade : MonoBehaviour
 {
     public float _angle = 0;
     public float _startAngle = 0;
-    public float _radius = 4;
+    float _radius = 4;
 
     float _damage;
     Vector3 _boxScale = new Vector3(1, 1, 1);
@@ -52,8 +52,12 @@ public class DamageBox_WhirlBlade : MonoBehaviour
             enemyHealth.LoseDamage(_damage);
         }
     }
+    public void UpdateRadius(float radius)
+    {
+        _radius = radius;
+    }
     public void UpdateDamage(float damage) { _damage = damage; }
-    public void UpdateScale(float boxSize) { transform.localScale = _boxScale * boxSize; }
+    public void UpdateScale(Vector3 boxSize) { transform.localScale = boxSize; }
     public void SetTarget(Transform target)
     {
         _playerTrs = target;

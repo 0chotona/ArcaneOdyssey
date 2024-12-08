@@ -38,6 +38,7 @@ public class LobbyUIManager : MonoBehaviour
 
     [Header("스테이지 버튼"), SerializeField] List<Button> _stageButtons;
     [Header("로딩 씬"), SerializeField] LoadingScene _loadingScene;
+    
     private void Awake()
     {
         _gameStartButton.onClick.AddListener(() => Click_StartGame());

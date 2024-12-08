@@ -55,6 +55,8 @@ public class Momoi_Active_E : MonoBehaviour, IActiveAttackable
 
                 Vector3 targetPos = _shootTrs.position + randomDirection * _distance;
                 SpawnRocket(targetPos);
+
+                SoundManager.Instance.PlaySound(eCHARSOUNDTYPE.Momoi_E);
                 // 원하는 행동을 수행 (예: Gizmos로 그리기, 총알 발사 등)
                 //Gizmos.DrawLine(_shootTrs.position, _shootTrs.position + randomDirection * _distance);
                 yield return new WaitForSeconds(_timeGap);
